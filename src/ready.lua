@@ -41,28 +41,55 @@
 --     },
 -- })
 
+function mod.dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. mod.dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 function mod.CheckBlinkTrailProjectile()
     if true then
         game.MapState[_PLUGIN.guid .. "BlinkTrailBoon"] = true
         local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
         local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
         local startTime = game._worldTime
-        local maxProjectiles = 4
+        local maxProjectiles = 5
         local currentProjectiles = 0
+        local location = GetLocation({ Id = CurrentRun.Hero.ObjectId })
+        location.X = 0
+        location.Y = 0
+        local fireFromId = SpawnObstacle({ Name = "InvisibleTarget", DestinationId = CurrentRun.Hero.ObjectId })
+        local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
+        game.wait(0.17, "BlinkTrailBoon")
         while currentProjectiles < maxProjectiles and game.MapState[_PLUGIN.guid .. "BlinkTrailBoon"] and (game._worldTime - startTime) < waitPeriod do
-            
-            game.CreateProjectileFromUnit({ Name = "BlinkTrailProjectileHeraOmega", Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = {
-                BaseValue = 1,
-                DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
-                AbsoluteStackValues = 
-                {
-                    [1] = 0.25,
-                    [2] = 0.125,
-                    [3] = 10/120,
-                },
-            }})
+            local newlocation = GetLocation({ Id = CurrentRun.Hero.ObjectId })
+            print("new location", mod.dump(newlocation))
+            print("old location", mod.dump(location))
+            if not (location.X == newlocation.X and location.Y == newlocation.Y) then
+                game.CreateProjectileFromUnit({ Name = "BlinkTrailProjectileHeraOmega", Id = game.CurrentRun.Hero.ObjectId, Angle = angle, FireFromId = fireFromId, DamageMultiplier = {
+                    BaseValue = 1,
+                    DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
+                    AbsoluteStackValues = 
+                    {
+                        [1] = 0.25,
+                        [2] = 0.125,
+                        [3] = 10/120,
+                    },
+                }})
+                location = newlocation
+                Destroy({Id = fireFromId})
+                fireFromId = SpawnObstacle({ Name = "InvisibleTarget", DestinationId = CurrentRun.Hero.ObjectId })
+                angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
+                game.wait(0.17, "BlinkTrailBoon")
+            end
             currentProjectiles = currentProjectiles + 1
-            game.wait(0.15, "BlinkTrailBoon")
         end
         game.MapState[_PLUGIN.guid .. "BlinkTrailBoon"] = false
     end
@@ -81,4 +108,14 @@ end)
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
     LoadPackages({Name = _PLUGIN.guid .. "zerp-BlinkTrail"})
     base(...)
+end)
+
+modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
+end)
+
+modutil.mod.Path.Wrap("ClearBlinkAlpha", function (base,triggerArgs)
+    if not triggerArgs.PostFire then
+        game.MapState[_PLUGIN.guid .. "BlinkTrailBoon"] = false
+    end
+    base(triggerArgs)
 end)

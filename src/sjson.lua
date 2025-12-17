@@ -8,23 +8,23 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Thing.Graphic = "HeraBlinkTrailProjectileAnim"
             newentry.DetonateFx = "HeraBlinkTrailCastDetonate"
             newentry.StartDelay = 0.4
-            newentry.Thing.Tallness = 10
+            newentry.Thing.Tallness = 7
             newentry.Thing.Points = {
                 {
-					X = -200,
-					Y = 90,
+					X = -90,
+					Y = 55,
 				},
 				{
-					X = -200,
-					Y = -90,
+					X = -90,
+					Y = -55,
 				},
 				{
-					X = 200,
-					Y = -90,
+					X = 90,
+					Y = -55,
 				},
 				{
-					X = 200,
-					Y = 90,
+					X = 90,
+					Y = 55,
 				}
             }
             table.insert(data.Projectiles,newentry)

@@ -4,6 +4,7 @@
 		FilePath = "zerp-BlinkTrail\HeraCastGroundLine\HeraCastGroundLine"
 		GroupName = "FX_Terrain_Add"
 		Hue = -0.33
+        VisualFx = "HeraBlinkTrailProjectileAnimGlow"
 		Sound = "/SFX/Player Sounds/HeraProjectileLoopQuake"
 		StopSoundOnFinishFade = 0.2
 		Alpha = 0.0
@@ -13,7 +14,7 @@
 		PlaySpeed = 30.0
 		StartFrame = 1
 		LocationFromOwner = "Take"
-		ScaleLength = 400.0
+		ScaleLength = 200.0
 		Ambient = 0.0
 		VisualFxIntervalMax = 0.11
 		VisualFxIntervalMin = 0.1
@@ -56,6 +57,62 @@
 	}
 
     {
+		Name = "HeraBlinkTrailProjectileAnimGlow"
+		CreateAnimation = "HeraBlinkTrailProjectileAnimStreakDark"
+		FilePath = "Particles\particle_heraLightStreak"
+		GroupName = "FX_Standing_Add"
+		
+		AngleFromOwner = "Take"
+		UseOwnAngle = false
+		AddColor = true
+		PingPongColor = true
+		StartAlpha = 1
+		EndAlpha = 0.5
+		StartRed = 1.0
+		StartGreen = 0.7
+		StartBlue = 0.3
+		EndRed = 0.99
+		EndGreen = 0.6
+		EndBlue = 0.25
+		EaseOut = 1.0
+		EndFrame = 1
+		NumFrames = 1
+		RandomDurationMax = 1.5
+		RandomDurationMin = 1.0
+		StartFrame = 1
+		RandomFlipHorizontal = true
+		EndOffsetZ = 30.0
+		OriginX = 64.0
+		OriginY = 440.0
+		RadialOffsetMax = 100.0
+		RadialOffsetMin = -100.0
+		StartOffsetZ = -30.0
+		DieWithOwner = true
+		LocationFromOwner = "Take"
+		EndScaleY = 2.0
+		ScaleFromOwner = "Ignore"
+		ScaleMax = 1.0
+		ScaleMin = 0.25
+		ScaleY = 0.5
+		StartScaleX = 0.6
+		EndScaleX = 0.2
+		StartScaleY = 0.1
+		Ambient = 0.0
+		OffsetZ = 30
+	}
+    
+    {
+		Name = "HeraBlinkTrailProjectileAnimStreakDark"
+		InheritFrom = "HeraBlinkTrailProjectileAnimGlow"
+		CreateAnimation = "null"
+		GroupName = "FX_Dark"
+		AddColor = false
+		EndAlpha = 1.0
+		EndScaleY = 0.5
+		Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
+	}
+
+    {
 		Name = "HeraBlinkTrailCastDetonate"
 		FilePath = "zerp-BlinkTrail\HeraCastGroundLineDissipate\HeraCastGroundLineDissipate"
 		Hue = -0.33
@@ -63,12 +120,31 @@
 		NumFrames = 22
 		PlaySpeed = 30.0
 		StartFrame = 1
-		ScaleLength = 400.0
+		ScaleLength = 200.0
 		Ambient = 0.0
 		CreateAnimations =
 		[
-			
+			{ Name = "HeraBlinkTrailCastDetonateFlare" }
 		]
+	}
+
+    {
+		Name = "HeraBlinkTrailCastDetonateFlare"
+		FilePath = "Particles\particle_glow"
+		GroupName = "FX_Add_Top"
+		
+		StartAlpha = 1.0
+		Duration = 0.15
+		EaseIn = 0.99
+		EaseOut = 1.0
+		EndFrame = 1
+		NumFrames = 1
+		StartFrame = 1
+		EndScale = 1.15
+		Scale = 0.5
+		ScaleFromOwner = "Ignore"
+		ScaleX = 1.2
+		Color = { Red = 0.1 Green = 0.7 Blue = 1.0 }
 	}
 ]
 
