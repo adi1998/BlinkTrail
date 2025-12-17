@@ -134,7 +134,7 @@
 		GroupName = "FX_Add_Top"
 		
 		StartAlpha = 1.0
-		Duration = 0.15
+		Duration = 0.6
 		EaseIn = 0.99
 		EaseOut = 1.0
 		EndFrame = 1
