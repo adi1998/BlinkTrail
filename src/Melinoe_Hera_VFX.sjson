@@ -141,7 +141,7 @@
 		NumFrames = 1
 		StartFrame = 1
 		EndScale = 1.15
-		Scale = 0.5
+		Scale = 1
 		ScaleFromOwner = "Ignore"
 		ScaleX = 1.2
 		Color = { Red = 0.1 Green = 0.7 Blue = 1.0 }
