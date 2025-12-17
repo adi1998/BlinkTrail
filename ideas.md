@@ -1,0 +1,9 @@
+- Hera: Small fine lines
+- Poseidon: Small outward ocean swells like skull ExSpecial
+- Ares: spawn plasma
+- Aphro: hearthrobs
+- Heph: 
+- Zeus: somehow lightning strikes
+- Apollo: small prom flares
+- Demeter: 
+- Hestia: 
