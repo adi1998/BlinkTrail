@@ -42,14 +42,14 @@ gods.CreateBoon({
 })
 
 function mod.CheckBlinkTrailProjectile()
-    if game.HeroHasTrait(gods.GetInternalBoonName("HeraBlinkTrailBoon")) then
+    if game.HeroHasTrait(gods.GetInternalBoonName("HeraBlinkTrailBoon")) or true then
         game.MapState[_PLUGIN.guid .. "BlinkTrainBoon"] = true
         local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
         local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
         local startTime = game._worldTime
         local maxProjectiles = 4
         local currentProjectiles = 0
-        while currentProjectiles < maxProjectiles and game.MapState[_PLUGIN.guid .. "BlinkTrainBoon"] do
+        while currentProjectiles < maxProjectiles and game.MapState[_PLUGIN.guid .. "BlinkTrainBoon"] and (game._worldTime - startTime) < waitPeriod do
             game.wait("0.1", "BlinkTrainBoon")
             game.CreateProjectileFromUnit({ Name = "ProjectileHeraOmega", Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = {
                 BaseValue = 1,
