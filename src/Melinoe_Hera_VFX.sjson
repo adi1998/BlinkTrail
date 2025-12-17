@@ -1,0 +1,75 @@
+{ Animations = [
+    {
+		Name = "HeraBlinkTrailProjectileAnim"
+		FilePath = "zerp-BlinkTrail\HeraCastGroundLine\HeraCastGroundLine"
+		GroupName = "FX_Terrain_Add"
+		Hue = -0.33
+		Sound = "/SFX/Player Sounds/HeraProjectileLoopQuake"
+		StopSoundOnFinishFade = 0.2
+		Alpha = 0.0
+		EndFrame = 30
+		Loop = true
+		NumFrames = 30
+		PlaySpeed = 30.0
+		StartFrame = 1
+		LocationFromOwner = "Take"
+		ScaleLength = 400.0
+		Ambient = 0.0
+		VisualFxIntervalMax = 0.11
+		VisualFxIntervalMin = 0.1
+		CreateAnimations =
+		[
+			{ Name = "HeraBlinkTrailProjectileAnimDark" }
+			{ Name = "HeraBlinkTrailProjectileAnim2" }
+		]
+	}
+
+    {
+		Name = "HeraBlinkTrailProjectileAnimDark"
+		InheritFrom = "HeraBlinkTrailProjectileAnim"
+		FilePath = "zerp-BlinkTrail\HeraCastGroundLine\HeraCastGroundLineDark"
+		GroupName = "FX_Terrain"
+		Hue = -0.15
+		Sound = "/EmptyCue"
+		Alpha = 1.0
+		StartRed = 0.01
+		EndBlue = 0.5
+		EndGreen = 0.3
+		EndRed = 0.0
+		PingPongColor = true
+		Duration = 1.0
+		EaseOut = 1.0
+		EndFrame = 1
+		NumFrames = 1
+		StartFrame = 1
+		DieWithOwner = true
+		CreateAnimations = []
+	}
+
+    {
+		Name = "HeraBlinkTrailProjectileAnim2"
+		InheritFrom = "HeraBlinkTrailProjectileAnim"
+		Sound = "/EmptyCue"
+		Alpha = 1.0
+		DieWithOwner = true
+		CreateAnimations = []
+	}
+
+    {
+		Name = "HeraBlinkTrailCastDetonate"
+		FilePath = "zerp-BlinkTrail\HeraCastGroundLineDissipate\HeraCastGroundLineDissipate"
+		Hue = -0.33
+		EndFrame = 22
+		NumFrames = 22
+		PlaySpeed = 30.0
+		StartFrame = 1
+		ScaleLength = 400.0
+		Ambient = 0.0
+		CreateAnimations =
+		[
+			
+		]
+	}
+]
+
+}

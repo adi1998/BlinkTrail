@@ -39,12 +39,13 @@ config = chalk.auto 'config.lua'
 public.config = config -- so other mods can access our config
 
 ---@module 'zannc-GodsAPI-auto'
-gods = mods['zannc-GodsAPI'].auto()
+-- gods = mods['zannc-GodsAPI'].auto()
 
 local function on_ready()
     -- what to do when we are ready, but not re-do on reload.
     if config.enabled == false then return end
     mod = modutil.mod.Mod.Register(_PLUGIN.guid)
+    import 'sjson.lua'
     import 'ready.lua'
 end
 
