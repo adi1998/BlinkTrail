@@ -3,9 +3,9 @@ gods.CreateBoon({
     internalBoonName = "ZeusBlinkTrailBoon",
     isLegendary = false,
     InheritFrom =
-	{
-		"AirBoon",
-	},
+    {
+        "AirBoon",
+    },
     characterName = "Zeus",
     addToExistingGod = true,
 
@@ -54,26 +54,26 @@ gods.CreateBoon({
                 ProjectileName = "BlinkTrailProjectileZeus",
                 DamageMultiplier = {
                     BaseValue = 1,
-					DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
-					AbsoluteStackValues =
-					{
-						[1] = 0.25,
-						[2] = 0.125,
-						[3] = 10/120,
-					},
+                    DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
+                    AbsoluteStackValues =
+                    {
+                        [1] = 0.25,
+                        [2] = 0.125,
+                        [3] = 10/120,
+                    },
                 },
                 ReportValues =
-				{
-					ReportedMultiplier = "DamageMultiplier"
-				},
+                {
+                    ReportedMultiplier = "DamageMultiplier"
+                },
             }
         },
         GameStateRequirements =
-		{
-			{
-				FunctionName = _PLUGIN.guid .. "." .. "CheckExistingBlinkBoons",
+        {
+            {
+                FunctionName = _PLUGIN.guid .. "." .. "CheckExistingBlinkBoons",
                 FunctionArgs = {}
-			},
-		},
+            },
+        },
     }
 })

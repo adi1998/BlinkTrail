@@ -11,21 +11,21 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Thing.Tallness = 7
             newentry.Thing.Points = {
                 {
-					X = -55,
-					Y = 45,
-				},
-				{
-					X = -55,
-					Y = -45,
-				},
-				{
-					X = 55,
-					Y = -45,
-				},
-				{
-					X = 55,
-					Y = 45,
-				}
+                    X = -55,
+                    Y = 45,
+                },
+                {
+                    X = -55,
+                    Y = -45,
+                },
+                {
+                    X = 55,
+                    Y = -45,
+                },
+                {
+                    X = 55,
+                    Y = 45,
+                }
             }
             newentry.Thing.OffsetZ = 30
             table.insert(data.Projectiles,newentry)
