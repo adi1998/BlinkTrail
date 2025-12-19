@@ -2,7 +2,7 @@ gods.CreateBoon({
     pluginGUID = _PLUGIN.guid,
     internalBoonName = "HeraBlinkTrailBoon",
     isLegendary = false,
-    InheritFrom = 
+    InheritFrom =
 	{
 		"FireBoon",
 	},
@@ -15,7 +15,7 @@ gods.CreateBoon({
     StatLines = {"HeraRiftDamageStatDisplay1"},
     boonIconPath = "GUI\\Screens\\BoonIcons\\Hera_28",
     reuseBaseIcons = true,
-    ExtractValues = 
+    ExtractValues =
     {
         {
             Key = "ReportedMultiplier",
@@ -49,22 +49,22 @@ gods.CreateBoon({
     {
         [_PLUGIN.guid .. "OnSprintAction"] = {
             FunctionName = _PLUGIN.guid .. "." .. "StartHeraBlink",
-            FunctionArgs = 
+            FunctionArgs =
             {
                 ProjectileName = "BlinkTrailProjectileHeraOmega",
                 DamageMultiplier = {
                     BaseValue = 1,
 					DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
-					AbsoluteStackValues = 
+					AbsoluteStackValues =
 					{
 						[1] = 0.25,
 						[2] = 0.125,
 						[3] = 10/120,
 					},
                 },
-                ReportValues = 
-				{ 
-					ReportedMultiplier = "DamageMultiplier" 
+                ReportValues =
+				{
+					ReportedMultiplier = "DamageMultiplier"
 				},
             }
         },
@@ -94,10 +94,11 @@ function mod.StartHeraBlink( args )
 	local nextClipRegenTime  = GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
 	local waitPeriod = nextClipRegenTime + (GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
 	local startTime = _worldTime
-	local maxTrailLength = 99 
+	local maxTrailLength = 99
 
 	MapState.BlinkDropTrail = MapState.BlinkDropTrail or {}
 	MapState.BlinkDropTrail[initialId] = blinkIds
+    local skipped = true
 	while MapState.BlinkDropTrail and MapState.BlinkDropTrail[initialId] and (_worldTime - startTime) < waitPeriod do
 		wait (0.13, "BlinkTrailPresentation")
 		local distance = GetDistance({ Id = blinkIds [#blinkIds], DestinationId = CurrentRun.Hero.ObjectId })
@@ -111,23 +112,28 @@ function mod.StartHeraBlink( args )
 			angle = (angle + newangle)/2
 			-- local loc_angle = LuaGetAngleBetween(location.X,location.Y,newlocation.X,newlocation.Y)
 			local loc_angle = (LuaGetAngleBetween(newlocation.X,-newlocation.Y,location.X,-location.Y) + 180) % 360
-			local animid = CreateAnimationsBetween({ 
-					Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1], 
+			local animid = CreateAnimationsBetween({
+					Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
 					Stretch = true, UseZLocation = false})
-			local animid = CreateAnimationsBetween({ 
-					Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1], 
+			local animid = CreateAnimationsBetween({
+					Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
 					Stretch = true, UseZLocation = false})
 			print("animid",animid)
 			print("angle", angle)
 			print("loc angle", loc_angle)
-			CreateProjectileFromUnit({
-                Name = args.ProjectileName, 
-                Id = CurrentRun.Hero.ObjectId, 
-                Angle = angle, 
-                FireFromId = animid, 
-                DamageMultiplier = args.DamageMultiplier,
-                FizzleOldestProjectileCount = 4
-            })
+            if distance > 90 or (skipped and distance > 30) then
+                CreateProjectileFromUnit({
+                    Name = args.ProjectileName,
+                    Id = CurrentRun.Hero.ObjectId,
+                    Angle = angle,
+                    FireFromId = animid,
+                    DamageMultiplier = args.DamageMultiplier,
+                    FizzleOldestProjectileCount = 4
+                })
+                skipped = false
+            else
+                skipped = true
+            end
 			angle = newangle
 			location = newlocation
 			if TableLength(blinkIds) > maxTrailLength then
@@ -171,3 +177,12 @@ function mod.StartHeraBlink( args )
 	end
 	Destroy({ Id = finalAnchor })
 end
+
+game.OverwriteTableKeys( game.ProjectileData, {
+    BlinkTrailProjectileHeraOmega =
+	{
+		InheritFrom = { "HeraColorProjectile" },
+	},
+})
+
+game.ProcessDataStore(game.ProjectileData)
