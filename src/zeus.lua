@@ -34,15 +34,15 @@ gods.CreateBoon({
         },
         Rare =
         {
-            Multiplier = 1.25,
+            Multiplier = 1.5,
         },
         Epic =
         {
-            Multiplier = 1.5,
+            Multiplier = 2,
         },
         Heroic =
         {
-            Multiplier = 1.75,
+            Multiplier = 2.5,
         }
     },
     ExtraFields =
@@ -51,15 +51,13 @@ gods.CreateBoon({
             FunctionName = _PLUGIN.guid .. "." .. "StartZeusBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailProjectileZeus",
+                ProjectileName = "ProjectileZeusSpark",
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
                     AbsoluteStackValues =
                     {
-                        [1] = 0.25,
-                        [2] = 0.125,
-                        [3] = 10/120,
+                        [1] = 0.5,
                     },
                 },
                 ReportValues =
@@ -77,3 +75,7 @@ gods.CreateBoon({
         },
     }
 })
+
+function mod.StartZeusBlink( args )
+
+end
