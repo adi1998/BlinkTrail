@@ -214,7 +214,7 @@
 		Ambient = 0.0
 		OffsetZ = 30
 	}
-    
+   
     {
 		Name = "HeraBlinkTrailProjectileAnimStreakDark"
 		InheritFrom = "HeraBlinkTrailProjectileAnimGlow"

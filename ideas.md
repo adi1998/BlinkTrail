@@ -2,8 +2,8 @@
 - Poseidon: Small outward ocean swells like skull ExSpecial
 - Ares: spawn plasma
 - Aphro: hearthrobs
-- Heph: 
+- Heph:
 - Zeus: somehow lightning strikes, but it would be too similar to base sprint so not sure
 - Apollo: small prom flares
-- Demeter: 
+- Demeter:
 - Hestia: 

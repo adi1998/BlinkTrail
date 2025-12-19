@@ -2,7 +2,7 @@ gods.CreateBoon({
     pluginGUID = _PLUGIN.guid,
     internalBoonName = "ZeusBlinkTrailBoon",
     isLegendary = false,
-    InheritFrom = 
+    InheritFrom =
 	{
 		"AirBoon",
 	},
@@ -15,7 +15,7 @@ gods.CreateBoon({
     StatLines = {"LightningDamageStatDisplay1"},
     boonIconPath = "GUI\\Screens\\BoonIcons\\Zeus_28",
     reuseBaseIcons = true,
-    ExtractValues = 
+    ExtractValues =
     {
         {
             Key = "ReportedMultiplier",
@@ -48,23 +48,23 @@ gods.CreateBoon({
     ExtraFields =
     {
         [_PLUGIN.guid .. "OnSprintAction"] = {
-            FunctionName = _PLUGIN.guid .. "." .. "StartHeraBlink",
-            FunctionArgs = 
+            FunctionName = _PLUGIN.guid .. "." .. "StartZeusBlink",
+            FunctionArgs =
             {
-                ProjectileName = "BlinkTrailProjectileHeraOmega",
+                ProjectileName = "BlinkTrailProjectileZeus",
                 DamageMultiplier = {
                     BaseValue = 1,
 					DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
-					AbsoluteStackValues = 
+					AbsoluteStackValues =
 					{
 						[1] = 0.25,
 						[2] = 0.125,
 						[3] = 10/120,
 					},
                 },
-                ReportValues = 
-				{ 
-					ReportedMultiplier = "DamageMultiplier" 
+                ReportValues =
+				{
+					ReportedMultiplier = "DamageMultiplier"
 				},
             }
         },
