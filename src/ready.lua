@@ -55,7 +55,7 @@ function mod.dump(o)
 end
 
 function mod.CheckBlinkTrailProjectile()
-    if true then
+    if false then
         game.MapState[_PLUGIN.guid .. "BlinkTrailBoon"] = true
         local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
         local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
@@ -67,7 +67,7 @@ function mod.CheckBlinkTrailProjectile()
         location.Y = 0
         local fireFromId = SpawnObstacle({ Name = "InvisibleTarget", DestinationId = CurrentRun.Hero.ObjectId })
         local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
-        game.wait(0.17, "BlinkTrailBoon")
+        game.wait(0.12, "BlinkTrailBoon")
         while currentProjectiles < maxProjectiles and game.MapState[_PLUGIN.guid .. "BlinkTrailBoon"] and (game._worldTime - startTime) < waitPeriod do
             local newlocation = GetLocation({ Id = CurrentRun.Hero.ObjectId })
             print("new location", mod.dump(newlocation))
@@ -110,8 +110,8 @@ modutil.mod.Path.Wrap("SetupMap", function (base,...)
     base(...)
 end)
 
-modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
-end)
+-- modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
+-- end)
 
 modutil.mod.Path.Wrap("ClearBlinkAlpha", function (base,triggerArgs)
     if not triggerArgs.PostFire then

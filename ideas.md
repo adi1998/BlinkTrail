@@ -3,7 +3,7 @@
 - Ares: spawn plasma
 - Aphro: hearthrobs
 - Heph: 
-- Zeus: somehow lightning strikes
+- Zeus: somehow lightning strikes, but it would be too similar to base sprint so not sure
 - Apollo: small prom flares
 - Demeter: 
 - Hestia: 

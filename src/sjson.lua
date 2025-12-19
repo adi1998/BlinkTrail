@@ -5,28 +5,29 @@ sjson.hook(playerProjectilesFile,function (data)
         if projectile.Name == "ProjectileHeraOmega" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrail" .. projectile.Name
-            newentry.Thing.Graphic = "HeraBlinkTrailProjectileAnim"
-            newentry.DetonateFx = "HeraBlinkTrailCastDetonate"
-            newentry.StartDelay = 0.4
+            newentry.Thing.Graphic = "HeraBlinkTrailProjectileAnimasasd"
+            newentry.DetonateFx = "HeraBlinkTrailCastDetonateasdas"
+            newentry.StartDelay = 0.5
             newentry.Thing.Tallness = 7
             newentry.Thing.Points = {
                 {
-					X = -90,
-					Y = 55,
+					X = -55,
+					Y = 45,
 				},
 				{
-					X = -90,
-					Y = -55,
+					X = -55,
+					Y = -45,
 				},
 				{
-					X = 90,
-					Y = -55,
+					X = 55,
+					Y = -45,
 				},
 				{
-					X = 90,
-					Y = 55,
+					X = 55,
+					Y = 45,
 				}
             }
+            newentry.Thing.OffsetZ = 30
             table.insert(data.Projectiles,newentry)
             return
         end

@@ -1,4 +1,118 @@
 { Animations = [
+
+	{
+		Name = "HeraBlinkRope"
+		FilePath = "zerp-BlinkTrail\HeraShort\HeraCastGroundLine"
+		NumFrames = 30
+		Material = "Unlit"
+		OffsetZ = 60
+		RandomPlaySpeedMin = 60
+		RandomPlaySpeedMax = 60
+		RandomStartFrame = false
+		Hue = -0.33
+		OriginX = 0
+		OriginY = 80
+		ScaleLength = 200
+		StartScaleY = 1
+		EndScaleY = 1
+		AngleFromOwner = "Ignore"
+		LocationZFromOwner = "Ignore"
+		SortMode = "FromParent"
+		ScaleFromOwner = "Ignore"
+		SortFromOwner = "Maintain"
+		TransferFrameToThis = true
+		TransferAngle = true
+		RandomFlipVertical = true
+		UseAttachedShake = false
+		GroupName = "FX_Standing_Add"
+	}
+
+	{
+		Name = "HeraBlinkShort1"
+		InheritFrom = "HeraBlinkRope"
+		FilePath = "zerp-BlinkTrail\HeraShort1\HeraCastGroundLine"
+	}
+
+	{
+		Name = "HeraBlinkShort2"
+		InheritFrom = "HeraBlinkRope"
+		FilePath = "zerp-BlinkTrail\HeraShort2\HeraCastGroundLine"
+	}
+
+	{
+		Name = "HeraBlinkShort3"
+		InheritFrom = "HeraBlinkRope"
+		FilePath = "zerp-BlinkTrail\HeraShort3\HeraCastGroundLine"
+	}
+
+	{
+		Name = "HeraBlinkRopeOuadst"
+		InheritFrom = "HeraBlinkRope"
+		Duration = 0.15
+		StartAlpha = 1
+		EndAlpha = 0
+		Loop = false
+		ChainTo = null
+		AddColor = false
+		StartRed = 1
+		StartGreen = 1
+		StartBlue = 1
+		EndRed = 0.25
+		EndGreen = 0.5
+		EndBlue = 1.0
+	}
+
+	{
+		Name = "HeraBlinkShortDark"
+		FilePath = "zerp-BlinkTrail\HeraShort\HeraCastGroundLineDark"
+		NumFrames = 1
+		Material = "Unlit"
+		OffsetZ = 0
+		Duration = 0.5
+		Hue = -0.15
+		OriginX = 0
+		OriginY = 80
+		ScaleLength = 200
+		StartScaleY = 1
+		EndScaleY = 1
+		StartRed = 0.01
+		EndBlue = 0.5
+		EndGreen = 0.3
+		EndRed = 0.0
+		EaseOut = 1.0
+		Ambient = 0.0
+		PingPongColor = true
+		Alpha = 1.0
+		AngleFromOwner = "Ignore"
+		LocationZFromOwner = "Ignore"
+		SortMode = "FromParent"
+		ScaleFromOwner = "Ignore"
+		SortFromOwner = "Maintain"
+		TransferFrameToThis = true
+		TransferAngle = true
+		RandomFlipVertical = true
+		UseAttachedShake = false
+		GroupName = "FX_Terrain"
+	}
+
+	{
+		Name = "HeraBlinkShortDark1"
+		InheritFrom = "HeraBlinkShortDark"
+		FilePath = "zerp-BlinkTrail\HeraShort1\HeraCastGroundLineDark"
+	}
+
+	{
+		Name = "HeraBlinkShortDark2"
+		InheritFrom = "HeraBlinkShortDark"
+		FilePath = "zerp-BlinkTrail\HeraShort2\HeraCastGroundLineDark"
+	}
+
+	{
+		Name = "HeraBlinkShortDark3"
+		InheritFrom = "HeraBlinkShortDark"
+		FilePath = "zerp-BlinkTrail\HeraShort3\HeraCastGroundLineDark"
+	}
+
     {
 		Name = "HeraBlinkTrailProjectileAnim"
 		FilePath = "zerp-BlinkTrail\HeraCastGroundLine\HeraCastGroundLine"
@@ -14,7 +128,7 @@
 		PlaySpeed = 30.0
 		StartFrame = 1
 		LocationFromOwner = "Take"
-		ScaleLength = 200.0
+		ScaleLength = 236.0
 		Ambient = 0.0
 		VisualFxIntervalMax = 0.11
 		VisualFxIntervalMin = 0.1
@@ -114,13 +228,13 @@
 
     {
 		Name = "HeraBlinkTrailCastDetonate"
-		FilePath = "zerp-BlinkTrail\HeraCastGroundLineDissipate\HeraCastGroundLineDissipate"
+		FilePath = "zerp-BlinkTrail\HeraShort3\HeraCastGroundLine"
 		Hue = -0.33
 		EndFrame = 22
 		NumFrames = 22
 		PlaySpeed = 30.0
 		StartFrame = 1
-		ScaleLength = 200.0
+		ScaleLength = 236.0
 		Ambient = 0.0
 		CreateAnimations =
 		[
