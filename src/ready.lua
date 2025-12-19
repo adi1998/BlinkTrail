@@ -28,3 +28,10 @@ modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
         base(...)
     end
 end)
+
+function mod.CheckExistingBlinkBoons()
+    if #( game.GetHeroTraitValues( _PLUGIN.guid .. "OnSprintAction" ) ) > 0 then
+        return false
+    end
+    return true
+end

@@ -48,6 +48,7 @@ local function on_ready()
     import 'sjson.lua'
     import 'ready.lua'
     import 'hera.lua'
+    import 'zeus.lua'
 end
 
 local function on_reload()

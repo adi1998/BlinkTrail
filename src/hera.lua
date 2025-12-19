@@ -67,7 +67,14 @@ gods.CreateBoon({
 					ReportedMultiplier = "DamageMultiplier" 
 				},
             }
-        }
+        },
+        GameStateRequirements =
+		{
+			{
+				FunctionName = _PLUGIN.guid .. "." .. "CheckExistingBlinkBoons",
+                FunctionArgs = {}
+			},
+		},
     }
 })
 
@@ -77,7 +84,6 @@ function mod.StartHeraBlink( args )
 			SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = id, CopyFromPrev = true })
 			thread(DestroyOnDelay, { id }, 0.1 )
 		end
-		
 		MapState.BlinkDropTrail = {}
 	end
 	local initialId = SpawnObstacle({ Name = "BlankObstacle", DestinationId = CurrentRun.Hero.ObjectId, Group = "Standing" })
