@@ -30,8 +30,7 @@ sjson.hook(playerProjectilesFile,function (data)
             }
             newentry.Thing.OffsetZ = 30
             table.insert(newdata,newentry)
-        end
-        if projectile.Name == "ProjectileZeusSpark" then
+        elseif projectile.Name == "ProjectileZeusSpark" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailZeusSpark"
             -- newentry.StartDelay = 1
@@ -57,7 +56,7 @@ end)
 
 local melZeusVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Zeus_VFX.sjson")
 
-sjson.hook(melHeraVfxFile, function (data)
+sjson.hook(melZeusVfxFile, function (data)
     local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Zeus_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     local heraBlinkContent = fileHandle:read("*a")

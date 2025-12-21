@@ -1,19 +1,19 @@
 gods.CreateBoon({
     pluginGUID = _PLUGIN.guid,
-    internalBoonName = "ZeusBlinkTrailBoon",
+    internalBoonName = "PoseidonBlinkTrailBoon",
     isLegendary = false,
     InheritFrom =
     {
-        "AirBoon",
+        "WaterBoon",
     },
-    characterName = "Zeus",
+    characterName = "Poseidon",
     addToExistingGod = true,
 
     BlockStacking = false,
-    displayName = "Thunder Blink",
-    description = "Creates chain lightning from your dash trail",
-    StatLines = {"LightningDamageStatDisplay1"},
-    boonIconPath = "GUI\\Screens\\BoonIcons\\Zeus_28",
+    displayName = "Wave Blink",
+    description = "Creates outward waves from your dash trail",
+    StatLines = {"PoseidonOmegaProjectileDamageStatDisplay1"},
+    boonIconPath = "GUI\\Screens\\BoonIcons\\Poseidon_28",
     reuseBaseIcons = true,
     ExtractValues =
     {
@@ -22,7 +22,7 @@ gods.CreateBoon({
             ExtractAs = "Damage",
             Format = "MultiplyByBase",
             BaseType = "Projectile",
-            BaseName = "BlinkTrailZeusSpark",
+            BaseName = "PoseidonOmegaWave",
             BaseProperty = "Damage",
         },
     },
@@ -38,7 +38,7 @@ gods.CreateBoon({
         },
         Epic =
         {
-            Multiplier = 2,
+            Multiplier = 2.0,
         },
         Heroic =
         {
@@ -48,16 +48,17 @@ gods.CreateBoon({
     ExtraFields =
     {
         [_PLUGIN.guid .. "OnSprintAction"] = {
-            FunctionName = _PLUGIN.guid .. "." .. "StartZeusBlink",
+            FunctionName = _PLUGIN.guid .. "." .. "StartPoseidonBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailZeusSpark",
+                ProjectileName = "PoseidonOmegaWave",
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
                     AbsoluteStackValues =
                     {
-                        [1] = 0.5,
+                        [1] = 0.50,
+						[2] = 0.25,
                     },
                 },
                 ReportValues =
@@ -76,19 +77,7 @@ gods.CreateBoon({
     }
 })
 
-function mod.ProjectileWithDelay(args, delay)
-    game.wait(delay)
-    local enemyId = GetClosest({Id = args.FireFromId, DestinationName = "EnemyTeam", Distance = 1100})
-    local angle = GetAngleBetween({ Id = args.FireFromId, DestinationId = enemyId })
-    if enemyId == 0 then
-        angle = math.random(1,360)
-    end
-    args.Angle = angle
-
-    game.CreateProjectileFromUnit(args)
-end
-
-function mod.StartZeusBlink( args )
+function mod.StartPoseidonBlink( args )
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
             SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})

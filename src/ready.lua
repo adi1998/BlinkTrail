@@ -11,6 +11,16 @@ function mod.dump(o)
    end
 end
 
+game.OverwriteTableKeys( game.ProjectileData, {
+    BlinkTrailProjectileHeraOmega =
+    {
+        InheritFrom = { "HeraColorProjectile" },
+    },
+    BlinkTrailZeusSpark =
+    {
+        InheritFrom = { "ZeusColorProjectile" },
+    }
+})
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
     LoadPackages({Name = _PLUGIN.guid .. "zerp-BlinkTrail"})

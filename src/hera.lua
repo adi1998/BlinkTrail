@@ -177,10 +177,3 @@ function mod.StartHeraBlink( args )
     end
     Destroy({ Id = finalAnchor })
 end
-
-game.OverwriteTableKeys( game.ProjectileData, {
-    BlinkTrailProjectileHeraOmega =
-    {
-        InheritFrom = { "HeraColorProjectile" },
-    },
-})

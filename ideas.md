@@ -1,9 +1,16 @@
 - Hera: Small fine lines
+    - Add detonate fx
+    - look into detonating at once
+    - projectile overlap cleanup
 - Poseidon: Small outward ocean swells like skull ExSpecial
+    - waves from pos ball 
 - Ares: spawn plasma
-- Aphro: hearthrobs
+- Aphro: hearthrobs?
+    - Trial Room vfx
 - Heph:
-- Zeus: somehow lightning strikes, but it would be too similar to base sprint so not sure
+- Zeus: chain lightning, 
+    - trail fx
+    - fire at the same time/fire instantly
 - Apollo: small prom flares
-- Demeter:
+- Demeter: 
 - Hestia: 
