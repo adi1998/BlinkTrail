@@ -2,7 +2,7 @@
     {
 		Name = "BlinkLightningBall"
 		InheritFrom = "ProjectileFire"
-		ChildAnimation = "ProjectileLightningBallGlowSpawner"
+		ChildAnimation = "BlinkLightningBallGlowSpawner"
 		FilePath = "Fx\LightningBall\LightningBall"
 		Sound = "/SFX/Player Sounds/ZeusLightningRangedAttack"
 		StopSoundOnFinishFade = 0.2
@@ -15,5 +15,46 @@
 		VisualFxIntervalMax = 0.071
 		VisualFxIntervalMin = 0.07
         Loop = false
+        PlaySpeed = 30
 	}
+
+    {
+		Name = "BlinkLightningBallGlowSpawner"
+		InheritFrom = "GroupChange"
+		VisualFx = "BlinkLightningBallGlow"
+		DieWithOwner = true
+		LocationZFromOwner = "Ignore"
+		ScaleFromOwner = "Ignore"
+	}
+
+    {
+		Name = "BlinkLightningBallGlow"
+		FilePath = "Particles\particle_quickflash"
+		GroupName = "FX_Standing_Add"
+		
+		UseOwnAngle = false
+		EndAlpha = 0.7
+		StartAlpha = 1.0
+		EndFrame = 1
+		Loop = true
+        Duration = 1
+		NumFrames = 1
+		RandomDurationMax = 0.2
+		RandomDurationMin = 0.01
+		StartFrame = 1
+		DieWithOwner = true
+		SortMode = "FromParent"
+		RandomRotation = true
+		RandomRotationSpeedMax = 2000.0
+		RandomRotationSpeedMin = -2000.0
+		EndScale = 0.3
+		Scale = 0.2
+		ScaleFromOwner = "Ignore"
+		ScaleMax = 0.4
+		ScaleMin = 0.2
+		StartScale = 0.3
+		Ambient = 0.0
+		Color = { Red = 1.0 Green = 0.8 Blue = 0.30 }
+	}
+
 ]}

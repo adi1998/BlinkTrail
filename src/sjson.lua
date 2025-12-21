@@ -1,6 +1,7 @@
 local playerProjectilesFile = rom.path.combine(rom.paths.Content,"Game\\Projectiles\\PlayerProjectiles.sjson")
 
 sjson.hook(playerProjectilesFile,function (data)
+    local newdata = {}
     for index, projectile in ipairs(data.Projectiles) do
         if projectile.Name == "ProjectileHeraOmega" then
             local newentry = game.DeepCopyTable(projectile)
@@ -28,9 +29,17 @@ sjson.hook(playerProjectilesFile,function (data)
                 }
             }
             newentry.Thing.OffsetZ = 30
-            table.insert(data.Projectiles,newentry)
-            return
+            table.insert(newdata,newentry)
         end
+        if projectile.Name == "ProjectileZeusSpark" then
+            local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "BlinkTrailZeusSpark"
+            -- newentry.StartDelay = 1
+            table.insert(newdata,newentry)
+        end
+    end
+    for index, value in ipairs(newdata) do
+        table.insert(data.Projectiles,value)
     end
 end)
 

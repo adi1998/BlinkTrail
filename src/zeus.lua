@@ -76,6 +76,18 @@ gods.CreateBoon({
     }
 })
 
+function mod.ProjectileWithDelay(args, delay)
+    game.wait(delay)
+    local enemyId = GetClosest({Id = args.FireFromId,DestinationName = "EnemyTeam"})
+    local angle = GetAngleBetween({ Id = args.FireFromId, DestinationId = enemyId })
+    if enemyId == 0 then
+        angle = math.random(1,360)
+    end
+    args.Angle = angle
+
+    game.CreateProjectileFromUnit(args)
+end
+
 function mod.StartZeusBlink( args )
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
@@ -85,6 +97,7 @@ function mod.StartZeusBlink( args )
         game.MapState.BlinkDropTrail = {}
     end
     local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    local prevProj = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local blinkIds = { initialId }
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
     local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0)
@@ -99,15 +112,31 @@ function mod.StartZeusBlink( args )
         print("distance", distance)
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+            local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            local animid = CreateAnimationsBetween({
-                Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-                Stretch = false, UseZLocation = false})
-            if TableLength(blinkIds) > maxTrailLength then
-                local lastItemId = table.remove( blinkIds, 1 )
-                SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId})
-                thread(DestroyOnDelay, { lastItemId }, 0.09 )
-            end
+            -- local animid = CreateAnimationsBetween({
+            --     Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+            --     Stretch = false, UseZLocation = false})
+            SetAnimation({ Name = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1]})
+            local angle = math.random(1,360)
+            -- CreateProjectileFromUnit({
+            --         Name = "BlinkTrailZeusSpark",
+            --         Id = CurrentRun.Hero.ObjectId,
+            --         Angle = angle,
+            --         FireFromId = prevProj,
+            --         DamageMultiplier = args.DamageMultiplier,
+            --         FizzleOldestProjectileCount = 10
+            --     })
+            game.thread(mod.ProjectileWithDelay,{
+                Name = "BlinkTrailZeusSpark",
+                Id = CurrentRun.Hero.ObjectId,
+                -- Angle = angle,
+                FireFromId = prevProj,
+                DamageMultiplier = args.DamageMultiplier,
+                FizzleOldestProjectileCount = 10
+            }, 1)
+            prevProj = targetProjId
+            thread(DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1 )
         end
     end
 
@@ -131,18 +160,18 @@ function mod.StartZeusBlink( args )
     local finalAnchor = SpawnObstacle({ Name = "BlankObstacle", DestinationId = CurrentRun.Hero.ObjectId, Group = "Standing" })
     Attach({ Id = finalAnchor, DestinationId = CurrentRun.Hero.ObjectId })
     if GetDistance({ Id = finalAnchor, DestinationId = CurrentRun.Hero.ObjectId }) > 0 then
-        CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
+        -- CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
     end
     while not IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
-            SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
-            thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            -- SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
+            -- thread(DestroyOnDelay, { lastItemId }, 0.1 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
         wait( waitInterval, "BlinkTrailPresentation")
     end
-    Destroy({ Id = finalAnchor })
+    -- Destroy({ Id = finalAnchor })
 
 end
