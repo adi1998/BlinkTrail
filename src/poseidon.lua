@@ -103,10 +103,10 @@ function mod.StartPoseidonBlink( args )
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            -- local animid = CreateAnimationsBetween({
-            --     Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-            --     Stretch = false, UseZLocation = false})
-            SetAnimation({ Name = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1]})
+            local animid = CreateAnimationsBetween({
+                Animation = "PoseidonBlink", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
+            -- SetAnimation({ Name = "PoseidonBlink", DestinationId = blinkIds [#blinkIds - 1]})
             local angle = math.random(1,360)
             -- CreateProjectileFromUnit({
             --         Name = "BlinkTrailZeusSpark",

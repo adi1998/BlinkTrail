@@ -1,5 +1,27 @@
 { Animations = [
     {
-        
+        Name = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\PoseidonTrail\PoseidonSwipe"
+        NumFrames = 40
+        Material = "Unlit"
+        OffsetZ = 60
+        RandomPlaySpeedMin = 30
+        RandomPlaySpeedMax = 30
+        RandomStartFrame = false
+        OriginX = 0
+        OriginY = 80
+        Scale = 0.7
+        StartScaleY = 1
+        EndScaleY = 1
+        AngleFromOwner = "Ignore"
+        LocationZFromOwner = "Ignore"
+        SortMode = "FromParent"
+        ScaleFromOwner = "Ignore"
+        SortFromOwner = "Maintain"
+        TransferFrameToThis = true
+        TransferAngle = true
+        RandomFlipVertical = true
+        UseAttachedShake = false
+        GroupName = "FX_Standing_Add"
     }
 ]}
