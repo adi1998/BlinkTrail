@@ -2,7 +2,7 @@
     {
         Name = "PoseidonBlink"
         FilePath = "zerp-BlinkTrail\PoseidonTrail\PoseidonSwipe"
-        NumFrames = 40
+        NumFrames = 24
         Material = "Unlit"
         OffsetZ = 60
         RandomPlaySpeedMin = 30
@@ -10,7 +10,7 @@
         RandomStartFrame = false
         OriginX = 0
         OriginY = 80
-        Scale = 0.7
+        ScaleLength = 200
         StartScaleY = 1
         EndScaleY = 1
         AngleFromOwner = "Ignore"
@@ -20,8 +20,89 @@
         SortFromOwner = "Maintain"
         TransferFrameToThis = true
         TransferAngle = true
-        RandomFlipVertical = true
+        RandomFlipVertical = false
         UseAttachedShake = false
         GroupName = "FX_Standing_Add"
+        Loop = true
+        FlipHorizontal = true
     }
+
+    {
+        Name = "ZeusBlink"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail3\ZeusTrail"
+    }
+
+    {
+        Name = "ZeusBlink0"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_0_"
+    }
+
+    {
+        Name = "ZeusBlink1"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_1_"
+    }
+
+    {
+        Name = "ZeusBlink2"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_2_"
+    }
+
+    {
+        Name = "ZeusBlink3"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_3_"
+    }
+
+    {
+        Name = "ZeusBlink4"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_4_"
+    }
+
+    {
+        Name = "ZeusBlink5"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_5_"
+    }
+
+    {
+        Name = "ZeusBlink6"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_6_"
+    }
+
+    {
+        Name = "ZeusBlinkJoin01"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin01"
+    }
+
+    {
+        Name = "ZeusBlinkJoin12"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin12"
+    }
+
+    {
+        Name = "ZeusBlinkJoin23"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin23"
+    }
+
+    {
+        Name = "ZeusBlinkJoin34"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin34"
+    }
+
+    {
+        Name = "ZeusBlinkJoin45"
+        InheritFrom = "PoseidonBlink"
+        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin45"
+    }
+    
 ]}

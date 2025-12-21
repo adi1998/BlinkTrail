@@ -77,15 +77,22 @@ gods.CreateBoon({
     }
 })
 
+
+function mod.AnimationWithDelay(args,delay)
+    wait(delay)
+    CreateAnimationsBetween(args)
+end
+
 function mod.StartPoseidonBlink( args )
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
-            SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})
+            -- SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})
             game.thread(game.DestroyOnDelay, { id }, 0.1 )
         end
         game.MapState.BlinkDropTrail = {}
     end
     local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
     local prevProj = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local blinkIds = { initialId }
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
@@ -94,20 +101,29 @@ function mod.StartPoseidonBlink( args )
     local maxTrailLength = 99
     game.MapState.BlinkDropTrail = MapState.BlinkDropTrail or {}
     game.MapState.BlinkDropTrail[initialId] = blinkIds
-
-    while game.MapState.BlinkDropTrail and MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
-        game.wait(0.13, "BlinkTrailPresentation")
+    local fx_index = 5
+    local delay_count = 0
+    local anim_list = {}
+    while game.MapState.BlinkDropTrail and MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
+        game.wait(0.2, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         print("distance", distance)
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            local animid = CreateAnimationsBetween({
-                Animation = "PoseidonBlink", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+            local newangle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
+            angle = (angle + newangle)/2
+            -- local animid = CreateAnimationsBetween({
+            --     Animation = "ZeusBlink"..tostring(fx_index), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+            --     Stretch = true, UseZLocation = false})
+            -- thread(mod.AnimationWithDelay,{
+            --     Animation = "ZeusBlink"..tostring(fx_index), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+            --     Stretch = true, UseZLocation = false}, 0.13)
+            table.insert(anim_list, {
+                Animation = "ZeusBlink"..tostring(fx_index), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
             -- SetAnimation({ Name = "PoseidonBlink", DestinationId = blinkIds [#blinkIds - 1]})
-            local angle = math.random(1,360)
             -- CreateProjectileFromUnit({
             --         Name = "BlinkTrailZeusSpark",
             --         Id = CurrentRun.Hero.ObjectId,
@@ -116,17 +132,31 @@ function mod.StartPoseidonBlink( args )
             --         DamageMultiplier = args.DamageMultiplier,
             --         FizzleOldestProjectileCount = 10
             --     })
-            game.thread(mod.ProjectileWithDelay,{
-                Name = "BlinkTrailZeusSpark",
-                Id = CurrentRun.Hero.ObjectId,
-                -- Angle = angle,
-                FireFromId = prevProj,
-                DamageMultiplier = args.DamageMultiplier,
-                FizzleOldestProjectileCount = 10
-            }, 1)
+            -- game.thread(mod.ProjectileWithDelay,{
+            --     Name = "BlinkTrailZeusSpark",
+            --     Id = CurrentRun.Hero.ObjectId,
+            --     -- Angle = angle,
+            --     FireFromId = prevProj,
+            --     DamageMultiplier = args.DamageMultiplier,
+            --     FizzleOldestProjectileCount = 10
+            -- }, 1)
             prevProj = targetProjId
-            thread(DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1 )
+            angle = newangle
+            
+            fx_index = (fx_index - 1) 
         end
+    end
+
+    local previd
+    for index, value in ipairs(anim_list) do
+        local newanimid = CreateAnimationsBetween(value)
+
+        if index ~= 0 then
+            local angle = GetAngleBetween({Id = newanimid, DestinationId = previd})
+            SetAnimation({ Name = "ZeusBlinkJoin" .. tostring(index) .. tostring(index+1), DestinationId = args.Id, Angle = angle})
+            SetAngle({Id = args.Id, Angle = angle})
+        end
+        previd = newanimid
     end
 
     if MapState.BlinkDropTrail then
