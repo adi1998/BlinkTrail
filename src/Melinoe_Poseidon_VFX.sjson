@@ -10,7 +10,7 @@
         RandomStartFrame = false
         OriginX = 0
         OriginY = 80
-        ScaleLength = 200
+        ScaleLength = 260
         StartScaleY = 1
         EndScaleY = 1
         AngleFromOwner = "Ignore"
