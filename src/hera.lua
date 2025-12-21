@@ -113,11 +113,11 @@ function mod.StartHeraBlink( args )
             -- local loc_angle = LuaGetAngleBetween(location.X,location.Y,newlocation.X,newlocation.Y)
             local loc_angle = (LuaGetAngleBetween(newlocation.X,-newlocation.Y,location.X,-location.Y) + 180) % 360
             local animid = CreateAnimationsBetween({
-                    Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-                    Stretch = true, UseZLocation = false})
+                Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
             local animid = CreateAnimationsBetween({
-                    Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-                    Stretch = true, UseZLocation = false})
+                Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
             print("animid",animid)
             print("angle", angle)
             print("loc angle", loc_angle)
@@ -184,5 +184,3 @@ game.OverwriteTableKeys( game.ProjectileData, {
         InheritFrom = { "HeraColorProjectile" },
     },
 })
-
-game.ProcessDataStore(game.ProjectileData)

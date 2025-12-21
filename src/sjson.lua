@@ -45,3 +45,15 @@ sjson.hook(melHeraVfxFile, function (data)
         table.insert(data.Animations, value)
     end
 end)
+
+local melZeusVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Zeus_VFX.sjson")
+
+sjson.hook(melHeraVfxFile, function (data)
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Zeus_VFX.sjson")
+    local fileHandle = io.open(heraBlinkFile,"r")
+    local heraBlinkContent = fileHandle:read("*a")
+    local heraBlinkTable = sjson.decode(heraBlinkContent)
+    for key, value in pairs(heraBlinkTable.Animations) do
+        table.insert(data.Animations, value)
+    end
+end)

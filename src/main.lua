@@ -49,6 +49,7 @@ local function on_ready()
     import 'ready.lua'
     import 'hera.lua'
     import 'zeus.lua'
+    game.ProcessDataStore(game.ProjectileData)
 end
 
 local function on_reload()

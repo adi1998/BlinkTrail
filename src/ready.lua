@@ -23,6 +23,7 @@ modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
         print(data.FunctionName, data.FunctionArgs.DamageMultiplier)
         game.CallFunctionName( data.FunctionName, data.FunctionArgs )
         isBlinkFired = true
+        break
     end
     if not isBlinkFired then
         base(...)

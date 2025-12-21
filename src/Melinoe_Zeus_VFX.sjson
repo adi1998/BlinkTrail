@@ -1,0 +1,19 @@
+{ Animations = [
+    {
+		Name = "BlinkLightningBall"
+		InheritFrom = "ProjectileFire"
+		ChildAnimation = "ProjectileLightningBallGlowSpawner"
+		FilePath = "Fx\LightningBall\LightningBall"
+		Sound = "/SFX/Player Sounds/ZeusLightningRangedAttack"
+		StopSoundOnFinishFade = 0.2
+		AddColor = false
+		EndFrame = 30
+		NumFrames = 30
+		StartFrame = 1
+		VisualFxUse3DAngle = false
+		Scale = 0.45
+		VisualFxIntervalMax = 0.071
+		VisualFxIntervalMin = 0.07
+        Loop = false
+	}
+]}
