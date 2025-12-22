@@ -1,108 +1,158 @@
 { Animations = [
     {
-        Name = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\PoseidonTrail\PoseidonSwipe"
-        NumFrames = 24
-        Material = "Unlit"
-        OffsetZ = 60
-        RandomPlaySpeedMin = 30
-        RandomPlaySpeedMax = 30
+		Name = "PoseidonBlinkBall"
+		FilePath = "Fx\Poseidon\PoseidonStaffBall\PoseidonStaffBall"
+		NumFrames = 60
+		RandomStartFrame = true
+		ReRandomizeOnLoop = false
+		Loop = true
+		RandomPlaySpeedMin = 45
+		RandomPlaySpeedMax = 45
+		Scale = 1
+		Material = "Unlit"
+		UseOwnAngle = false
+		AngleFromOwner = "Take"
+		OffsetZ = 60
+		Sound = "/SFX/Player Sounds/PoseidonWaterRangedAttack"
+		StopSoundOnFinishFade = 0.2
+	}
+
+    {
+		Name = "PoseidonBlinkBallIn"
+		InheritFrom = "PoseidonBlinkBall"
+		StartScale = 0
+		EndScale = 1
+		DurationFrames = 15
+		ChainTo = "PoseidonBlinkBallStatic"
+		Loop = false
+		PingPongScale = false
+	}
+
+    {
+        Name = "PoseidonBlinkBallStatic"
+        InheritFrom = "PoseidonBlinkBall"
+        Loop = false
         RandomStartFrame = false
-        OriginX = 0
-        OriginY = 80
-        ScaleLength = 260
-        StartScaleY = 1
-        EndScaleY = 1
-        AngleFromOwner = "Ignore"
-        LocationZFromOwner = "Ignore"
-        SortMode = "FromParent"
-        ScaleFromOwner = "Ignore"
-        SortFromOwner = "Maintain"
-        TransferFrameToThis = true
-        TransferAngle = true
-        RandomFlipVertical = false
-        UseAttachedShake = false
-        GroupName = "FX_Standing_Add"
-        Loop = true
-        FlipHorizontal = true
+        RandomPlaySpeedMin = 75
+		RandomPlaySpeedMax = 75
+        ChainTo = "PoseidonBlinkBallOut"
     }
 
     {
-        Name = "ZeusBlink"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail3\ZeusTrail"
-    }
+		Name = "PoseidonBlinkBallOut"
+		InheritFrom = "PoseidonBlinkBall"
+		StartScale = 1
+		EndScale = 0
+		DurationFrames = 15
+		ChainTo = null
+		Loop = false
+		PingPongScale = false
+	}
 
     {
-        Name = "ZeusBlink0"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_0_"
-    }
+		Name = "PoseidonBlinkWaveFx"
+		FilePath = "Fx\Poseidon\PoseidonOceanSwell\PoseidonOceanSwell"
+		NumFrames = 15
+		Loop = true
+		PlaySpeed = 60
+		Scale = 1
+		PostRotateScaleY = 0.5
+		Material = "Unlit"
+		GroupName = "FX_Terrain"
+		UseAttachedFlasher = false
+		ColorFromOwner = "Ignore"
+		ChainTo = "PoseidonBlinkWaveDissipateFx"
+		ScaleX = 1.4
+		ScaleY = 1.1
+		OriginX = 165.5
+		OriginY = 178
+		TransferFrameToThis = true
+		CreateAnimations = [
+			{ Name = "PoseidonBlinkWaveFxDark" }
+            /*
+			{ Name = "QuickFlashCyan" }
+			{ Name = "PoseidonOceanSwellStartFx" }
+			{ Name = "PoseidonOceanSwellStartFx" }
+			{ Name = "PoseidonOceanSwellStartFx" }
+			{ Name = "PoseidonOceanSwellStartFx" }
+			{ Name = "PoseidonOceanSwellStartFx" }
+			*/
+		]
+	}
 
     {
-        Name = "ZeusBlink1"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_1_"
-    }
+		Name = "PoseidonBlinkWaveFxIn"
+		InheritFrom = "PoseidonBlinkWaveFx"
+		ClearCreateAnimations = true
+		TransferFrameFromThis = true
+		Loop = false
+		StartScale = 0
+		EndScale = 1
+		Duration = 0.1
+		EaseIn = 0.9
+		EaseOut = 1
+		ChainTo = "PoseidonBlinkWaveFx"
+	}
+
+	{
+		Name = "PoseidonBlinkWaveFxDark"
+		InheritFrom = "PoseidonBlinkWaveFx"
+		ClearCreateAnimations = true
+		VisualFx = "PoseidonBlinkWaveFxWaterTrail"
+		GroupName = "FX_Terrain_Dark"
+		Red = 0
+		Green = 0
+		Blue = 0.0
+		ScaleX = 1.2
+		DieWithOwner = true
+		ChainTo = null
+		Sound = "/SFX/Player Sounds/PoseidonOceanSwellSFX"
+	}
 
     {
-        Name = "ZeusBlink2"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_2_"
-    }
+		Name = "PoseidonBlinkWaveFxWaterTrail"
+		FilePath = "Fx\WaterSplashRipple\WaterSplashRipple"
+		NumFrames = 30
+		GroupName = "FX_Terrain_Liquid"
+		StartAlpha = 0.5
+		EndAlpha = 0
+		ScaleMin = 0.25
+		ScaleMax = 0.5
+		RandomFlipVertical = true
+		RandomFlipHorizontal = true
+		RandomPlaySpeedMin = 20
+		RandomPlaySpeedMax = 24
+		RandomOffsetX = 100
+		RandomOffsetY = 50
+		PostRotateScaleY = 0.5
+		RandomRotation = true
+		StartRed = 0.6
+		StartGreen = 1
+		StartBlue = 0.9
+		EndRed = 0.1
+		EndGreen = 0.25
+		EndBlue = 0.5
+		VelocityMin = 150
+		VelocityMax = 300
+		Acceleration = -400
+		LocationFromOwner = "Ignore"
+		LocationZFromOwner = "Ignore"
+	}
 
     {
-        Name = "ZeusBlink3"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_3_"
-    }
+		Name = "PoseidonBlinkWaveDissipateFx"
+		TransferFrameToThis = false
+		NumFrames = 8
+		PlaySpeed = 30
+		InheritFrom = "PoseidonBlinkWaveFx"
+		ClearCreateAnimations = true
+		FilePath = "Fx\Poseidon\PoseidonOceanSwellDissipate\PoseidonOceanSwellDissipate"
+		Loop = false
+		ScaleFromOwner = "Ignore"
+		ChainTo = null
+		VisualFx = null
+	}
 
-    {
-        Name = "ZeusBlink4"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_4_"
-    }
+]
 
-    {
-        Name = "ZeusBlink5"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_5_"
-    }
-
-    {
-        Name = "ZeusBlink6"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrail_6_"
-    }
-
-    {
-        Name = "ZeusBlinkJoin01"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin01"
-    }
-
-    {
-        Name = "ZeusBlinkJoin12"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin12"
-    }
-
-    {
-        Name = "ZeusBlinkJoin23"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin23"
-    }
-
-    {
-        Name = "ZeusBlinkJoin34"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin34"
-    }
-
-    {
-        Name = "ZeusBlinkJoin45"
-        InheritFrom = "PoseidonBlink"
-        FilePath = "zerp-BlinkTrail\ZeusTrail\cuttrail\ZeusTrailJoin45"
-    }
-    
-]}
+}

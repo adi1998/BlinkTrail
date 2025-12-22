@@ -57,19 +57,6 @@
 		Color = { Red = 1.0 Green = 0.8 Blue = 0.30 }
 	}
 
-    {
-		Name = "BlinkTrailPoseidon"
-		InheritFrom = "StaffBallProjectile"
-		Scale = 0.66
-		FilePath = "Fx\Poseidon\PoseidonProjectileLoop\PoseidonProjectileLoop"
-		ChildAnimation = null
-		NumFrames = 60
-		Material = "Unlit"
-		PlaySpeed = 60
-		VisualFx = "StaffProjectileTrailLine_Poseidon"
-		ClearCreateAnimations = true
-	}
-
 	{
 		Name = "ZeusBlinkTrailLoop"
 		InheritFrom = "BlinkTrailFxLoop"

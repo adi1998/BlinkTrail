@@ -35,6 +35,31 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Name = "BlinkTrailZeusSpark"
             -- newentry.StartDelay = 1
             table.insert(newdata,newentry)
+        elseif projectile.Name == "PoseidonOmegaWave" then
+            local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "PoseidonBlinkWave"
+            newentry.DetonateFx = "PoseidonBlinkWaveDissipate"
+            newentry.Thing.Graphic = "PoseidonBlinkWaveFxIn"
+            newentry.Range = 680
+            newentry.Thing.Points = {
+                {
+                    X = 20,
+                    Y = 140,
+                },
+                {
+                    X = 20,
+                    Y = 140,
+                },
+                {
+                    X = -50,
+                    Y = -180,
+                },
+                {
+                    X = -50,
+                    Y = 180,
+                }
+            }
+            table.insert(newdata,newentry)
         end
     end
     for index, value in ipairs(newdata) do
@@ -72,8 +97,9 @@ sjson.hook(melPoseidonVfxFile, function (data)
     local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Poseidon_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     local heraBlinkContent = fileHandle:read("*a")
-    local heraBlinkTable = sjson.decode(heraBlinkContent)
+    local heraBlinkTable, pos, msg = sjson.decode(heraBlinkContent)
     for key, value in pairs(heraBlinkTable.Animations) do
+        print("POseidon hook", value.Name)
         table.insert(data.Animations, value)
     end
 end)
