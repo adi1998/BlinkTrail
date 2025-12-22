@@ -70,4 +70,44 @@
 		ClearCreateAnimations = true
 	}
 
+	{
+		Name = "ZeusBlinkTrailLoop"
+		InheritFrom = "BlinkTrailFxLoop"
+		FilePath = "zerp-BlinkTrail\ZeusTrailLoop\ZeusProjectileLoop"
+		NumFrames = 60
+		RandomPlaySpeedMin = 15
+		RandomPlaySpeedMax = 20
+		ChainTo = "ZeusBlinkTrailOut"
+	}
+
+	{
+		Name = "ZeusBlinkTrailOut"
+		InheritFrom = "ZeusBlinkTrailLoop"
+		Duration = 0.15
+		StartAlpha = 1
+		EndAlpha = 0
+		Loop = false
+		ChainTo = null
+		AddColor = false
+	}
+
+	{
+		Name = "ZeusBlinkTrailIn"
+		InheritFrom = "ZeusBlinkTrailLoop"
+		RandomFlipVertical = true
+		TransferFrameFromThis = true
+		RandomStartFrame = false
+		ChainTo = "ZeusBlinkTrailLoop"
+		RandomDurationMin = 0.1
+		RandomDurationMax = 0.15
+		EaseIn = 0.9
+		EaseOut = 1.0
+		StartScaleY = 0
+		EndScaleY = 1
+		StartAlpha = 0
+		EndAlpha = 1
+		Loop = false
+	}
+
+
 ]}
