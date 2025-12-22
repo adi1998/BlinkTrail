@@ -41,6 +41,7 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.DetonateFx = "PoseidonBlinkWaveDissipate"
             newentry.Thing.Graphic = "PoseidonBlinkWaveFxIn"
             newentry.Range = 680
+            newentry.Damage = 30
             newentry.Thing.Points = {
                 {
                     X = 20,

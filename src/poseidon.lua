@@ -34,15 +34,15 @@ gods.CreateBoon({
         },
         Rare =
         {
-            Multiplier = 1.5,
+            Multiplier = 40/30,
         },
         Epic =
         {
-            Multiplier = 2.0,
+            Multiplier = 50/30,
         },
         Heroic =
         {
-            Multiplier = 2.5,
+            Multiplier = 2,
         }
     },
     ExtraFields =
@@ -57,8 +57,7 @@ gods.CreateBoon({
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
                     AbsoluteStackValues =
                     {
-                        [1] = 0.50,
-						[2] = 0.25,
+                        [1] = 5/30,
                     },
                 },
                 ReportValues =
@@ -118,10 +117,10 @@ function mod.StartPoseidonBlink( args )
             table.insert( blinkIds, targetId )
             SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
             thread(mod.PoseidonProjectileWithDelay, 
-                { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj,  }
+                { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
             , 1.2)
             thread(mod.PoseidonProjectileWithDelay, 
-                { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj,  }
+                { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
             , 1.2)
             prevProj = targetProjId
             local newangle = GetAngle({ Id = CurrentRun.Hero.ObjectId })

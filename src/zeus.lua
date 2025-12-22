@@ -133,7 +133,7 @@ function mod.StartZeusBlink( args )
                 -- Angle = angle,
                 FireFromId = prevProj,
                 DamageMultiplier = args.DamageMultiplier,
-                FizzleOldestProjectileCount = 10
+                ProjectileCap = 8
             }, 1)
             prevProj = targetProjId
             thread(DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1 )
