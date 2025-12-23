@@ -1,5 +1,4 @@
 - Hera: Small fine lines
-    - Add detonate fx
     - look into detonating at once
     - projectile overlap cleanup
 - Poseidon: Small outward ocean swells like skull ExSpecial
@@ -7,10 +6,10 @@
 - Ares: spawn plasma
 - Aphro: hearthrobs?
     - Trial Room vfx
-- Heph:
+- Heph: Smaller Lucifer mines, proximity detonation
 - Zeus: chain lightning, 
-    - trail fx
+    - trail fx speed
     - fire at the same time/fire instantly
-- Apollo: small prom flares
-- Demeter: 
-- Hestia: 
+- Apollo: small prom flares/enemies lose sight of player
+- Demeter: icicles from the ground
+- Hestia: Lava pools
