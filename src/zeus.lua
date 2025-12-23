@@ -25,6 +25,15 @@ gods.CreateBoon({
             BaseName = "BlinkTrailZeusSpark",
             BaseProperty = "Damage",
         },
+        {
+            External = true,
+            BaseType = "ProjectileBase",
+            BaseName = "BlinkTrailZeusSpark",
+            BaseProperty = "NumJumps",
+            Format = "TotalTargets",
+            ExtractAs = "Bounces",
+            SkipAutoExtract = true,
+        },
     },
     RarityLevels =
     {
@@ -90,7 +99,7 @@ function mod.ProjectileWithDelay(args, delay)
     
     args.Angle = angle
     local addlProperties = {}
-    addlProperties.NumJumps = GetBaseDataValue({ Type = "Projectile", Name = functionArgs.ProjectileName, Property = "NumJumps"}) + GetTotalHeroTraitValue("ZeusSparkBonusBounces")
+    addlProperties.NumJumps = GetBaseDataValue({ Type = "Projectile", Name = args.Name, Property = "NumJumps"}) + GetTotalHeroTraitValue("ZeusSparkBonusBounces")
     args.DataProperties = addlProperties
     game.CreateProjectileFromUnit(args)
 end
@@ -121,9 +130,9 @@ function mod.StartZeusBlink( args )
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            -- local animid = CreateAnimationsBetween({
-            --     Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-            --     Stretch = false, UseZLocation = false})
+            local animid = CreateAnimationsBetween({
+                Animation = "BlinkGhostTrail_ZeusFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
             SetAnimation({ Name = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1]})
             local angle = math.random(1,360)
             -- CreateProjectileFromUnit({

@@ -2,18 +2,19 @@
     {
 		Name = "BlinkLightningBall"
 		InheritFrom = "ProjectileFire"
-		ChildAnimation = "BlinkLightningBallGlowSpawner"
 		FilePath = "Fx\LightningBall\LightningBall"
 		AddColor = false
 		EndFrame = 30
 		NumFrames = 30
 		StartFrame = 1
 		VisualFxUse3DAngle = false
-		Scale = 0.45
+		StartScale = 0
+		EndScale = 0.45
 		VisualFxIntervalMax = 0.071
 		VisualFxIntervalMin = 0.07
         Loop = false
         PlaySpeed = 30
+		OffsetZ = 30
 	}
 
     {
@@ -92,6 +93,48 @@
 		StartAlpha = 0
 		EndAlpha = 1
 		Loop = false
+	}
+
+	{
+		Name = "BlinkGhostTrail_ZeusFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrail_ZeusFxA" }
+			{ Name = "BlinkGhostTrail_ZeusFxB" }
+			{ Name = "BlinkGhostTrail_ZeusFxC" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrail_ZeusFxA"
+		FilePath = "Fx\Zeus\ZeusDirectionalTrailA\ZeusDirectionalTrailA"
+		NumFrames = 45
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Ignore"
+		RandomPlaySpeedMin = 22
+		RandomPlaySpeedMax = 22
+		RandomFlipVertical = true
+		OffsetZ = 30
+		OriginY = 80
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+		ScaleLength = 250
+		TransferAngle = true
+		TransferFrameToThis = true
+	}
+
+	{
+		Name = "BlinkGhostTrail_ZeusFxB"
+		InheritFrom = "BlinkGhostTrail_ZeusFxA"
+		FilePath = "Fx\Zeus\ZeusDirectionalTrailB\ZeusDirectionalTrailB"
+	}
+	{
+		Name = "BlinkGhostTrail_ZeusFxC"
+		InheritFrom = "BlinkGhostTrail_ZeusFxA"
+		FilePath = "Fx\Zeus\ZeusDirectionalTrailC\ZeusDirectionalTrailC"
 	}
 
 
