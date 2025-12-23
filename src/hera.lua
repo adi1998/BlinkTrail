@@ -95,7 +95,7 @@ function mod.StartHeraBlink( args )
     local blinkIds = { initialId }
     local blinkAnimationIds = {}
     local nextClipRegenTime  = GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
-    local waitPeriod = nextClipRegenTime + (GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
+    local waitPeriod = nextClipRegenTime + (GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.2
     local startTime = _worldTime
     local maxTrailLength = 99
 
@@ -127,6 +127,7 @@ function mod.StartHeraBlink( args )
             print("animid",animid)
             print("angle", angle)
             print("loc angle", loc_angle)
+            angle = GetAngleBetween({Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds - 1]})
             if distance > 90 or (skipped and distance > 30) then
                 CreateProjectileFromUnit({
                     Name = args.ProjectileName,
