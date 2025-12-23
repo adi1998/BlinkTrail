@@ -46,6 +46,27 @@
     }
 
     {
+        Name = "HeraBlinkDissShort1"
+        InheritFrom = "HeraBlinkRope"
+        FilePath = "zerp-BlinkTrail\HeraDiss1\HeraCastGroundLineDissipate"
+        NumFrames = 22
+        RandomPlaySpeedMin = 30
+        RandomPlaySpeedMax = 30
+    }
+
+    {
+        Name = "HeraBlinkDissShort2"
+        InheritFrom = "HeraBlinkDissShort1"
+        FilePath = "zerp-BlinkTrail\HeraDiss2\HeraCastGroundLineDissipate"
+    }
+
+    {
+        Name = "HeraBlinkDissShort3"
+        InheritFrom = "HeraBlinkDissShort1"
+        FilePath = "zerp-BlinkTrail\HeraDiss3\HeraCastGroundLineDissipate"
+    }
+
+    {
         Name = "HeraBlinkRopeOuadst"
         InheritFrom = "HeraBlinkRope"
         Duration = 0.15

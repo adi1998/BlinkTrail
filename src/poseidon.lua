@@ -88,6 +88,7 @@ end
 
 function mod.AnimationWithDelay(args,delay)
     wait(delay)
+    print(mod.dump(args))
     CreateAnimationsBetween(args)
 end
 
@@ -126,10 +127,9 @@ function mod.StartPoseidonBlink( args )
             , 1.2)
             thread(mod.PoseidonProjectileWithDelay, 
                 { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
-            , 1.2)
+            , 1.21)
             prevProj = targetProjId
-            local newangle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
-            angle = newangle
+            angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
         end
     end
 

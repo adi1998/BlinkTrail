@@ -58,6 +58,7 @@ gods.CreateBoon({
                     AbsoluteStackValues =
                     {
                         [1] = 0.5,
+                        [2] = 0.3
                     },
                 },
                 ReportValues =
@@ -81,13 +82,16 @@ game.LootData.ZeusUpgrade.TraitIndex[boonanme]= true
 
 function mod.ProjectileWithDelay(args, delay)
     game.wait(delay)
-    local enemyId = GetClosest({Id = args.FireFromId, DestinationName = "EnemyTeam", Distance = 1100})
+    local enemyId = GetClosest({Id = args.FireFromId, DestinationName = "EnemyTeam", Distance = 730})
     local angle = GetAngleBetween({ Id = args.FireFromId, DestinationId = enemyId })
     if enemyId == 0 then
         angle = math.random(1,360)
     end
+    
     args.Angle = angle
-
+    local addlProperties = {}
+    addlProperties.NumJumps = GetBaseDataValue({ Type = "Projectile", Name = functionArgs.ProjectileName, Property = "NumJumps"}) + GetTotalHeroTraitValue("ZeusSparkBonusBounces")
+    args.DataProperties = addlProperties
     game.CreateProjectileFromUnit(args)
 end
 

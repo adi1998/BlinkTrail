@@ -84,8 +84,8 @@ game.LootData.HeraUpgrade.TraitIndex[booname]= true
 function mod.StartHeraBlink( args )
     if not IsEmpty(MapState.BlinkDropTrail) then
         for id, ids in pairs(MapState.BlinkDropTrail) do    
-            SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = id, CopyFromPrev = true })
-            thread(DestroyOnDelay, { id }, 0.1 )
+            -- SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = id, CopyFromPrev = true })
+            -- thread(DestroyOnDelay, { id }, 0.1 )
         end
         MapState.BlinkDropTrail = {}
     end
@@ -121,6 +121,9 @@ function mod.StartHeraBlink( args )
             local animid = CreateAnimationsBetween({
                 Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
+            game.thread(mod.AnimationWithDelay, {
+                Animation = "HeraBlinkDissShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false }, 0.5)
             print("animid",animid)
             print("angle", angle)
             print("loc angle", loc_angle)
@@ -141,8 +144,8 @@ function mod.StartHeraBlink( args )
             location = newlocation
             if TableLength(blinkIds) > maxTrailLength then
                 local lastItemId = table.remove( blinkIds, 1 )
-                SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
-                thread(DestroyOnDelay, { lastItemId }, 0.09 )
+                -- SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
+                -- thread(DestroyOnDelay, { lastItemId }, 0.09 )
             end
         end
     end
@@ -151,7 +154,7 @@ function mod.StartHeraBlink( args )
     end
     print("blink id count", #blinkIds)
     local lastItemId = table.remove( blinkIds )
-    Destroy({Id = lastItemId})
+    -- Destroy({Id = lastItemId})
     local outDuration = 0.16 -- time to remove trail over
     local waitInterval = outDuration/#blinkIds
     local minWaitInterval = 0.06
@@ -167,16 +170,22 @@ function mod.StartHeraBlink( args )
     Attach({ Id = finalAnchor, DestinationId = CurrentRun.Hero.ObjectId })
     if GetDistance({ Id = finalAnchor, DestinationId = CurrentRun.Hero.ObjectId }) > 0 then
         CreateAnimationsBetween({ Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = true, UseZLocation = false })
+        CreateAnimationsBetween({
+                Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
+                Stretch = true, UseZLocation = false})
+        game.thread(mod.AnimationWithDelay, {
+                Animation = "HeraBlinkDissShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
+                Stretch = true, UseZLocation = false }, 0.5)
     end
     while not IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
-            SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
-            thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            -- SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
+            -- thread(DestroyOnDelay, { lastItemId }, 0.1 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
         wait( waitInterval, "BlinkTrailPresentation")
     end
-    Destroy({ Id = finalAnchor })
+    -- Destroy({ Id = finalAnchor })
 end

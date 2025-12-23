@@ -4,8 +4,6 @@
 		InheritFrom = "ProjectileFire"
 		ChildAnimation = "BlinkLightningBallGlowSpawner"
 		FilePath = "Fx\LightningBall\LightningBall"
-		Sound = "/SFX/Player Sounds/ZeusLightningRangedAttack"
-		StopSoundOnFinishFade = 0.2
 		AddColor = false
 		EndFrame = 30
 		NumFrames = 30

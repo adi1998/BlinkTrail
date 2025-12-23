@@ -33,6 +33,7 @@ sjson.hook(playerProjectilesFile,function (data)
         elseif projectile.Name == "ProjectileZeusSpark" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailZeusSpark"
+            newentry.Range = 750
             -- newentry.StartDelay = 1
             table.insert(newdata,newentry)
         elseif projectile.Name == "PoseidonOmegaWave" then
@@ -40,7 +41,7 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Name = "PoseidonBlinkWave"
             newentry.DetonateFx = "PoseidonBlinkWaveDissipate"
             newentry.Thing.Graphic = "PoseidonBlinkWaveFxIn"
-            newentry.Range = 680
+            newentry.Range = 300
             newentry.Damage = 30
             newentry.Thing.Points = {
                 {
