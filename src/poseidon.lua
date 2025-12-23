@@ -69,12 +69,17 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckExistingBlinkBoons",
-                FunctionArgs = {}
+                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
+                FunctionArgs = {
+                    Except = "PoseidonBlinkTrailBoon"
+                }
             },
         },
     }
 })
+
+local boonanme = gods.GetInternalBoonName("PoseidonBlinkTrailBoon")
+game.LootData.PoseidonUpgrade.TraitIndex[boonanme]= true
 
 function mod.PoseidonProjectileWithDelay(args, delay)
     game.wait(delay)

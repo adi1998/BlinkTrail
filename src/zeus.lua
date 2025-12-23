@@ -69,12 +69,15 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckExistingBlinkBoons",
+                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
                 FunctionArgs = {}
             },
         },
     }
 })
+
+local boonanme = gods.GetInternalBoonName("ZeusBlinkTrailBoon")
+game.LootData.ZeusUpgrade.TraitIndex[boonanme]= true
 
 function mod.ProjectileWithDelay(args, delay)
     game.wait(delay)

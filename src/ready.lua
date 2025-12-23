@@ -26,6 +26,18 @@ game.OverwriteTableKeys( game.ProjectileData, {
     }
 })
 
+game.ConcatTableValues(game.WeaponSets.OlympianProjectileNames,{
+    "BlinkTrailProjectileHeraOmega",
+    "BlinkTrailZeusSpark",
+    "PoseidonBlinkWave"
+})
+
+game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
+    BlinkTrailProjectileHeraOmega = gods.GetInternalBoonName("HeraBlinkTrailBoon"),
+    BlinkTrailZeusSpark = "ChainLightning_Name",
+    PoseidonBlinkWave = gods.GetInternalBoonName("PoseidonBlinkTrailBoon")
+})
+
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
     LoadPackages({Name = _PLUGIN.guid .. "zerp-BlinkTrail"})
     base(...)
@@ -44,8 +56,9 @@ modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
     end
 end)
 
-function mod.CheckExistingBlinkBoons()
-    if #( game.GetHeroTraitValues( _PLUGIN.guid .. "OnSprintAction" ) ) > 0 then
+function mod.CheckNoExistingBlinkBoons( source, args )
+    local blinktrait = game.HasHeroTraitValue(_PLUGIN.guid .. "OnSprintAction")
+    if blinktrait ~= nil and blinktrait.Name ~= source.Name then
         return false
     end
     return true

@@ -71,12 +71,15 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckExistingBlinkBoons",
+                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
                 FunctionArgs = {}
             },
         },
     }
 })
+
+local booname = gods.GetInternalBoonName("HeraBlinkTrailBoon")
+game.LootData.HeraUpgrade.TraitIndex[booname]= true
 
 function mod.StartHeraBlink( args )
     if not IsEmpty(MapState.BlinkDropTrail) then
