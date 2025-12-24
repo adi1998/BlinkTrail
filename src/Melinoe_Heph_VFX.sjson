@@ -12,7 +12,7 @@
 	  Scale = 0.5
       RandomRotation = true
       ScaleRadius = 400
-      OffsetZ = 0
+      OffsetZ = 30
       StartAlpha = 0.6
       EndAlpha = 1
       EaseIn = 0
@@ -21,7 +21,10 @@
       Red = 1.0
       Green = 0.0
       Blue = 0.0
-      CreateAnimation = "HephMineAoe2"
+      CreateAnimations = [
+        { Name = "HephMineAoe2" }
+        { Name = "HephMineBomb" }
+      ]
       LocationZFromOwner = "Ignore"
       ChainTo = "HephMineAoeLoop"
       DieWithOwner = true
@@ -35,7 +38,7 @@
       Blue = 1
       Green = 1
       ChainTo = "HephMineAoe2Loop"
-      CreateAnimation = null
+      CreateAnimations = []
     }
 
     {
@@ -46,7 +49,7 @@
         StartFrame = 17
         EndFrame = 44
         ChainTo = null
-        CreateAnimation = null
+        CreateAnimations = []
     }
 
     {
@@ -57,7 +60,144 @@
         StartFrame = 17
         EndFrame = 44
         ChainTo = null
+        CreateAnimations = []
     }
+
+    {
+      Name = "HephMineBomb"
+      FilePath = "Fx\LuciferBomb\LuciferBomb"
+      NumFrames = 35
+      Material = "Unlit"
+      RandomPlaySpeedMin = 30
+      RandomPlaySpeedMax = 45
+      Loop = true
+      GroupName = "FX_Standing_Add"
+      AddColor = true
+      ColorFromOwner = "Ignore"
+      Red = 0.5
+      Green = 0.9
+      Blue = 0.9
+      Scale = 0.8
+      OffsetZ = 30
+      DieWithOwner = true
+      CreateAnimations = [
+        { Name = "HephMineBombDark" }
+        { Name = "HephMineBombGlow" }
+        { Name = "LuciferBombDropDisplace" }
+        { Name = "QuickFlashRedSmall" }
+      ]
+    }
+
+    {
+      Name = "HephMineBombDark"
+      InheritFrom = "HephMineBomb"
+      ClearCreateAnimations = true
+      DieWithOwner = true
+      AddColor = false
+      ColorFromOwner = "Ignore"
+      FilePath = "Fx\LuciferBombDark\LuciferBombDark"
+      GroupName = "FX_Dark"
+      DrawBehindOwner = true
+      Sound = "/SFX/Enemy Sounds/LuciferBombLoop"
+      StopSoundOnFinishFade = 0.2
+    }
+
+    {
+      Name = "HephMineBombGlow"
+      FilePath = "Particles\particle_glow"
+      Material = "Unlit"
+      Loop = true
+      StartScale = 0.6
+      EndScale = 0.75
+      StartAlpha = 0.33
+      EndAlpha = 0.66
+      PingPongColor = true
+      ColorFromOwner = "Ignore"
+      GroupName = "FX_Standing_Add"
+      SortMode = "FromParent"
+      DieWithOwner = true
+      Duration = 1
+      EaseIn = 0
+      EaseOut = 1
+      StartOffsetZ = 15
+      EndOffsetZ = 30
+      PingPongShiftOverDuration = true
+      Red = 0.9
+      Green = 0.0
+      Blue = 0
+    }
+
+    {
+		Name = "BlinkGhostTrail_HephFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrail_HephFxA" }
+			{ Name = "BlinkGhostTrail_HephFxB" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrail_HephFxA"
+		FilePath = "Fx\Hephaestus\HephDirectionalProjectileA\HephDirectionalProjectileA"
+		NumFrames = 37
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Ignore"
+		RandomPlaySpeedMin = 40
+		RandomPlaySpeedMax = 40
+		RandomFlipVertical = true
+		OffsetZ = 30
+		OriginY = 90
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+		ScaleLength = 500
+		TransferAngle = true
+		TransferFrameToThis = true
+	}
+
+	{
+		Name = "BlinkGhostTrail_HephFxB"
+		InheritFrom = "BlinkGhostTrail_HephFxA"
+		FilePath = "Fx\Hephaestus\HephDirectionalProjectileB\HephDirectionalProjectileB"
+	}
+
+    {
+		Name = "BlinkGhostTrailSpark_HephFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrailSpark_HephFxA" }
+			{ Name = "BlinkGhostTrailSpark_HephFxB" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrailSpark_HephFxA"
+		FilePath = "Fx\Hephaestus\HephDirectionalSparkA\HephDirectionalSparkA"
+		NumFrames = 36
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Ignore"
+		RandomPlaySpeedMin = 40
+		RandomPlaySpeedMax = 40
+		RandomFlipVertical = true
+		OffsetZ = 30
+		OriginY = 140
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+		ScaleLength = 550
+		TransferAngle = true
+		TransferFrameToThis = true
+	}
+
+	{
+		Name = "BlinkGhostTrailSpark_HephFxB"
+		InheritFrom = "BlinkGhostTrailSpark_HephFxA"
+		FilePath = "Fx\Hephaestus\HephDirectionalSparkB\HephDirectionalSparkB"
+	}
 
     {
       Name = "HephMineDissipate"

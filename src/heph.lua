@@ -150,36 +150,18 @@ function mod.StartHephBlink( args )
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            -- SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
-            -- thread(mod.PoseidonProjectileWithDelay, 
-            --     { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
-            -- , 1.2)
-            -- thread(mod.PoseidonProjectileWithDelay, 
-            --     { Name = args.ProjectileName, Id = CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
-            -- , 1.21)
-            -- CreateProjectileFromUnit({ Name = "GunBombImmolation", Id = CurrentRun.Hero.ObjectId, DamageMultiplier = 1, FireFromId = prevProj, ProjectileCap = 8 })
+            CreateAnimationsBetween({
+                Animation = "BlinkGhostTrail_HephFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
+            CreateAnimationsBetween({
+                Animation = "BlinkGhostTrailSpark_HephFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
             game.thread(mod.CreateMine, 0.5, prevProj)
-            -- CreateAlliedEnemy("GunBombUnit", { MaxHealthMultiplier = 1, SpeedMultiplier = 1, ScaleMultiplier = 1, DamageMultiplier = 1})
-            -- local mineId = SpawnUnit({Name = "GunBombUnit", Group = "Standing", DestinationId = prevProj,  })
-            -- local newMine = DeepCopyTable(EnemyData["GunBombUnit"])
-            -- newMine.ObjectId = mineId
-            -- game.thread( game.SetupUnit, newMine, game.CurrentRun, { SkipPresentation = true } )
             prevProj = targetProjId
-            angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
         end
     end
-
-    local previd
-    for index, value in ipairs(anim_list) do
-        local newanimid = CreateAnimationsBetween(value)
-
-        if index ~= 0 then
-            local angle = GetAngleBetween({Id = newanimid, DestinationId = previd})
-            -- SetAnimation({ Name = "ZeusBlinkJoin" .. tostring(index) .. tostring(index+1), DestinationId = args.Id, Angle = angle})
-            SetAngle({Id = args.Id, Angle = angle})
-        end
-        previd = newanimid
-    end
+    game.wait(0.3, "BlinkTrailPresentation")
+    game.thread(mod.CreateMine, 0.5, prevProj)
 
     if MapState.BlinkDropTrail then
         MapState.BlinkDropTrail[ initialId ] = nil
