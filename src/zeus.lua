@@ -141,7 +141,7 @@ function mod.StartZeusBlink( args )
                 ProjectileCap = 8
             }, 1)
             prevProj = targetProjId
-            thread(DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.1 )
+            game.thread(DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.1 )
         end
     end
 
@@ -177,8 +177,8 @@ function mod.StartZeusBlink( args )
     while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
-            -- SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
-            -- thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
+            -- game.thread(DestroyOnDelay, { lastItemId }, 0.1 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0

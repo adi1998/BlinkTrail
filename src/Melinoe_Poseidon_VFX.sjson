@@ -153,6 +153,48 @@
 		VisualFx = null
 	}
 
+	{
+		Name = "BlinkGhostTrail_PoseidonFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrail_PoseidonFxA" }
+			{ Name = "BlinkGhostTrail_PoseidonFxB" }
+			{ Name = "BlinkGhostTrail_PoseidonFxC" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrail_PoseidonFxA"
+		FilePath = "Fx\Poseidon\PoseidonDirectionalTrailA\PoseidonDirectionalTrailA"
+		NumFrames = 45
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Ignore"
+		RandomPlaySpeedMin = 34
+		RandomPlaySpeedMax = 34
+		RandomFlipVertical = true
+		OffsetZ = 15
+		OriginY = 83
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+		ScaleLength = 260
+		TransferAngle = true
+		TransferFrameToThis = true
+	}
+
+	{
+		Name = "BlinkGhostTrail_PoseidonFxB"
+		InheritFrom = "BlinkGhostTrail_PoseidonFxA"
+		FilePath = "Fx\Poseidon\PoseidonDirectionalTrailB\PoseidonDirectionalTrailB"
+	}
+	{
+		Name = "BlinkGhostTrail_PoseidonFxC"
+		InheritFrom = "BlinkGhostTrail_PoseidonFxA"
+		FilePath = "Fx\Poseidon\PoseidonDirectionalTrailC\PoseidonDirectionalTrailC"
+	}	
+
 ]
 
 }
