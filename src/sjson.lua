@@ -105,3 +105,16 @@ sjson.hook(melPoseidonVfxFile, function (data)
         table.insert(data.Animations, value)
     end
 end)
+
+local melHephVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hephaestus_VFX.sjson")
+
+sjson.hook(melHephVfxFile, function (data)
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Heph_VFX.sjson")
+    local fileHandle = io.open(heraBlinkFile,"r")
+    local heraBlinkContent = fileHandle:read("*a")
+    local heraBlinkTable, pos, msg = sjson.decode(heraBlinkContent)
+    for key, value in pairs(heraBlinkTable.Animations) do
+        print("heph hook", value.Name)
+        table.insert(data.Animations, value)
+    end
+end)

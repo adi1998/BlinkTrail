@@ -1,0 +1,95 @@
+{ Animations = [
+    {
+      Name = "HephMineAoe"
+      FilePath = "Fx\RadialNova\RadialNova"
+      NumFrames = 36
+      StartFrame = 8
+	  PlaySpeed = 50
+      AddColor = true
+      GroupName = "FX_Standing_Add"
+      ColorFromOwner = "Ignore"
+	  PostRotateScaleY = 0.5
+	  Scale = 0.5
+      RandomRotation = true
+      ScaleRadius = 400
+      OffsetZ = 0
+      StartAlpha = 0.6
+      EndAlpha = 1
+      EaseIn = 0
+      EaseOut = 1
+      Loop = false
+      Red = 1.0
+      Green = 0.0
+      Blue = 0.0
+      CreateAnimation = "HephMineAoe2"
+      LocationZFromOwner = "Ignore"
+      ChainTo = "HephMineAoeLoop"
+      DieWithOwner = true
+    }
+
+    {
+      Name = "HephMineAoe2"
+      InheritFrom = "HephMineAoe"
+      Scale = 0.49
+      Red = 0.6
+      Blue = 1
+      Green = 1
+      ChainTo = "HephMineAoe2Loop"
+      CreateAnimation = null
+    }
+
+    {
+        Name = "HephMineAoeLoop"
+        InheritFrom = "HephMineAoe"
+        Loop = true
+        PlaySpeed = 30
+        StartFrame = 17
+        EndFrame = 44
+        ChainTo = null
+        CreateAnimation = null
+    }
+
+    {
+        Name = "HephMineAoe2Loop"
+        InheritFrom = "HephMineAoe2"
+        Loop = true
+        PlaySpeed = 30
+        StartFrame = 17
+        EndFrame = 44
+        ChainTo = null
+    }
+
+    {
+      Name = "HephMineDissipate"
+      FilePath = "Fx\AuraExplosionOptimized\AuraExplosionDissipation"
+      RandomDurationMin = 1.0
+      RandomDurationMax = 2.0
+      EaseIn = 0.9
+      EaseOut = 1
+      StartAlpha = 1
+      EndAlpha = 0
+      AddColor = true
+      ScaleRadius = 1200
+      OffsetZ = 50
+      StartScale = 0.6
+      ColorFromOwner = "Take"
+      EndScale = 1.1
+      Scale = 1.5
+      ScaleMin = 0.9
+      ScaleMax = 1.2
+      LocationFromOwner = "Ignore"
+      LocationZFromOwner = "Ignore"
+      AngleFromOwner = "Ignore"
+      RandomFlipHorizontal = true
+      RandomFlipVertical = true
+      GroupName = "FX_Standing_Add"
+      Material = "Unlit"
+      StartRed = 1.0
+      StartGreen = 0.6
+      StartBlue = 0.0001
+      EndRed = 0.99
+      EndGreen = 0.3
+      EndBlue = 0
+    }
+
+]}

@@ -50,6 +50,7 @@ local function on_ready()
     import 'hera.lua'
     import 'zeus.lua'
     import 'poseidon.lua'
+    import 'heph.lua'
     game.ProcessDataStore(game.ProjectileData)
 end
 
