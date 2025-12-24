@@ -11,9 +11,9 @@ gods.CreateBoon({
 
     BlockStacking = false,
     displayName = "Volcanic Blink",
-    description = "Drops mines on your dash trail.",
-    StatLines = {"HeraRiftDamageStatDisplay1"},
-    boonIconPath = "GUI\\Screens\\BoonIcons\\Hera_28",
+    description = "Drops mines behind your dash trail.",
+    StatLines = {"HephMineBlastBoonStatDisplay"},
+    boonIconPath = "GUI\\Screens\\BoonIcons\\Hephaestus_28",
     reuseBaseIcons = true,
     ExtractValues =
     {
@@ -22,7 +22,7 @@ gods.CreateBoon({
             ExtractAs = "Damage",
             Format = "MultiplyByBase",
             BaseType = "Projectile",
-            BaseName = "BlinkTrailProjectileHeraOmega",
+            BaseName = "HephMineBlast",
             BaseProperty = "Damage",
         },
     },
@@ -51,7 +51,7 @@ gods.CreateBoon({
             FunctionName = _PLUGIN.guid .. "." .. "StartHephBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailProjectileHeraOmega",
+                ProjectileName = "HephMineBlast",
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
@@ -59,7 +59,6 @@ gods.CreateBoon({
                     {
                         [1] = 0.25,
                         [2] = 0.125,
-                        [3] = 10/120,
                     },
                 },
                 ReportValues =
@@ -78,8 +77,10 @@ gods.CreateBoon({
     }
 })
 
+local boonname = gods.GetInternalBoonName("HephaestusBlinkTrailBoon")
+game.LootData.ZeusUpgrade.TraitIndex[boonname]= true
 
-function mod.CreateMine(delay,id)
+function mod.CreateMine(delay, id, args)
     game.MapState[_PLUGIN.guid .. "HephMineCount"] = (game.MapState[_PLUGIN.guid .. "HephMineCount"] or 0) + 1
     game.SetAnimation({Name = "HephMineAoe", DestinationId = id})
     while true do
@@ -98,10 +99,10 @@ function mod.CreateMine(delay,id)
             local r = 1/sqrt_term
             local distance = math.sqrt((r*math.cos(math.rad(angle)))^2 + (r*math.sin(math.rad(angle)))^2)
             print("mine range", distance)
-            local enemy_distance = GetDistance({Id = enemyId, DestinationId = id})
+            local enemy_distance = game.GetDistance({Id = enemyId, DestinationId = id})
             print("enemy distance", enemy_distance)
             if enemy_distance <= distance + 20 then
-                game.CreateProjectileFromUnit({ Name = "GunBombWeapon", Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = 1, FireFromId = id })
+                game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
                 game.MapState[_PLUGIN.guid .. "HephMineCount"] = game.MapState[_PLUGIN.guid .. "HephMineCount"] - 1
                 if game.MapState[_PLUGIN.guid .. "HephMineCount"] < 0 then
                     game.MapState[_PLUGIN.guid .. "HephMineCount"] = 0
@@ -156,12 +157,12 @@ function mod.StartHephBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrailSpark_HephFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            game.thread(mod.CreateMine, 0.5, prevProj)
+            game.thread(mod.CreateMine, 0.5, prevProj, args)
             prevProj = targetProjId
         end
     end
     game.wait(0.3, "BlinkTrailPresentation")
-    game.thread(mod.CreateMine, 0.5, prevProj)
+    game.thread(mod.CreateMine, 0.5, prevProj, args)
 
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
@@ -180,9 +181,9 @@ function mod.StartHephBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
-    if GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
+    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
+    if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
         -- game.CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
     end
     while not IsEmpty( blinkIds ) do

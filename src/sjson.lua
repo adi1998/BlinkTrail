@@ -61,11 +61,29 @@ sjson.hook(playerProjectilesFile,function (data)
                     Y = 180,
                 }
             }
-            table.insert(newdata,newentry)
+            table.insert(newdata, newentry)
         end
     end
     for index, value in ipairs(newdata) do
-        table.insert(data.Projectiles,value)
+        table.insert(data.Projectiles, value)
+    end
+end)
+
+local biomeOProjectileFile = rom.path.combine(rom.paths.Content, "Game\\Projectiles\\Enemy_BiomeO_Projectiles.sjson")
+
+sjson.hook(biomeOProjectileFile, function (data)
+    local newdata = {}
+    for index, projectile in ipairs(data.Projectiles) do
+        if projectile.Name == "GunBombWeapon" then
+            local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "HephMineBlast"
+            newentry.DamageRadius = 230
+            newentry.Damage = 40
+            table.insert(newdata, newentry)
+        end
+    end
+    for index, value in ipairs(newdata) do
+        table.insert(data.Projectiles, value)
     end
 end)
 
@@ -116,5 +134,27 @@ sjson.hook(melHephVfxFile, function (data)
     for key, value in pairs(heraBlinkTable.Animations) do
         print("heph hook", value.Name)
         table.insert(data.Animations, value)
+    end
+end)
+
+local traitTextEnFile = rom.path.combine(rom.paths.Content, "Game\\Text\\en\\TraitText.en.sjson")
+
+sjson.hook(traitTextEnFile, function (data)
+    local traitTextOrder = {
+        "Id",
+        "InheritFrom",
+        "DisplayName",
+        "Description",
+    }
+    local traitTextList = {
+        {
+            Id = "HephMineBlastBoonStatDisplay",
+            InheritFrom = "BaseStatLine",
+            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Mine Damage:",
+            Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}",
+        }
+    }
+    for index, value in ipairs(traitTextList) do
+        table.insert(data.Texts,sjson.to_object(value,traitTextOrder))
     end
 end)

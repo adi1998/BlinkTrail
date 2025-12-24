@@ -78,8 +78,8 @@ gods.CreateBoon({
     }
 })
 
-local boonanme = gods.GetInternalBoonName("PoseidonBlinkTrailBoon")
-game.LootData.PoseidonUpgrade.TraitIndex[boonanme]= true
+local boonname = gods.GetInternalBoonName("PoseidonBlinkTrailBoon")
+game.LootData.PoseidonUpgrade.TraitIndex[boonname]= true
 
 function mod.PoseidonProjectileWithDelay(args, delay)
     game.wait(delay)

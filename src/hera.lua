@@ -129,7 +129,7 @@ function mod.StartHeraBlink( args )
             print("loc angle", loc_angle)
             angle = game.GetAngleBetween({Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds - 1]})
             if distance > 90 or (skipped and distance > 30) then
-                CreateProjectileFromUnit({
+                game.CreateProjectileFromUnit({
                     Name = args.ProjectileName,
                     Id = game.CurrentRun.Hero.ObjectId,
                     Angle = angle,

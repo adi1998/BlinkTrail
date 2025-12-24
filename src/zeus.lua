@@ -86,8 +86,8 @@ gods.CreateBoon({
     }
 })
 
-local boonanme = gods.GetInternalBoonName("ZeusBlinkTrailBoon")
-game.LootData.ZeusUpgrade.TraitIndex[boonanme]= true
+local boonname = gods.GetInternalBoonName("ZeusBlinkTrailBoon")
+game.LootData.ZeusUpgrade.TraitIndex[boonname]= true
 
 function mod.ProjectileWithDelay(args, delay)
     game.wait(delay)
@@ -134,14 +134,14 @@ function mod.StartZeusBlink( args )
                 Stretch = true, UseZLocation = false})
             game.SetAnimation({ Name = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1]})
             game.thread(mod.ProjectileWithDelay,{
-                Name = "BlinkTrailZeusSpark",
+                Name = args.ProjectileName,
                 Id = game.CurrentRun.Hero.ObjectId,
                 FireFromId = prevProj,
                 DamageMultiplier = args.DamageMultiplier,
                 ProjectileCap = 8
             }, 1)
             prevProj = targetProjId
-            game.thread(DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.1 )
+            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.1 )
         end
     end
 
