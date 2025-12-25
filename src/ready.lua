@@ -46,7 +46,6 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
     LoadPackages({Name = _PLUGIN.guid .. "zerp-BlinkTrail"})
-    LoadPackages({Name = "BiomeOBoss"})
     base(...)
 end)
 

@@ -154,6 +154,12 @@ sjson.hook(traitTextEnFile, function (data)
             InheritFrom = "BaseStatLine",
             DisplayName = "{!Icons.Bullet}{#PropertyFormat}Mine Damage:",
             Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}",
+        },
+        {
+            Id = "HestiaLavaPoolStatDisplay",
+            InheritFrom = "BaseStatLine",
+            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Lava Damage:",
+            Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}",
         }
     }
     for index, value in ipairs(traitTextList) do
