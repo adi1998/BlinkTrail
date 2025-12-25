@@ -64,8 +64,14 @@ sjson.hook(playerProjectilesFile,function (data)
             }
             table.insert(newdata, newentry)
         elseif projectile.Name == "AresProjectile" then
-            ;local newentry = game.DeepCopyTable(projectile)
+            local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileAres"
+            newentry.Speed = 200
+            newentry.MaxAdjustRate = 200
+            newentry.DamageRadius = 180
+            newentry.Thing.Graphic = "AresBlinkBladeSpinIn"
+            newentry.Thing.AttachedAnim = "AresBlinkBladeSpinShadow"
+            newentry.ImpactFx = nil
             table.insert(newdata,newentry)
         end
     end
@@ -176,6 +182,18 @@ local melHephVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Mel
 
 sjson.hook(melHephVfxFile, function (data)
     local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Hephaestus_VFX.sjson")
+    local fileHandle = io.open(heraBlinkFile,"r")
+    local heraBlinkContent = fileHandle:read("*a")
+    local heraBlinkTable, pos, msg = sjson.decode(heraBlinkContent)
+    for key, value in pairs(heraBlinkTable.Animations) do
+        table.insert(data.Animations, value)
+    end
+end)
+
+local melAresVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Ares_VFX.sjson")
+
+sjson.hook(melAresVfxFile, function (data)
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Ares_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     local heraBlinkContent = fileHandle:read("*a")
     local heraBlinkTable, pos, msg = sjson.decode(heraBlinkContent)

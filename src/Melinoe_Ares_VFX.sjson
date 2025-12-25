@@ -1,3 +1,85 @@
 { Animations = [
-    
+    {
+        Name = "AresBlinkBladeSpin"
+        InheritFrom = "AresBladeSpin"
+        ChainTo = "AresBlinkBladeSpinOut"
+        Scale = 0.6
+    }
+
+    {
+      Name = "AresBlinkBladeSpinIn"
+      InheritFrom = "AresBlinkBladeSpin"
+      ChainTo = "AresBlinkBladeSpin"
+      CreateAnimation = "QuickFlashRed"
+      FilePath = "Fx\AresBladeSpinIn\AresBladeSpinIn"
+      Sound = "/SFX/FlameTrapFire"
+      EndFrame = 12
+      Loop = false
+      NumFrames = 12
+      StartFrame = 1
+      Scale = 0.6
+    }
+
+    {
+      Name = "AresBlinkBladeSpinOut"
+      InheritFrom = "AresBlinkBladeSpin"
+      ChainTo = "null"
+      FilePath = "Fx\AresBladeSpinOut\AresBladeSpinOut"
+      Sound = "/SFX/Player Sounds/AresDelayedDamageHit"
+      EndFrame = 21
+      Loop = false
+      NumFrames = 21
+      StartFrame = 1
+      Red = 1
+      Green = 1
+      Blue = 1
+      ClearCreateAnimations = true
+      CreateAnimation = null
+      OverlayVfx = true
+      SortMode = "FromParent"
+      Scale = 0.6
+    }
+
+    {
+      Name = "AresBlinkBladeSpinShadow"
+      InheritFrom = "AresBlinkBladeSpin"
+      Sound = "/EmptyCue"
+      ChainTo = null
+      Red = 0
+      Green = 0
+      Blue = 0
+      GroupName = "Shadows"
+      OffsetZ = 0
+      Alpha = 0.5
+      DieWithOwner = true
+      VisualFx = "AresBlinkBladeSpinGlowRing"
+      VisualFxIntervalMin = 0.25
+      VisualFxIntervalMax = 0.40
+    }
+
+    {
+      Name = "AresBlinkBladeSpinGlowRing"
+      FilePath = "Particles\particle_glow_ring"
+      Material = "Unlit"
+      GroupName = "FX_Standing_Add"
+      PostRotateScaleY = 0.5
+      RandomRotationSpeedMin = 720
+      RandomRotationSpeedMax = 1440
+      StartAlpha = 1
+      EndAlpha = 0
+      AlphaMin = 0.5
+      AlphaMax = 1.0
+      PingPongColor = false
+      Loop = false
+      RandomRotation = true
+      ReRandomizeOnLoop = true
+      RandomDurationMin = 0.22
+      RandomDurationMax = 0.40
+      DieWithOwner = true
+      EaseIn = 0.9
+      EaseOut = 1.0
+      ScaleRadius = 64
+      Scale = 0.6
+      Color = { Red = 1.0 Green = 0.0 Blue = 0.0}
+    }
 ]}
