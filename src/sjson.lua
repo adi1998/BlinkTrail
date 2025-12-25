@@ -105,6 +105,8 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             newentry.SpawnOnDetonate = "BlinkTrailProjectileFireHestia"
             newentry.Range = 300
             newentry.Speed = 600
+            newentry.SpawnCap = 4
+		    newentry.FizzleOldSpawnsOnDetonate = true
             table.insert(newdata,newentry)
         elseif projectile.Name == "DevotionHestiaFire" then
             local newentry = game.DeepCopyTable(projectile)
