@@ -41,7 +41,7 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileHeraOmega = gods.GetInternalBoonName("HeraBlinkTrailBoon"),
     BlinkTrailZeusSpark = "ChainLightning_Name",
     PoseidonBlinkWave = gods.GetInternalBoonName("PoseidonBlinkTrailBoon"),
-    HephMineBlast = gods.GetInternalBoonName("HephaestusColorProjectile")
+    HephMineBlast = gods.GetInternalBoonName("HephaestusBlinkTrailBoon")
 })
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)

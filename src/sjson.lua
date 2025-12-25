@@ -79,6 +79,8 @@ sjson.hook(biomeOProjectileFile, function (data)
             newentry.Name = "HephMineBlast"
             newentry.DamageRadius = 230
             newentry.Damage = 40
+            newentry.DetonateFx = "HephMassiveHit"
+            newentry.DetonateSound = nil
             table.insert(newdata, newentry)
         end
     end

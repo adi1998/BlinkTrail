@@ -85,12 +85,12 @@ function mod.CreateMine(delay, id, args)
     game.SetAnimation({Name = "HephMineAoe", DestinationId = id})
     while true do
         -- game.CreateProjectileFromUnit({ Name = "GunBombImmolation", Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = 1, FireFromId = id, ProjectileCap = 8 })
-        
+        game.wait(delay)
         local enemyId = game.GetClosest({Id = id, DestinationName = "EnemyTeam"})
         if enemyId ~= 0 then
             local angle = game.GetAngleBetween({Id = enemyId, DestinationId = id})
             local a = 200
-            local b = 100
+            local b = a/2
             local term_x = math.cos(math.rad(angle))/a
             local term_y = math.sin(math.rad(angle))/b
             local sqr_term_x = term_x * term_x
@@ -110,7 +110,6 @@ function mod.CreateMine(delay, id, args)
                 break
             end
         end
-        game.wait(delay)
         if game.MapState[_PLUGIN.guid .. "HephMineCount"] >= 5 then
             game.MapState[_PLUGIN.guid .. "HephMineCount"] = game.MapState[_PLUGIN.guid .. "HephMineCount"] - 1
             if game.MapState[_PLUGIN.guid .. "HephMineCount"] < 0 then
@@ -157,12 +156,12 @@ function mod.StartHephBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrailSpark_HephFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            game.thread(mod.CreateMine, 0.5, prevProj, args)
+            game.thread(mod.CreateMine, 0.2, prevProj, args)
             prevProj = targetProjId
         end
     end
     game.wait(0.3, "BlinkTrailPresentation")
-    game.thread(mod.CreateMine, 0.5, prevProj, args)
+    game.thread(mod.CreateMine, 0.2, prevProj, args)
 
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
