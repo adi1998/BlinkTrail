@@ -126,7 +126,8 @@ function mod.StartHestiaBlink( args )
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
-    game.wait(0.17, "BlinkTrailPresentation")
+    game.wait(0.25, "BlinkTrailPresentation")
+    game.SetAnimation({ Name = "HestiaBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
     game.thread(mod.PoseidonProjectileWithDelay,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
     , 0.4)

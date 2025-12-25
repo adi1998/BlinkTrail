@@ -109,7 +109,7 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
         elseif projectile.Name == "DevotionHestiaFire" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileFireHestia"
-            newentry.TotalFuse = 4
+            newentry.TotalFuse = 3
             table.insert(newdata,newentry)
         end
     end
@@ -156,7 +156,7 @@ end)
 
 local melHestiaVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hestia_VFX.sjson")
 
-sjson.hook(melPoseidonVfxFile, function (data)
+sjson.hook(melHestiaVfxFile, function (data)
     local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Hestia_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     local heraBlinkContent = fileHandle:read("*a")

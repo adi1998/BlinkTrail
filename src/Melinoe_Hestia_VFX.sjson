@@ -32,11 +32,11 @@
 		RandomPlaySpeedMax = 30
 		RandomFlipVertical = true
 		OffsetZ = 30
-		OriginY = 70
-		OriginX = 0
+		OriginY = 90
+		OriginX = 15
 		ScaleMin = 1
 		ScaleMax = 1.0
-		ScaleLength = 250
+		ScaleLength = 255
 		TransferAngle = true
 		TransferFrameToThis = true
         DieWithOwner = true
@@ -96,8 +96,8 @@
         InheritFrom = "HestiaBlinkBall"
         Loop = false
         RandomStartFrame = false
-        RandomPlaySpeedMin = 45
-		RandomPlaySpeedMax = 45
+        RandomPlaySpeedMin = 55
+		RandomPlaySpeedMax = 55
         ChainTo = "HestiaBlinkBallOut"
     }
 
