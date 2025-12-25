@@ -63,6 +63,10 @@ sjson.hook(playerProjectilesFile,function (data)
                 }
             }
             table.insert(newdata, newentry)
+        elseif projectile.Name == "AresProjectile" then
+            ;local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "BlinkTrailProjectileAres"
+            table.insert(newdata,newentry)
         end
     end
     for index, value in ipairs(newdata) do

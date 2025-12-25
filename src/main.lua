@@ -52,6 +52,7 @@ local function on_ready()
     import 'poseidon.lua'
     import 'heph.lua'
     import 'hestia.lua'
+    import 'ares.lua'
     game.ProcessDataStore(game.ProjectileData)
 end
 

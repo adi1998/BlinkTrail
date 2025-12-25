@@ -27,21 +27,32 @@ game.OverwriteTableKeys( game.ProjectileData, {
     HephMineBlast =
     {
         InheritFrom = { "HephaestusColorProjectile" }
-    }
+    },
+    BlinkTrailProjectileHestia =
+    {
+        InheritFrom = { "HestiaColorProjectile" }
+    },
+    BlinkTrailProjectileFireHestia =
+    {
+        InheritFrom = { "HestiaColorProjectile" }
+    },
 })
 
 game.ConcatTableValues(game.WeaponSets.OlympianProjectileNames,{
     "BlinkTrailProjectileHeraOmega",
     "BlinkTrailZeusSpark",
     "PoseidonBlinkWave",
-    "HephMineBlast"
+    "HephMineBlast",
+    "BlinkTrailProjectileHestia",
+    "BlinkTrailProjectileFireHestia",
 })
 
 game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileHeraOmega = gods.GetInternalBoonName("HeraBlinkTrailBoon"),
     BlinkTrailZeusSpark = "ChainLightning_Name",
     PoseidonBlinkWave = gods.GetInternalBoonName("PoseidonBlinkTrailBoon"),
-    HephMineBlast = gods.GetInternalBoonName("HephaestusBlinkTrailBoon")
+    HephMineBlast = gods.GetInternalBoonName("HephaestusBlinkTrailBoon"),
+    BlinkTrailProjectileHestia = gods.GetInternalBoonName("HestiaBlinkTrailBoon"),
 })
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
