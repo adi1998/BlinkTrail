@@ -93,6 +93,31 @@ sjson.hook(biomeOProjectileFile, function (data)
     end
 end)
 
+local enemyGeneralProjectileFile = rom.path.combine(rom.paths.Content, "Game\\Projectiles\\Enemy_General_Projectiles.sjson")
+
+sjson.hook(enemyGeneralProjectileFile, function (data)
+    local newdata = {}
+    for index, projectile in ipairs(data.Projectiles) do
+        if projectile.Name == "DevotionHestia" then
+            local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "BlinkTrailProjectileHestia"
+            newentry.Damage = 15
+            newentry.SpawnOnDetonate = "BlinkTrailProjectileFireHestia"
+            newentry.Range = 300
+            newentry.Speed = 600
+            table.insert(newdata,newentry)
+        elseif projectile.Name == "DevotionHestiaFire" then
+            local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "BlinkTrailProjectileFireHestia"
+            newentry.TotalFuse = 4
+            table.insert(newdata,newentry)
+        end
+    end
+    for index, value in ipairs(newdata) do
+        table.insert(data.Projectiles, value)
+    end
+end)
+
 local melHeraVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hera_VFX.sjson")
 
 sjson.hook(melHeraVfxFile, function (data)

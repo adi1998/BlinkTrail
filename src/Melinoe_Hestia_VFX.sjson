@@ -1,0 +1,115 @@
+{ Animations = [
+
+    {
+		Name = "BlinkGhostTrail_HestiaFx"
+		AngleFromOwner = "Take"
+        DieWithOwner = "true"
+		Random = [
+			{ Name = "BlinkGhostTrail_HestiaFxA" }
+			{ Name = "BlinkGhostTrail_HestiaFxB" }
+		]
+	}
+
+    {
+		Name = "BlinkGhostTrail_HestiaFxLoop"
+		AngleFromOwner = "Take"
+        DieWithOwner = "true"
+		Random = [
+			{ Name = "BlinkGhostTrail_HestiaFxALoop" }
+			{ Name = "BlinkGhostTrail_HestiaFxBLoop" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrail_HestiaFxA"
+		FilePath = "Fx\Hestia\HestiaDirectionalFlameA\HestiaDirectionalFlameA"
+		NumFrames = 38
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Take"
+		RandomPlaySpeedMin = 30
+		RandomPlaySpeedMax = 30
+		RandomFlipVertical = true
+		OffsetZ = 30
+		OriginY = 70
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+		ScaleLength = 250
+		TransferAngle = true
+		TransferFrameToThis = true
+        DieWithOwner = true
+	}
+
+	{
+		Name = "BlinkGhostTrail_HestiaFxB"
+		InheritFrom = "BlinkGhostTrail_HestiaFxA"
+		FilePath = "Fx\Hestia\HestiaDirectionalFlameB\HestiaDirectionalFlameB"
+	}
+
+    {
+		Name = "BlinkGhostTrail_HestiaFxALoop"
+		InheritFrom = "BlinkGhostTrail_HestiaFxA"
+		Loop = true
+        StartFrame = 3
+        EndFrame = 17
+	}
+
+    {
+		Name = "BlinkGhostTrail_HestiaFxBLoop"
+		InheritFrom = "BlinkGhostTrail_HestiaFxALoop"
+		FilePath = "Fx\Hestia\HestiaDirectionalFlameB\HestiaDirectionalFlameB"
+	}
+
+    {
+		Name = "HestiaBlinkBall"
+		FilePath = "Fx\Hestia\HestiaTorchOrbit\HestiaTorchOrbit"
+		NumFrames = 30
+		RandomStartFrame = true
+		ReRandomizeOnLoop = false
+		Loop = true
+		RandomPlaySpeedMin = 45
+		RandomPlaySpeedMax = 45
+		Scale = 0.75
+		Material = "Unlit"
+		UseOwnAngle = false
+		AngleFromOwner = "Take"
+		OffsetZ = 60
+		Sound = "/SFX/Player Sounds/HestiaWaterRangedAttack"
+		StopSoundOnFinishFade = 0.2
+	}
+
+    {
+		Name = "HestiaBlinkBallIn"
+		InheritFrom = "HestiaBlinkBall"
+		StartScale = 0
+		EndScale = 1
+		DurationFrames = 15
+		ChainTo = "HestiaBlinkBallStatic"
+		Loop = false
+		PingPongScale = false
+	}
+
+    {
+        Name = "HestiaBlinkBallStatic"
+        InheritFrom = "HestiaBlinkBall"
+        Loop = false
+        RandomStartFrame = false
+        RandomPlaySpeedMin = 45
+		RandomPlaySpeedMax = 45
+        ChainTo = "HestiaBlinkBallOut"
+    }
+
+    {
+		Name = "HestiaBlinkBallOut"
+		InheritFrom = "HestiaBlinkBall"
+		StartScale = 1
+		EndScale = 0
+		DurationFrames = 15
+		ChainTo = null
+		Loop = false
+		PingPongScale = false
+	}
+
+]}
