@@ -1,0 +1,30 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[vars]
+zerpBlinkTrailenv = "rom.mods['zerp-BlinkTrail'].lovely_env"
+
+[[patches]]
+[patches.pattern]
+target = "EnemyAILogic.lua"
+pattern = '''
+	elseif targetId == CurrentRun.Hero.ObjectId and CurrentRun.Hero.Invisible and CurrentRun.CurrentRoom.InvisTargetId then
+		targetId = CurrentRun.CurrentRoom.InvisTargetId
+
+		if aiData.CancelIfInvisTarget then
+			targetId = nil
+		end
+'''
+position = "after"
+payload = '''
+	elseif targetId == CurrentRun.Hero.ObjectId and CurrentRun.CurrentRoom["zerp-BlinkTrail" .. "InvisTargetTable"] ~= nil and 
+		   CurrentRun.CurrentRoom["zerp-BlinkTrail" .. "InvisTargetTable"][enemy.ObjectId] ~= nil then
+		targetId = CurrentRun.CurrentRoom["zerp-BlinkTrail" .. "InvisTargetTable"][enemy.ObjectId]
+		if aiData.CancelIfInvisTarget then
+			targetId = nil
+		end
+	end
+'''
+match_indent = true
+times = 1

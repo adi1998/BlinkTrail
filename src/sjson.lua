@@ -223,6 +223,12 @@ sjson.hook(traitTextEnFile, function (data)
             InheritFrom = "BaseStatLine",
             DisplayName = "{!Icons.Bullet}{#PropertyFormat}Lava Damage:",
             Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1} {#Prev}{#ItalicFormat}(every {$TooltipData.ExtractData.Fuse} Sec.)",
+        },
+        {
+            Id = "ApolloBlinkCooldownStatDisplay",
+            InheritFrom = "BaseStatLine",
+            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Blind cooldown per foe:",
+            Description = "{#UpgradeFormat}{$TooltipData.ExtractData.Cooldown} Sec.",
         }
     }
     for index, value in ipairs(traitTextList) do
