@@ -8,7 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Hephaestus",
     addToExistingGod = true,
-
+    requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Volcanic Blink",
     description = "Drops mines behind your dash trail.",

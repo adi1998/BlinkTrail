@@ -8,7 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Zeus",
     addToExistingGod = true,
-
+    requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Thunder Blink",
     description = "Creates chain lightning from your dash trail",

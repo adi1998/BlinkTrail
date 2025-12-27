@@ -8,7 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Hera",
     addToExistingGod = true,
-
+    requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Sworn Blink",
     description = "Creates a rift in the shape of your dash trail.",

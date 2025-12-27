@@ -8,7 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Poseidon",
     addToExistingGod = true,
-
+    requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Wave Blink",
     description = "Creates outward waves from your dash trail",

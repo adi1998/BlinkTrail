@@ -11,6 +11,19 @@ function mod.dump(o)
    end
 end
 
+mod.SprintBoons = {
+    "HestiaSprintBoon",
+    "AresSprintBoon",
+    "ApolloSprintBoon",
+    "ZeusSprintBoon",
+    "HeraSprintBoon",
+    "DemeterSprintBoon",
+    "PoseidonSprintBoon",
+    "AphroditeSprintBoon",
+    "HephaestusSprintBoon",
+}
+
+
 game.OverwriteTableKeys( game.ProjectileData, {
     BlinkTrailProjectileHeraOmega =
     {

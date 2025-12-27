@@ -8,7 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Hestia",
     addToExistingGod = true,
-
+    requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Flame Blink",
     description = "Spawns lava pools from your dash trail.",

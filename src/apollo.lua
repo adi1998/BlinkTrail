@@ -8,7 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Apollo",
     addToExistingGod = true,
-
+    requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Blinding Blink",
     description = "Completely blind enemies caught in your dash trail for {#BoldFormatGraft}{$TooltipData.ExtractData.Duration} Sec {#Prev}.",
