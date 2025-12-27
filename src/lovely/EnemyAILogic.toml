@@ -24,7 +24,6 @@ payload = '''
 		if aiData.CancelIfInvisTarget then
 			targetId = nil
 		end
-	end
 '''
-match_indent = true
+match_indent = false
 times = 1

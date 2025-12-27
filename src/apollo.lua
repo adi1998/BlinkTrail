@@ -50,10 +50,11 @@ gods.CreateBoon({
     ExtraFields =
     {
         [_PLUGIN.guid .. "OnSprintAction"] = {
-            FunctionName = _PLUGIN.guid .. "." .. "StartApolloBlink",
+            FunctionName = _PLUGIN.guid .. "." .. "StartHeraBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailProjectileApollo",
+                ProjectileName = "BlinkTrailProjectileHeraOmega",
+                DamageMultiplier = 0.02,
             }
         },
         OnEnemyDamagedAction = 
