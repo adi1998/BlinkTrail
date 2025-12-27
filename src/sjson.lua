@@ -228,15 +228,17 @@ sjson.hook(melApolloVfxFile, function (data)
     end
 end)
 
+local traitTextOrder = {
+    "Id",
+    "InheritFrom",
+    "DisplayName",
+    "Description",
+}
+
 local traitTextEnFile = rom.path.combine(rom.paths.Content, "Game\\Text\\en\\TraitText.en.sjson")
 
 sjson.hook(traitTextEnFile, function (data)
-    local traitTextOrder = {
-        "Id",
-        "InheritFrom",
-        "DisplayName",
-        "Description",
-    }
+    
     local traitTextList = {
         {
             Id = "HephMineBlastBoonStatDisplay",
@@ -258,6 +260,44 @@ sjson.hook(traitTextEnFile, function (data)
         }
     }
     for index, value in ipairs(traitTextList) do
-        table.insert(data.Texts,sjson.to_object(value,traitTextOrder))
+        table.insert(data.Texts, sjson.to_object(value, traitTextOrder))
     end
 end)
+
+-- local helpTextFile = rom.path.combine(rom.paths.Content, "Game/Text/en/HelpText.en.sjson")
+
+-- sjson.hook(helpTextFile, function (data)
+--     local helpTextList = {
+--         {
+--             Id = "BlinkTrailProjectileHeraOmega",
+--             DisplayName = "Sworn Blink"
+--         },
+--         {
+--             Id = "PoseidonBlinkWave",
+--             DisplayName = "Wave Blink"
+--         },
+--         {
+--             Id = "HephMineBlast",
+--             DisplayName = "Volcanic Blink"
+--         },
+--         {
+--             Id = "BlinkTrailProjectileHestia",
+--             DisplayName = "Flame Blink"
+--         },
+--         {
+--             Id = "BlinkTrailProjectileFireHestia",
+--             DisplayName = "Flame Blink Lava"
+--         },
+--         {
+--             Id = "BlinkTrailProjectileAres",
+--             DisplayName = "Bloody Blink"
+--         },
+--         {
+--             Id = "BlinkTrailZeusSpark",
+--             DisplayName = "Thunder Blink"
+--         },
+--     }
+--     for index, value in ipairs(helpTextList) do
+--         table.insert(data.Texts, sjson.to_object(value, traitTextOrder))
+--     end
+-- end)
