@@ -87,7 +87,7 @@ function mod.PoseidonProjectileWithDelay(args, delay)
 end
 
 function mod.AnimationWithDelay(args,delay)
-    wait(delay)
+    game.wait(delay)
     print(mod.dump(args))
     game.CreateAnimationsBetween(args)
 end
@@ -160,12 +160,12 @@ function mod.StartPoseidonBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
-    if GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
+    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
+    if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
         -- game.CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
     end
-    while not IsEmpty( blinkIds ) do
+    while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
             -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
@@ -173,7 +173,7 @@ function mod.StartPoseidonBlink( args )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
-        wait( waitInterval, "BlinkTrailPresentation")
+        game.wait( waitInterval, "BlinkTrailPresentation")
     end
-    -- Destroy({ Id = finalAnchor })
+    -- game.Destroy({ Id = finalAnchor })
 end

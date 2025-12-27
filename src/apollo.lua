@@ -101,6 +101,7 @@ function mod.SuperBlind(enemy, functionArgs, triggerArgs)
     game.FinishTargetMarker( enemy )
     game.thread( game.OnInvisStartPresentation, enemy )
     game.wait(functionArgs.Duration)
+    game.thread( game.InCombatText, enemy.ObjectId, "Alerted", 0.45, { OffsetY = enemy.HealthBarOffsetY, SkipFlash = true, PreDelay = game.RandomFloat(0.1, 0.15), SkipShadow = true } )
     if invisTargetTable[enemy.ObjectId] then
         game.Destroy({ Id = invisTargetTable[enemy.ObjectId] })
         invisTargetTable[enemy.ObjectId] = nil

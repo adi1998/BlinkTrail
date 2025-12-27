@@ -82,39 +82,39 @@ local booname = gods.GetInternalBoonName("HeraBlinkTrailBoon")
 game.LootData.HeraUpgrade.TraitIndex[booname]= true
 
 function mod.StartHeraBlink( args )
-    if not IsEmpty(MapState.BlinkDropTrail) then
-        for id, ids in pairs(MapState.BlinkDropTrail) do    
+    if not game.IsEmpty(game.MapState.BlinkDropTrail) then
+        for id, ids in pairs(game.MapState.BlinkDropTrail) do    
             -- game.SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = id, CopyFromPrev = true })
             -- game.thread(DestroyOnDelay, { id }, 0.1 )
         end
         game.MapState.BlinkDropTrail = {}
     end
-    local initialId = SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
-    local location = GetLocation({ Id = game.CurrentRun.Hero.ObjectId })
+    local location = game.GetLocation({ Id = game.CurrentRun.Hero.ObjectId })
     local blinkIds = { initialId }
     local blinkAnimationIds = {}
-    local nextClipRegenTime  = GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
-    local waitPeriod = nextClipRegenTime + (GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.2
-    local startTime = _worldTime
+    local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
+    local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.2
+    local startTime = game._worldTime
     local maxTrailLength = 99
 
     game.MapState.BlinkDropTrail = game.MapState.BlinkDropTrail or {}
     game.MapState.BlinkDropTrail[initialId] = blinkIds
     local skipped = true
-    while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (_worldTime - startTime) < waitPeriod do
-        wait (0.13, "BlinkTrailPresentation")
-        local distance = GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
+    while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
+        game.wait (0.13, "BlinkTrailPresentation")
+        local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         print("distance", distance)
         if distance > 0 then
-            local targetId = SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+            local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
             print(targetId)
             local newangle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
-            local newlocation = GetLocation({ Id = game.CurrentRun.Hero.ObjectId })
+            local newlocation = game.GetLocation({ Id = game.CurrentRun.Hero.ObjectId })
             angle = (angle + newangle)/2
             -- local loc_angle = LuaGetAngleBetween(location.X,location.Y,newlocation.X,newlocation.Y)
-            local loc_angle = (LuaGetAngleBetween(newlocation.X,-newlocation.Y,location.X,-location.Y) + 180) % 360
+            local loc_angle = (game.LuaGetAngleBetween(newlocation.X,-newlocation.Y,location.X,-location.Y) + 180) % 360
             local animid = game.CreateAnimationsBetween({
                 Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
@@ -143,7 +143,7 @@ function mod.StartHeraBlink( args )
             end
             angle = newangle
             location = newlocation
-            if TableLength(blinkIds) > maxTrailLength then
+            if game.TableLength(blinkIds) > maxTrailLength then
                 local lastItemId = table.remove( blinkIds, 1 )
                 -- game.SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
                 -- game.thread(DestroyOnDelay, { lastItemId }, 0.09 )
@@ -167,9 +167,9 @@ function mod.StartHeraBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
-    if GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
+    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
+    if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
         game.CreateAnimationsBetween({ Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = true, UseZLocation = false })
         game.CreateAnimationsBetween({
                 Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
@@ -178,7 +178,7 @@ function mod.StartHeraBlink( args )
                 Animation = "HeraBlinkDissShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
                 Stretch = true, UseZLocation = false }, 0.5)
     end
-    while not IsEmpty( blinkIds ) do
+    while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
             -- game.SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
@@ -186,7 +186,7 @@ function mod.StartHeraBlink( args )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
-        wait( waitInterval, "BlinkTrailPresentation")
+        game.wait( waitInterval, "BlinkTrailPresentation")
     end
     -- Destroy({ Id = finalAnchor })
 end
