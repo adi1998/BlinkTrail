@@ -214,6 +214,20 @@ sjson.hook(melAresVfxFile, function (data)
     end
 end)
 
+local melApolloVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Apollo_VFX.sjson")
+
+sjson.hook(melApolloVfxFile, function (data)
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Apollo_VFX.sjson")
+    local fileHandle = io.open(heraBlinkFile,"r")
+    if fileHandle ~= nil then
+        local heraBlinkContent = fileHandle:read("*a")
+        local heraBlinkTable = sjson.decode(heraBlinkContent)
+        for key, value in pairs(heraBlinkTable.Animations) do
+            table.insert(data.Animations, value)
+        end
+    end
+end)
+
 local traitTextEnFile = rom.path.combine(rom.paths.Content, "Game\\Text\\en\\TraitText.en.sjson")
 
 sjson.hook(traitTextEnFile, function (data)
@@ -240,7 +254,7 @@ sjson.hook(traitTextEnFile, function (data)
             Id = "ApolloBlinkCooldownStatDisplay",
             InheritFrom = "BaseStatLine",
             DisplayName = "{!Icons.Bullet}{#PropertyFormat}Blind cooldown per foe:",
-            Description = "{#UpgradeFormat}{$TooltipData.ExtractData.Cooldown} Sec.",
+            Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1} Sec.",
         }
     }
     for index, value in ipairs(traitTextList) do

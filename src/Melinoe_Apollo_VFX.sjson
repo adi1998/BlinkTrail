@@ -1,0 +1,87 @@
+{ Animations = [
+    {
+		Name = "BlinkGhostTrail_ApolloFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrail_ApolloFx1" }
+			{ Name = "BlinkGhostTrail_ApolloFx2" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrail_ApolloFx1"
+		FilePath = "Fx\Apollo\ApolloSwirlDirectionalA\ApolloSwirlDirectionalA"
+		NumFrames =   24
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Take"
+		AngleFromOwner = "Take"
+		RandomPlaySpeedMin = 30
+		RandomPlaySpeedMax = 30
+		OffsetZ = 60
+		OriginY = 60
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+		ScaleLength = 200
+		TransferAngle = true
+		TransferFrameToThis = true
+    ScaleFromOwner = true
+	}
+
+	{
+		Name = "BlinkGhostTrail_ApolloFx2"
+		InheritFrom = "BlinkGhostTrail_ApolloFx1"
+		FilePath = "Fx\Apollo\ApolloSwirlDirectionalB\ApolloSwirlDirectionalB"
+	}
+
+  {
+		Name = "BlinkGhostTrail_ApolloFx3"
+		InheritFrom = "BlinkGhostTrail_ApolloFx1"
+    FlipVertical = true
+	}
+
+  {
+		Name = "BlinkGhostTrail_ApolloFx4"
+		InheritFrom = "BlinkGhostTrail_ApolloFx2"
+    FlipVertical = true
+	}
+
+	
+  {
+    Name = "BlinkGhostTrail_ApolloFx_Dark1"
+    FilePath = "Fx\Apollo\ApolloSwirlDirectionalA\ApolloSwirlDirectionalA"
+    Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
+    StartFrame = 3
+    EndFrame = 3
+    NumFrames = 1
+    RandomPlaySpeedMin = 2
+		RandomPlaySpeedMax = 2
+    OffsetZ = 60
+		OriginY = 60
+		OriginX = 0
+    ScaleLength = 200
+		TransferAngle = true
+    AngleFromOwner = "Take"
+    ScaleFromOwner = "Take"
+  }
+  
+  /*
+  {
+    Name = "BlinkGhostTrail_ApolloFx_Dark1"
+    InheritFrom = "BlinkGhostTrail_ApolloFx1"
+    Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
+    RandomPlaySpeedMin = 25
+		RandomPlaySpeedMax = 25
+    DrawBehindOwner = true
+    CreateAnimations = []
+  }
+  */
+
+  {
+    Name = "BlinkGhostTrail_ApolloFx_Dark2"
+    InheritFrom = "BlinkGhostTrail_ApolloFx_Dark1"
+    FilePath = "Fx\Apollo\ApolloSwirlDirectionalB\ApolloSwirlDirectionalB"
+  }
+
+]}
