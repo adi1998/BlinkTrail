@@ -48,13 +48,13 @@ local function on_ready()
     mod = modutil.mod.Mod.Register(_PLUGIN.guid)
     import 'sjson.lua'
     import 'ready.lua'
-    import 'hera.lua'
-    import 'zeus.lua'
-    import 'poseidon.lua'
-    import 'heph.lua'
-    import 'hestia.lua'
-    import 'ares.lua'
-    import 'apollo.lua'
+    import 'gods/hera.lua'
+    import 'gods/zeus.lua'
+    import 'gods/poseidon.lua'
+    import 'gods/heph.lua'
+    import 'gods/hestia.lua'
+    import 'gods/ares.lua'
+    import 'gods/apollo.lua'
     game.ProcessDataStore(game.ProjectileData)
 end
 

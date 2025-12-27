@@ -133,7 +133,7 @@ end)
 local melHeraVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hera_VFX.sjson")
 
 sjson.hook(melHeraVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Hera_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Hera_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
@@ -147,7 +147,7 @@ end)
 local melZeusVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Zeus_VFX.sjson")
 
 sjson.hook(melZeusVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Zeus_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Zeus_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
@@ -161,7 +161,7 @@ end)
 local melPoseidonVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Poseidon_VFX.sjson")
 
 sjson.hook(melPoseidonVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Poseidon_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Poseidon_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
@@ -175,7 +175,7 @@ end)
 local melHestiaVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hestia_VFX.sjson")
 
 sjson.hook(melHestiaVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Hestia_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Hestia_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
@@ -189,7 +189,7 @@ end)
 local melHephVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hephaestus_VFX.sjson")
 
 sjson.hook(melHephVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Hephaestus_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Hephaestus_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
@@ -203,7 +203,7 @@ end)
 local melAresVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Ares_VFX.sjson")
 
 sjson.hook(melAresVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Ares_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Ares_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
@@ -217,7 +217,7 @@ end)
 local melApolloVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Apollo_VFX.sjson")
 
 sjson.hook(melApolloVfxFile, function (data)
-    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\Melinoe_Apollo_VFX.sjson")
+    local heraBlinkFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Apollo_VFX.sjson")
     local fileHandle = io.open(heraBlinkFile,"r")
     if fileHandle ~= nil then
         local heraBlinkContent = fileHandle:read("*a")
