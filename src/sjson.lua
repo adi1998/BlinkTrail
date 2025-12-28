@@ -77,11 +77,12 @@ sjson.hook(playerProjectilesFile,function (data)
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileApollo"
             newentry.Damage = 1
-            newentry.Fuse = 0.3
-            newentry.TotalFuse = 1.5
+            newentry.Fuse = 0.25
+            newentry.TotalFuse = 0.75
             newentry.DamageRadius = 250
             newentry.DetonateFx = "ApolloAoEStrikeBlink"
             newentry.DissipateFx = "ApolloAoEGroundBurnLongBlink"
+            newentry.ImpactFx = nil
             newentry.Thing.Graphic = "ApolloAoECircleBlink"
             newentry.Thing.Points = {
                 {

@@ -136,7 +136,7 @@ function mod.StartApolloBlink( args )
             --     Stretch = true, UseZLocation = false})
             game.thread(mod.AnimationWithDelay, {
             Animation = "BlinkGhostTrail_ApolloFx"..random_anim, DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-            Stretch = true, UseZLocation = false }, 0.4)
+            Stretch = true, UseZLocation = false }, 0.3)
 
             print("animid",animid)
             print("angle", angle)

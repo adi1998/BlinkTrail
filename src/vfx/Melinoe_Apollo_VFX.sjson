@@ -105,6 +105,7 @@
 		Name = "ApolloAoEStrikeBlinkA"
 		InheritFrom = "ApolloAoEStrikeA"
 		Scale = 0.5
+		Alpha = 0.8
 		CreateAnimations =
 		[
 			{ Name = "ApolloAoEFlareBlink" }
@@ -122,6 +123,7 @@
 		Name = "ApolloAoEStrikeBlinkB"
 		InheritFrom = "ApolloAoEStrikeB"
 		Scale = 0.5
+		Alpha = 0.8
 		CreateAnimations =
 		[
 			{ Name = "ApolloAoEFlareBlink" }

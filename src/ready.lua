@@ -52,6 +52,12 @@ game.OverwriteTableKeys( game.ProjectileData, {
     BlinkTrailProjectileAres =
     {
         InheritFrom = { "AresColorProjectile" }
+    },
+    BlinkTrailProjectileApollo =
+    {
+        DamageTextStartColor = game.Color.Transparent,
+        DamageTextColor = game.Color.Transparent,
+        IgnoreAllModifiers = true
     }
 })
 
