@@ -53,13 +53,13 @@ gods.CreateBoon({
             FunctionName = _PLUGIN.guid .. "." .. "StartApolloBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailProjectileHeraOmega",
-                DamageMultiplier = 0.02,
+                ProjectileName = "BlinkTrailProjectileApollo",
+                DamageMultiplier = 1,
             }
         },
         OnEnemyDamagedAction = 
         {
-            ValidProjectiles = {"BlinkTrailProjectileApollo", "BlinkTrailProjectileHeraOmega"},
+            ValidProjectiles = {"BlinkTrailProjectileApollo", "ApolloCast"},
             FunctionName = _PLUGIN.guid .. "." .. "CheckSuperBlindApply",
             Args =
             {
@@ -112,7 +112,7 @@ function mod.StartApolloBlink( args )
     game.MapState.BlinkDropTrail[initialId] = blinkIds
     local skipped = true
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
-        game.wait (0.13, "BlinkTrailPresentation")
+        game.wait (0.2, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         print("distance", distance)
         if distance > 0 then
@@ -142,19 +142,11 @@ function mod.StartApolloBlink( args )
             print("angle", angle)
             print("loc angle", loc_angle)
             angle = game.GetAngleBetween({Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds - 1]})
-            if distance > 90 or (skipped and distance > 30) then
-                game.CreateProjectileFromUnit({
-                    Name = args.ProjectileName,
-                    Id = game.CurrentRun.Hero.ObjectId,
-                    Angle = angle,
-                    FireFromId = animid,
-                    DamageMultiplier = args.DamageMultiplier,
-                    FizzleOldestProjectileCount = 4
-                })
-                skipped = false
-            else
-                skipped = true
-            end
+            
+            game.thread(mod.PoseidonProjectileWithDelay,
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = blinkIds [#blinkIds - 1], ProjectileCap = 8 }
+            , 0.5)
+            
             angle = newangle
             location = newlocation
             if game.TableLength(blinkIds) > maxTrailLength then
@@ -184,13 +176,13 @@ function mod.StartApolloBlink( args )
     local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
     if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
-        game.CreateAnimationsBetween({ Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = true, UseZLocation = false })
-        game.CreateAnimationsBetween({
-                Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
-                Stretch = true, UseZLocation = false})
-        game.thread(mod.AnimationWithDelay, {
-                Animation = "HeraBlinkDissShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
-                Stretch = true, UseZLocation = false }, 0.5)
+        -- game.CreateAnimationsBetween({ Animation = "HeraBlinkShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = true, UseZLocation = false })
+        -- game.CreateAnimationsBetween({
+        --         Animation = "HeraBlinkShortDark" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
+        --         Stretch = true, UseZLocation = false})
+        -- game.thread(mod.AnimationWithDelay, {
+        --         Animation = "HeraBlinkDissShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor,
+        --         Stretch = true, UseZLocation = false }, 0.5)
     end
     while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do

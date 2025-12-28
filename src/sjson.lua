@@ -73,6 +73,35 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Thing.AttachedAnim = "AresBlinkBladeSpinShadow"
             newentry.ImpactFx = nil
             table.insert(newdata,newentry)
+        elseif projectile.Name == "ApolloCast" then
+            local newentry = game.DeepCopyTable(projectile)
+            newentry.Name = "BlinkTrailProjectileApollo"
+            newentry.Damage = 1
+            newentry.Fuse = 0.3
+            newentry.TotalFuse = 1.5
+            newentry.DamageRadius = 250
+            newentry.DetonateFx = "ApolloAoEStrikeBlink"
+            newentry.DissipateFx = "ApolloAoEGroundBurnLongBlink"
+            newentry.Thing.Graphic = "ApolloAoECircleBlink"
+            newentry.Thing.Points = {
+                {
+					X = 16,
+					Y = 8,
+				},
+				{
+					X = 16,
+					Y = -8,
+				},
+				{
+					X = -16,
+					Y = -8,
+				},
+				{
+					X = -16,
+					Y = 8,
+				},
+            }
+            table.insert(newdata,newentry)
         end
     end
     for index, value in ipairs(newdata) do
@@ -238,7 +267,7 @@ local traitTextOrder = {
 local traitTextEnFile = rom.path.combine(rom.paths.Content, "Game\\Text\\en\\TraitText.en.sjson")
 
 sjson.hook(traitTextEnFile, function (data)
-    
+
     local traitTextList = {
         {
             Id = "HephMineBlastBoonStatDisplay",

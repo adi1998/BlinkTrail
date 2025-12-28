@@ -35,53 +35,168 @@
 		FilePath = "Fx\Apollo\ApolloSwirlDirectionalB\ApolloSwirlDirectionalB"
 	}
 
-  {
-		Name = "BlinkGhostTrail_ApolloFx3"
-		InheritFrom = "BlinkGhostTrail_ApolloFx1"
-    FlipVertical = true
-	}
+	{
+			Name = "BlinkGhostTrail_ApolloFx3"
+			InheritFrom = "BlinkGhostTrail_ApolloFx1"
+		FlipVertical = true
+		}
 
-  {
-		Name = "BlinkGhostTrail_ApolloFx4"
-		InheritFrom = "BlinkGhostTrail_ApolloFx2"
-    FlipVertical = true
-	}
+	{
+			Name = "BlinkGhostTrail_ApolloFx4"
+			InheritFrom = "BlinkGhostTrail_ApolloFx2"
+		FlipVertical = true
+		}
 
+		
+	{
+		Name = "BlinkGhostTrail_ApolloFx_Dark1"
+		FilePath = "Fx\Apollo\ApolloSwirlDirectionalA\ApolloSwirlDirectionalA"
+		Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
+		StartFrame = 3
+		EndFrame = 3
+		NumFrames = 1
+		RandomPlaySpeedMin = 2
+			RandomPlaySpeedMax = 2
+		OffsetZ = 60
+			OriginY = 60
+			OriginX = 0
+		ScaleLength = 200
+			TransferAngle = true
+		AngleFromOwner = "Take"
+		ScaleFromOwner = "Take"
+	}
 	
-  {
-    Name = "BlinkGhostTrail_ApolloFx_Dark1"
-    FilePath = "Fx\Apollo\ApolloSwirlDirectionalA\ApolloSwirlDirectionalA"
-    Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
-    StartFrame = 3
-    EndFrame = 3
-    NumFrames = 1
-    RandomPlaySpeedMin = 2
-		RandomPlaySpeedMax = 2
-    OffsetZ = 60
-		OriginY = 60
-		OriginX = 0
-    ScaleLength = 200
-		TransferAngle = true
-    AngleFromOwner = "Take"
-    ScaleFromOwner = "Take"
-  }
-  
-  /*
-  {
-    Name = "BlinkGhostTrail_ApolloFx_Dark1"
-    InheritFrom = "BlinkGhostTrail_ApolloFx1"
-    Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
-    RandomPlaySpeedMin = 25
-		RandomPlaySpeedMax = 25
-    DrawBehindOwner = true
-    CreateAnimations = []
-  }
-  */
+	/*
+	{
+		Name = "BlinkGhostTrail_ApolloFx_Dark1"
+		InheritFrom = "BlinkGhostTrail_ApolloFx1"
+		Color = { Red = 0.0 Green = 0.0 Blue = 0.0 }
+		RandomPlaySpeedMin = 25
+			RandomPlaySpeedMax = 25
+		DrawBehindOwner = true
+		CreateAnimations = []
+	}
+	*/
 
-  {
-    Name = "BlinkGhostTrail_ApolloFx_Dark2"
-    InheritFrom = "BlinkGhostTrail_ApolloFx_Dark1"
-    FilePath = "Fx\Apollo\ApolloSwirlDirectionalB\ApolloSwirlDirectionalB"
-  }
+	{
+		Name = "BlinkGhostTrail_ApolloFx_Dark2"
+		InheritFrom = "BlinkGhostTrail_ApolloFx_Dark1"
+		FilePath = "Fx\Apollo\ApolloSwirlDirectionalB\ApolloSwirlDirectionalB"
+	}
+
+	{
+		Name = "ApolloAoECircleBlink"
+		InheritFrom = "ApolloAoECircle"
+		Scale = 0.5
+		//ScaleRadius = 240
+		Sound = null
+	}
+
+	{
+		Name = "ApolloAoEStrikeBlink"
+		Random =
+		[
+			{ Name = "ApolloAoEStrikeBlinkA"}
+			{ Name = "ApolloAoEStrikeBlinkB"}
+		]
+	}
+
+	{
+		Name = "ApolloAoEStrikeBlinkA"
+		InheritFrom = "ApolloAoEStrikeA"
+		Scale = 0.5
+		CreateAnimations =
+		[
+			{ Name = "ApolloAoEFlareBlink" }
+			{ Name = "ApolloAoEFlare2Blink" }
+			{ Name = "ApolloAoEDarkBlink" }
+			{ Name = "ApolloAoERadialBlink" }
+			{ Name = "ApolloAoERingABlink" }
+			{ Name = "ApolloAoERingCBlink" }
+			{ Name = "ApolloAoEGroundBurnABlink" }
+			{ Name = "ApolloAoEGroundBurnBBlink" }
+		]
+	}
+
+	{
+		Name = "ApolloAoEStrikeBlinkB"
+		InheritFrom = "ApolloAoEStrikeB"
+		Scale = 0.5
+		CreateAnimations =
+		[
+			{ Name = "ApolloAoEFlareBlink" }
+			{ Name = "ApolloAoEFlare2Blink" }
+			{ Name = "ApolloAoEDarkBlink" }
+			{ Name = "ApolloAoERadialBlink" }
+			{ Name = "ApolloAoERingABlink" }
+			{ Name = "ApolloAoERingCBlink" }
+			{ Name = "ApolloAoEGroundBurnABlink" }
+			{ Name = "ApolloAoEGroundBurnBBlink" }
+		]
+	}
+
+	{
+		Name = "ApolloAoEFlareBlink"
+		InheritFrom = "ApolloAoEFlare"
+		Scale = 0.1
+	}
+
+	{
+		Name = "ApolloAoEFlare2Blink"
+		InheritFrom = "ApolloAoEFlare2"
+		Scale = 0.6
+	}
+
+	{
+		Name = "ApolloAoEDarkBlink"
+		InheritFrom = "ApolloAoEDark"
+		Scale = 1.5
+	}
+
+	{
+		Name = "ApolloAoERadialBlink"
+		InheritFrom = "ApolloAoERadial"
+		Scale = 0.5
+	}
+
+	{
+		Name = "ApolloAoERingABlink"
+		InheritFrom = "ApolloAoERingA"
+		StartScale = 0.25
+		EndScale = 0.5
+		ScaleMin = 0.45
+		ScaleMax = 0.55
+	}
+
+	{
+		Name = "ApolloAoERingCBlink"
+		InheritFrom = "ApolloAoERingABlink"
+		Red = 0
+		Green = 0
+		Blue = 0
+		GroupName = "FX_Terrain"
+		Duration = 0.7
+	}
+
+	{
+		Name = "ApolloAoEGroundBurnABlink"
+		InheritFrom = "ApolloAoEGroundBurnA"
+		StartScale = 0.5
+		EndScale = 0.75
+	}
+
+	{
+		Name = "ApolloAoEGroundBurnBBlink"
+		InheritFrom = "ApolloAoEGroundBurnB"
+		Scale = 0.375
+	}
+
+	{
+		Name = "ApolloAoEGroundBurnLongBlink"
+		InheritFrom = "ApolloAoEGroundBurnA"
+		Duration = 1.0
+		StartScale = 0.7
+		EndScale = 0.55
+	}
 
 ]}
