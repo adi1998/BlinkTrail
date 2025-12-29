@@ -1,0 +1,55 @@
+{ Projectiles = [
+    {
+        Name = "BlinkTrailDemeterProjectile"
+        InheritFrom = "1_BaseDamagingProjectile"
+        DetonateGraphic = "null"
+        CanBeProjectileDefenseDestroyed = false
+        Type = "BEAM"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        UnlimitedUnitPenetration = true
+        MaxAdjustRate = 0
+        Range = 200.0
+        Speed = 0.0
+        Damage = 5
+        ImpactVelocity = 0
+        MultiDetonate = true
+        Fuse = 0.2
+        TotalFuse = 5
+        DrawAsBeam = true
+        GroupName = "FX_Dark"
+        TipFx = "BlinkTrailDemeterLaserTipFlare"
+        DangerDistance = 0
+        Thing = {
+            Graphic = "BlinkTrailDemeterLaserPreview"
+            AttachedAnim = "BlinkTrailDemeterLaserOriginFlare"
+            OffsetZ = 100
+            Grip = 999999
+            Tallness = 10
+            UseBoundsForSortDrawArea = true
+            Points = [
+                {
+                    X = 48
+                    Y = 48
+                }
+                {
+                    X = 48
+                    Y = -48
+                }
+                    {
+                    X = -48
+                    Y = -48
+                }
+                {
+                    X = -48
+                    Y = 48
+                }
+            ]
+        }
+    }
+
+]
+}

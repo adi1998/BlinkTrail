@@ -3,6 +3,8 @@
 -- these funky (---@) comments are just there
 -- to help VS Code find the definitions of things
 
+import = require
+
 ---@diagnostic disable-next-line: undefined-global
 local mods = rom.mods
 
@@ -48,6 +50,7 @@ local function on_ready()
     mod = modutil.mod.Mod.Register(_PLUGIN.guid)
     import 'sjson.lua'
     import 'ready.lua'
+
     import 'gods/hera.lua'
     import 'gods/zeus.lua'
     import 'gods/poseidon.lua'
@@ -55,6 +58,8 @@ local function on_ready()
     import 'gods/hestia.lua'
     import 'gods/ares.lua'
     import 'gods/apollo.lua'
+    import 'gods/demeter.lua'
+
     game.ProcessDataStore(game.ProjectileData)
 end
 
