@@ -123,7 +123,7 @@ function mod.StartDemeterBlink( args )
             --     Animation = "BlinkGhostTrail_DemeterFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
             --     Stretch = true, UseZLocation = false})
             game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, DataProperties = {Range = distance} }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, DataProperties = {Range = distance}, FizzleOldestProjectileCount = 6 }
             , 0.4)
             prevProj = targetProjId
             -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
@@ -138,7 +138,7 @@ function mod.StartDemeterBlink( args )
     game.thread(game.DestroyOnDelay, { unitId }, 3.4 )
     game.SetUnitProperty({ DestinationId = unitId, Property = "CollideWithUnits", Value = false })
     game.thread(mod.PoseidonProjectileWithDelay,
-        { Name = "BlinkTrailDemeterProjectileTracking", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
+        { Name = "BlinkTrailDemeterProjectileTracking", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier, FizzleOldestProjectileCount = 2 }
     , 0.4)
     -- game.thread(mod.PoseidonProjectileWithDelay,
     --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
