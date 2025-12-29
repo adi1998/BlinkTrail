@@ -9,7 +9,7 @@
         AffectsFriends = false
         AffectsSelf = false
         CheckUnitImpact = true
-        CheckObstacleImpact = true
+        CheckObstacleImpact = false
         UnlimitedUnitPenetration = true
         MaxAdjustRate = 0
         Range = 200.0
@@ -18,7 +18,7 @@
         ImpactVelocity = 0
         MultiDetonate = true
         Fuse = 0.2
-        TotalFuse = 5
+        TotalFuse = 3
         DrawAsBeam = true
         GroupName = "FX_Dark"
         TipFx = "BlinkTrailDemeterLaserTipFlare"
@@ -51,5 +51,43 @@
         }
     }
 
+    {
+        Name = "BlinkTrailDemeterProjectileTracking"
+        InheritFrom = "BlinkTrailDemeterProjectile"
+        AutoAdjustForTarget = true
+		EndBeamAtTarget = true
+        MaxAdjustRate = 1080
+        Range = 1200
+        IgnoreCancelAttachedProjectiles = true
+        AttachToOwner = true
+        SpinRate = 0
+        TipFx = "BlinkTrailDemeterLaserOriginFlare"
+        Thing = {
+            Graphic = "BlinkTrailDemeterLaserPreview"
+            AttachedAnim = "BlinkTrailDemeterLaserTipFlare"
+            OffsetZ = 60
+            Grip = 999999
+            Tallness = 10
+            UseBoundsForSortDrawArea = true
+            Points = [
+                {
+                    X = 48
+                    Y = 48
+                }
+                {
+                    X = 48
+                    Y = -48
+                }
+                    {
+                    X = -48
+                    Y = -48
+                }
+                {
+                    X = -48
+                    Y = 48
+                }
+            ]
+        }
+    }
 ]
 }

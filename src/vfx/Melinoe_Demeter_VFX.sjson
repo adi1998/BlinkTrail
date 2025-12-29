@@ -50,7 +50,7 @@
         VisualFxIntervalMax = 0.10
         Duration = 2
         CreateAnimations = [
-            //{ Name = "BlinkTrailDemeterSmokeA_TurretPlace" }
+            { Name = "BlinkTrailDemeterSmokeA_TurretPlace" }
             { Name = "BlinkTrailDemeterTurretShadow"}
         ]
     }
@@ -82,19 +82,19 @@
     {
         Name = "BlinkTrailDemeterIceCrystalB_RandomOffset"
         InheritFrom = "BlinkTrailDemeterIceCrystalB"
-        RandomOffsetX = 100
-        RandomOffsetY = 50
+        RandomOffsetX = 80
+        RandomOffsetY = 40
         Scale = 0.5
-        OffsetZ = 30
+        OffsetZ = 24
     }
 
     {
         Name = "BlinkTrailDemeterIceCrystalC_RandomOffset"
         InheritFrom = "BlinkTrailDemeterIceCrystalC"
-        RandomOffsetX = 100
-        RandomOffsetY = 50
+        RandomOffsetX = 80
+        RandomOffsetY = 40
         Scale = 0.5
-        OffsetZ = 30
+        OffsetZ = 24
     }
 
     {
@@ -181,7 +181,7 @@
     {
         Name = "BlinkTrailDemeterSmokeA_TurretPlace"
         InheritFrom = "BlinkTrailDemeterSmokeA"
-        Scale = 0.75
+        Scale = 0.55
         OffsetZ = 80
         StartAlpha = 1
         EndAlpha = 0
@@ -194,7 +194,7 @@
         GroupName = "Shadows"
         DieWithOwner = true
         OffsetY = 80
-        Scale = 0.5
+        Scale = 0.45
         Alpha = 0.8
         AngleFromOwner = "Ignore"
         ColorFromOwner = "Ignore"

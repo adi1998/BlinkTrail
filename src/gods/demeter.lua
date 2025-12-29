@@ -118,7 +118,7 @@ function mod.StartDemeterBlink( args )
             local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
             table.insert( blinkIds, targetId )
             game.SetAnimation({ Name = "BlinkTrailDemeterTurret", DestinationId = blinkIds [#blinkIds - 1]})
-            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 5.4 )
+            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 3.4 )
             -- game.CreateAnimationsBetween({
             --     Animation = "BlinkGhostTrail_DemeterFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
             --     Stretch = true, UseZLocation = false})
@@ -131,11 +131,17 @@ function mod.StartDemeterBlink( args )
     end
     game.wait(0.25, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "BlinkTrailDemeterTurret", DestinationId = blinkIds [#blinkIds]})
-    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 5.4 )
+    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 3.4 )
     local angle = game.GetAngleBetween({ DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds-1] })
     local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds-1] })
+    local unitId = game.SpawnUnit({ Name = "DummyOlympusTarget", Group = "Standing", DestinationId = blinkIds[#blinkIds], DataProperties = {CollideWithUnits = false} })
+    game.thread(game.DestroyOnDelay, { unitId }, 3.4 )
+    game.SetUnitProperty({ DestinationId = unitId, Property = "CollideWithUnits", Value = false })
+    game.thread(mod.PoseidonProjectileWithDelay,
+        { Name = "BlinkTrailDemeterProjectileTracking", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
+    , 0.4)
     -- game.thread(mod.PoseidonProjectileWithDelay,
-    --     { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = blinkIds [#blinkIds-1], DataProperties = {Range = distance} }
+    --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
     -- , 0.4)
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
