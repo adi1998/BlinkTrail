@@ -76,7 +76,8 @@ game.OverwriteTableKeys( game.ProjectileData, {
     },
     BlinkTrailDemeterProjectileTracking =
     {
-        InheritFrom = { "BlinkTrailDemeterProjectile" }
+        InheritFrom = { "BlinkTrailDemeterProjectile" },
+        OnDeathFunctionName = _PLUGIN.guid .. "." .. "CrystalBeamCleanup"
     }
 })
 

@@ -78,7 +78,6 @@ gods.CreateBoon({
 })
 
 local boonname = gods.GetInternalBoonName("HephaestusBlinkTrailBoon")
-game.LootData.ZeusUpgrade.TraitIndex[boonname]= true
 
 function mod.CreateMine(delay, id, args)
     game.MapState[_PLUGIN.guid .. "HephMineCount"] = (game.MapState[_PLUGIN.guid .. "HephMineCount"] or 0) + 1
