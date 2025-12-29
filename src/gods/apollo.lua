@@ -144,7 +144,7 @@ function mod.StartApolloBlink( args )
             angle = game.GetAngleBetween({Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds - 1]})
             
             game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = blinkIds [#blinkIds - 1], ProjectileCap = 8 }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = blinkIds [#blinkIds - 1], FizzleOldestProjectileCount = 4 }
             , 0.5)
             
             angle = newangle

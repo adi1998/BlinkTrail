@@ -95,8 +95,8 @@ function mod.CrystalBeamCleanup( projectileData, triggerArgs )
 end
 
 function mod.DemeterProjectileWithDelay(args, delay, turretId)
-    game.MapState[_PLUGIN.guid .. "DemeterTurretMap"] = game.MapState[_PLUGIN.guid .. "DemeterTurretMap"] or {}
     game.wait(delay)
+    game.MapState[_PLUGIN.guid .. "DemeterTurretMap"] = game.MapState[_PLUGIN.guid .. "DemeterTurretMap"] or {}
     local projId = game.CreateProjectileFromUnit(args)
     game.MapState[_PLUGIN.guid .. "DemeterTurretMap"][projId] = turretId
 end
