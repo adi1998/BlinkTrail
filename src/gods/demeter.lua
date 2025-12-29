@@ -11,8 +11,8 @@ gods.CreateBoon({
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Crystal Blink",
-    description = "Spawns lava pools from your dash trail.",
-    StatLines = {"HestiaLavaPoolStatDisplay"},
+    description = "Create crystal beams along your dash trail.",
+    StatLines = {"DemeterCrystalBeamStatDisplay"},
     boonIconPath = "GUI\\Screens\\BoonIcons\\Demeter_28",
     reuseBaseIcons = true,
     ExtractValues =
@@ -22,7 +22,7 @@ gods.CreateBoon({
             ExtractAs = "Damage",
             Format = "MultiplyByBase",
             BaseType = "Projectile",
-            BaseName = "BlinkTrailDemeterProjectile",
+            BaseName = "BlinkTrailDemeterProjectileTracking",
             BaseProperty = "Damage",
         },
         {
@@ -30,7 +30,7 @@ gods.CreateBoon({
             SkipAutoExtract = true,
             External = true,
             BaseType = "ProjectileBase",
-            BaseName = "BlinkTrailDemeterProjectile",
+            BaseName = "BlinkTrailDemeterProjectileTracking",
             BaseProperty = "Fuse",
             DecimalPlaces = 2,
         }
@@ -43,15 +43,15 @@ gods.CreateBoon({
         },
         Rare =
         {
-            Multiplier = 1.25,
+            Multiplier = 8/5,
         },
         Epic =
         {
-            Multiplier = 1.5,
+            Multiplier = 11/5,
         },
         Heroic =
         {
-            Multiplier = 1.75,
+            Multiplier = 14/5,
         }
     },
     ExtraFields =
@@ -60,14 +60,16 @@ gods.CreateBoon({
             FunctionName = _PLUGIN.guid .. "." .. "StartDemeterBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailDemeterProjectile",
+                ProjectileName = "BlinkTrailDemeterProjectileTracking",
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
                     AbsoluteStackValues =
                     {
-                        [1] = 0.25,
-                        [2] = 0.125,
+                        [1] = 3/5,
+                        [2] = 2/5,
+                        [3] = 2/5,
+                        [4] = 1/5,
                     },
                 },
                 ReportValues =
@@ -123,7 +125,7 @@ function mod.StartDemeterBlink( args )
             --     Animation = "BlinkGhostTrail_DemeterFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
             --     Stretch = true, UseZLocation = false})
             game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, DataProperties = {Range = distance}, FizzleOldestProjectileCount = 6 }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, DataProperties = {Range = distance, MaxAdjustRate = 0, AttachToOwner = false}, FizzleOldestProjectileCount = 6 }
             , 0.4)
             prevProj = targetProjId
             -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
@@ -138,7 +140,7 @@ function mod.StartDemeterBlink( args )
     game.thread(game.DestroyOnDelay, { unitId }, 3.4 )
     game.SetUnitProperty({ DestinationId = unitId, Property = "CollideWithUnits", Value = false })
     game.thread(mod.PoseidonProjectileWithDelay,
-        { Name = "BlinkTrailDemeterProjectileTracking", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier, FizzleOldestProjectileCount = 2 }
+        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier, FizzleOldestProjectileCount = 6 }
     , 0.4)
     -- game.thread(mod.PoseidonProjectileWithDelay,
     --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }

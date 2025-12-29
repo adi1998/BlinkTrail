@@ -266,6 +266,12 @@ sjson.hook(traitTextEnFile, function (data)
             InheritFrom = "BaseStatLine",
             DisplayName = "{!Icons.Bullet}{#PropertyFormat}Blind cooldown per foe:",
             Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1} Sec.",
+        },
+        {
+            Id = "DemeterCrystalBeamStatDisplay",
+            InheritFrom = "BaseStatLine",
+            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Beam damage:",
+            Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1} {#Prev}{#ItalicFormat}(every {$TooltipData.ExtractData.Fuse} Sec.)"
         }
     }
     for index, value in ipairs(traitTextList) do

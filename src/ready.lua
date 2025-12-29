@@ -55,9 +55,28 @@ game.OverwriteTableKeys( game.ProjectileData, {
     },
     BlinkTrailProjectileApollo =
     {
+        InheritFrom = { "NoSlowFrameProjectile", "NoShakeProjectile", "NoShakeEffect" },
+		CancelArmorSpark = true,
+		CancelArmorUnitShake = true,
+		CancelUnitShake = true,
+		CancelHitSpark = true,
+		CancelUnitHitFlash = true,
+		CancelVulnerabilitySpark = true,
         DamageTextStartColor = game.Color.Transparent,
         DamageTextColor = game.Color.Transparent,
         IgnoreAllModifiers = true
+    },
+    BlinkTrailDemeterProjectile =
+    {
+        InheritFrom = { "NoSlowFrameProjectile", "DemeterColorProjectile" },
+		CancelArmorSpark = true,
+		CancelHitSpark = true,
+		CancelUnitHitFlash = true,
+		CancelVulnerabilitySpark = true,
+    },
+    BlinkTrailDemeterProjectileTracking =
+    {
+        InheritFrom = { "BlinkTrailDemeterProjectile" }
     }
 })
 
@@ -68,7 +87,9 @@ game.ConcatTableValues(game.WeaponSets.OlympianProjectileNames,{
     "HephMineBlast",
     "BlinkTrailProjectileHestia",
     "BlinkTrailProjectileFireHestia",
-    "BlinkTrailProjectileAres"
+    "BlinkTrailProjectileAres",
+    "BlinkTrailDemeterProjectile",
+    "BlinkTrailDemeterProjectileTracking"
 })
 
 game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
@@ -77,7 +98,9 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     PoseidonBlinkWave = gods.GetInternalBoonName("PoseidonBlinkTrailBoon"),
     HephMineBlast = gods.GetInternalBoonName("HephaestusBlinkTrailBoon"),
     BlinkTrailProjectileHestia = gods.GetInternalBoonName("HestiaBlinkTrailBoon"),
-    BlinkTrailProjectileAres = gods.GetInternalBoonName("AresBlinkTrailBoon")
+    BlinkTrailProjectileAres = gods.GetInternalBoonName("AresBlinkTrailBoon"),
+    BlinkTrailDemeterProjectile = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
+    BlinkTrailDemeterProjectileTracking = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
 })
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
