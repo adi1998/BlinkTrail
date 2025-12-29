@@ -26,7 +26,7 @@
         Thing = {
             Graphic = "BlinkTrailDemeterLaserPreview"
             AttachedAnim = "BlinkTrailDemeterLaserOriginFlare"
-            OffsetZ = 100
+            OffsetZ = 60
             Grip = 999999
             Tallness = 10
             UseBoundsForSortDrawArea = true

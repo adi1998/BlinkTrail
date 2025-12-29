@@ -43,8 +43,8 @@
         ScaleFromOwner = "Ignore"
         SortMode = "FromParent"
         DrawBehindOwner = true
-        Scale = 1.25
-        OffsetZ = 100
+        Scale = 1
+        OffsetZ = 60
         VisualFx = "BlinkTrailDemeterIceCrystalRandomOffset"
         VisualFxIntervalMin = 0.05
         VisualFxIntervalMax = 0.10
@@ -396,7 +396,7 @@
         FilePath = "zerp-BlinkTrail\DemeterTurret\DemeterTurret"
         PlaySpeed = 100
         GroupName = "FX_Standing_Add"
-        OffsetZ = 100
+        OffsetZ = 60
         StartAlpha = 0.5
         EndAlpha = 0
         Red = 0.1
