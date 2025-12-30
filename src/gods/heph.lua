@@ -77,44 +77,42 @@ gods.CreateBoon({
     }
 })
 
-local boonname = gods.GetInternalBoonName("HephaestusBlinkTrailBoon")
-
 function mod.CreateMine(delay, id, args)
-    game.MapState[_PLUGIN.guid .. "HephMineCount"] = (game.MapState[_PLUGIN.guid .. "HephMineCount"] or 0) + 1
+    game.MapState[_PLUGIN.guid .. "HephMineTable"] = game.MapState[_PLUGIN.guid .. "HephMineTable"] or {}
+    game.MapState[_PLUGIN.guid .. "HephMineMap"] = game.MapState[_PLUGIN.guid .. "HephMineMap"] or {}
+    table.insert(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
+    game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = true
     game.SetAnimation({Name = "HephMineAoe", DestinationId = id})
-    while true do
-        -- game.CreateProjectileFromUnit({ Name = "GunBombImmolation", Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = 1, FireFromId = id, ProjectileCap = 8 })
+    while game.MapState[_PLUGIN.guid .. "HephMineMap"][id] do
         game.wait(delay)
         local enemyId = game.GetClosest({Id = id, DestinationName = "EnemyTeam"})
         if enemyId ~= 0 then
-            local angle = game.GetAngleBetween({Id = enemyId, DestinationId = id})
+            local angle = math.rad(game.GetAngleBetween({Id = enemyId, DestinationId = id}))
             local a = 200
             local b = a/2
-            local term_x = math.cos(math.rad(angle))/a
-            local term_y = math.sin(math.rad(angle))/b
-            local sqr_term_x = term_x * term_x
-            local sqr_term_y = term_y * term_y
+            local cos_angle = math.cos(angle)
+            local sin_angle = math.sin(angle)
+            local term_x = cos_angle/a
+            local term_y = sin_angle/b
+            local sqr_term_x = term_x^2
+            local sqr_term_y = term_y^2
             local sqrt_term = math.sqrt(sqr_term_x + sqr_term_y)
             local r = 1/sqrt_term
-            local distance = math.sqrt((r*math.cos(math.rad(angle)))^2 + (r*math.sin(math.rad(angle)))^2)
+            local distance = math.sqrt((r*cos_angle)^2 + (r*sin_angle)^2)
             print("mine range", distance)
             local enemy_distance = game.GetDistance({Id = enemyId, DestinationId = id})
             print("enemy distance", enemy_distance)
             if enemy_distance <= distance + 20 then
+                -- detonate mine
                 game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
-                game.MapState[_PLUGIN.guid .. "HephMineCount"] = game.MapState[_PLUGIN.guid .. "HephMineCount"] - 1
-                if game.MapState[_PLUGIN.guid .. "HephMineCount"] < 0 then
-                    game.MapState[_PLUGIN.guid .. "HephMineCount"] = 0
-                end
+                game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
+                game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = nil
                 break
             end
         end
-        if game.MapState[_PLUGIN.guid .. "HephMineCount"] >= 5 then
-            game.MapState[_PLUGIN.guid .. "HephMineCount"] = game.MapState[_PLUGIN.guid .. "HephMineCount"] - 1
-            if game.MapState[_PLUGIN.guid .. "HephMineCount"] < 0 then
-                game.MapState[_PLUGIN.guid .. "HephMineCount"] = 0
-            end
-            break
+        if #game.MapState[_PLUGIN.guid .. "HephMineTable"] >= 5 then
+            local oldestId = table.remove(game.MapState[_PLUGIN.guid .. "HephMineTable"], 1)
+            game.MapState[_PLUGIN.guid .. "HephMineMap"][oldestId] = nil
         end
     end
     game.Destroy({Id = id})
