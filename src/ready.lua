@@ -126,6 +126,7 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     PoseidonBlinkWave = gods.GetInternalBoonName("PoseidonBlinkTrailBoon"),
     HephMineBlast = gods.GetInternalBoonName("HephaestusBlinkTrailBoon"),
     BlinkTrailProjectileHestia = gods.GetInternalBoonName("HestiaBlinkTrailBoon"),
+    BlinkTrailProjectileFireHestia = "Flame Blink Lava",
     BlinkTrailProjectileAres = gods.GetInternalBoonName("AresBlinkTrailBoon"),
     BlinkTrailDemeterProjectile = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
     BlinkTrailDemeterProjectileTracking = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),

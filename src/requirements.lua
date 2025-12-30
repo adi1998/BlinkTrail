@@ -110,7 +110,7 @@ local traitRequirements = {
     },
 }
 
-function OverwriteUptoDepth(base, incoming, depth, currentDepth)
+function DeepMergeUptoDepth(base, incoming, depth, currentDepth)
     depth = depth or 0
     currentDepth = currentDepth or 0
     local returnTable = game.DeepCopyTable( base )
@@ -119,7 +119,7 @@ function OverwriteUptoDepth(base, incoming, depth, currentDepth)
 			if next(v) == nil then
 				returnTable[k] = {}
 			else
-				returnTable[k] = OverwriteUptoDepth( returnTable[k], v, depth, currentDepth + 1 )
+				returnTable[k] = DeepMergeUptoDepth( returnTable[k], v, depth, currentDepth + 1 )
 			end
 		elseif v == "nil" then
 			returnTable[k] = nil
@@ -130,7 +130,7 @@ function OverwriteUptoDepth(base, incoming, depth, currentDepth)
     return returnTable
 end
 
-game.TraitRequirements = OverwriteUptoDepth(game.TraitRequirements, traitRequirements, 2)
+game.TraitRequirements = DeepMergeUptoDepth(game.TraitRequirements, traitRequirements, 2)
 
 local traitData = {
     SteamBoon = {
@@ -143,4 +143,4 @@ local traitData = {
     -- }
 }
 
-game.TraitData = OverwriteUptoDepth(game.TraitData, traitData, 2)
+game.TraitData = DeepMergeUptoDepth(game.TraitData, traitData, 2)
