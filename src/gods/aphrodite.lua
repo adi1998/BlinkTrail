@@ -1,38 +1,29 @@
 gods.CreateBoon({
     pluginGUID = _PLUGIN.guid,
-    internalBoonName = "AresBlinkTrailBoon",
+    internalBoonName = "AphroditeBlinkTrailBoon",
     isLegendary = false,
     InheritFrom =
     {
-        "EarthBoon",
+        "WaterBoon",
     },
-    characterName = "Ares",
+    characterName = "Aphrodite",
     addToExistingGod = true,
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
-    displayName = "Bloody Blink",
-    description = "Create multiple {$Keywords.BladeRift} from your dash trail. Enemies damaged from {$Keywords.BladeRift} spill {!Icons.BloodDropIcon}",
-    StatLines = {"BladeRiftDamageStatDisplay1"},
-    boonIconPath = "GUI\\Screens\\BoonIcons\\Ares_28",
+    displayName = "Flutter Blink",
+    description = "Fires large arrows along targets mades by your dash trail.",
+    StatLines = {"SupportFireDamageDisplay2"},
+    boonIconPath = "GUI\\Screens\\BoonIcons\\Aphrodite_28",
     reuseBaseIcons = true,
     ExtractValues =
     {
         {
             Key = "ReportedMultiplier",
             ExtractAs = "Damage",
-            Format = "MultiplyByBaseOverTime",
+            Format = "MultiplyByBase",
             BaseType = "Projectile",
-            BaseName = "BlinkTrailProjectileAres",
+            BaseName = "BlinkTrailProjectileAphrodite",
             BaseProperty = "Damage",
-            BaseFuseProperty = "Fuse",
-        },
-        {
-            ExtractAs = "BladeRiftDuration",
-            SkipAutoExtract = true,
-            External = true,
-            BaseType = "ProjectileBase",
-            BaseName = "BlinkTrailProjectileAres",
-            BaseProperty = "TotalFuse",
         },
     },
     RarityLevels =
@@ -43,31 +34,33 @@ gods.CreateBoon({
         },
         Rare =
         {
-            Multiplier = 1.25,
+            Multiplier = 6/5,
         },
         Epic =
         {
-            Multiplier = 1.5,
+            Multiplier = 7/5,
         },
         Heroic =
         {
-            Multiplier = 1.75,
+            Multiplier = 8/5,
         }
     },
     ExtraFields =
     {
         [_PLUGIN.guid .. "OnSprintAction"] = {
-            FunctionName = _PLUGIN.guid .. "." .. "StartAresBlink",
+            FunctionName = _PLUGIN.guid .. "." .. "StartAphroditeBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailProjectileAres",
+                ProjectileName = "BlinkTrailProjectileAphrodite",
+                SpawnDistance = 2600,
+                Delay = 0.7,
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
                     AbsoluteStackValues =
                     {
-                        [1] = 0.25,
-                        [2] = 0.125,
+                        [1] = 1/5,
+                        [2] = 1/10
                     },
                 },
                 ReportValues =
@@ -83,30 +76,41 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
-        AcquireFunctionName = "SetupBloodDropDisplay",
-		OnExpire = { FunctionName = "CheckBloodDropDisplay", },
-        OnEnemyDamagedAction =
-        {
-            ValidProjectiles = {"BlinkTrailProjectileAres", "AresProjectile"},
-            FunctionName = _PLUGIN.guid .. "." .. "CheckAresRiftBloodDrop",
-            Args =
-            {
-                Cooldown = 0.5,
-                Name = "BloodDrop",
-                Chance = 1
-            }
-        }
     }
 })
 
-function mod.CheckAresRiftBloodDrop(victim, functionArgs, triggerArgs)
-    if game.MapState[_PLUGIN.guid .. "LastBloodDropTime"] == nil or game._worldTime >= game.MapState[_PLUGIN.guid .. "LastBloodDropTime"] + functionArgs.Cooldown  then
-        game.thread( game.CreateBloodDrop, victim, functionArgs )
-        game.MapState[_PLUGIN.guid .. "LastBloodDropTime"] = game._worldTime
-    end
+function mod.AphroditeProjectileWithDelay(args, delay, turretId)
+    game.wait(delay)
+    game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] = game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] or {}
+    local projId = game.CreateProjectileFromUnit(args)
+    game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"][projId] = turretId
 end
 
-function mod.StartAresBlink( args )
+function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
+    local angle = math.rad( math.random(0,360) )
+    local offset = game.CalcOffset( angle , functionArgs.SpawnDistance )
+    local dropLocation = game.SpawnObstacle({ Name = "InvisibleTarget", DestinationId = id })
+    local angle_reverse = math.deg(angle) + 180
+    game.wait( functionArgs.Delay )
+    game.CreateProjectileFromUnit({
+        Name = functionArgs.ProjectileName,
+        Id = game.CurrentRun.Hero.ObjectId,
+        DestinationId = dropLocation,
+        FireFromTarget = true,
+        OffsetX = offset.X,
+        OffsetY = offset.Y,
+        Angle = angle_reverse,
+        DamageMultiplier = functionArgs.DamageMultiplier,
+    })
+    game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 46 })
+    game.wait( 0.4 )
+    game.SetAnimation({ Name = "BlinkTrailAphroditeTargetFast", DestinationId = blinkId})
+    --IncrementTableValue( SessionState, "ArtemisCastProjectiles" )
+    game.thread(game.DestroyOnDelay, {dropLocation}, 0.1)
+end
+
+function mod.StartAphroditeBlink( args )
+    game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] = game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] or {}
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
             -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})
@@ -115,7 +119,7 @@ function mod.StartAresBlink( args )
         game.MapState.BlinkDropTrail = {}
     end
     local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
+    -- local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
     local prevProj = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local blinkIds = { initialId }
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
@@ -134,23 +138,25 @@ function mod.StartAresBlink( args )
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+            local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
             table.insert( blinkIds, targetId )
-            game.SetAnimation({ Name = "AresBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
-            game.CreateAnimationsBetween({
-                Animation = "BlinkGhostTrail_AresFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-                Stretch = true, UseZLocation = false})
-            game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 6 }
-            , 0)
+            game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds - 1]})
+            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.2)
+            -- game.CreateAnimationsBetween({
+            --     Animation = "BlinkGhostTrail_AphroditeFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+            --     Stretch = true, UseZLocation = false})
+            game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds - 1])
             prevProj = targetProjId
-            angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
+            -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
     game.wait(0.25, "BlinkTrailPresentation")
-    game.SetAnimation({ Name = "AresBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
-    game.thread(mod.PoseidonProjectileWithDelay,
-        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 6 }
-    , 0)
+    game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
+    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.1)
+    game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds])
+    -- game.thread(mod.AphroditeProjectileWithDelay,
+    --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
+    -- , 0.4)
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end

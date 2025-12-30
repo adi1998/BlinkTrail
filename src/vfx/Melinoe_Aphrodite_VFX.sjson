@@ -1,3 +1,239 @@
 { Animations = [
-    
+    {
+		Name = "AphroditeBlinkTrailArrow"
+		InheritFrom = "ElysiumBallistaLoop"
+		VisualFx = "AphroditeBlinkTrailTrail"
+		VisualFxCap = 200
+		VisualFxDistanceMax = 160.0
+		VisualFxDistanceMin = 120.0
+	}
+
+	{
+		Name = "AphroditeBlinkTrailTrail"
+		Random =
+		[
+			{ Name = "AphroditeBlinkTrailTrailA" }
+			{ Name = "AphroditeBlinkTrailTrailB" }
+		]
+	}
+
+    {
+		Name = "AphroditeBlinkTrailTrailA"
+		FilePath = "Fx\ArtemisTrailA\ArtemisTrailA"
+		NumFrames = 45
+		Material = "Unlit"
+		RandomFlipVertical = true
+		RandomPlaySpeedMin = 60
+		RandomPlaySpeedMax = 70
+		VelocityMin = 50
+		VelocityMax = 100
+		Acceleration = -100
+		ScaleX = 2.0
+		ScaleY = 1.2
+		AngleFromOwner = "Take"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		Hue = -0.3
+		/*
+		AddColor = true
+		StartRed = 0.5
+		StartGreen = 0.1
+		StartBlue = 0.2
+		EndRed = 0
+		EndGreen = 0
+		EndBlue = 0
+		*/
+		EaseIn = 0.99
+		EaseOut = 1.0
+		GroupName = "FX_Standing"
+		VisualFxManagerCap = 400
+		VisualFxManagerFrameCap = 18
+		CreateAnimations =
+		[
+			{ Name = "AphroditeBlinkTrailHelixRandom" }
+			{ Name = "AphroditeBlinkTrailTrailLight" }
+			{ Name = "AphroditeBlinkTrailTrailLinger" }
+			{ Name = "AphroditeBlinkTrailTrailParticles" }
+			{ Name = "AphroditeBlinkTrailTrailParticles" }
+			{ Name = "AphroditeBlinkTrailTrailParticles" }
+		]
+	}
+
+    {
+		Name = "AphroditeBlinkTrailTrailB"
+		InheritFrom = "AphroditeBlinkTrailTrailA"
+		FilePath = "Fx\ArtemisTrailB\ArtemisTrailB"
+	}
+
+	{
+		Name = "AphroditeBlinkTrailTrailLinger"
+		Random =
+		[
+			{ Name = "AphroditeBlinkTrailTrailLingerA" }
+			{ Name = "AphroditeBlinkTrailTrailLingerB" }
+		]
+	}
+	{
+		Name = "AphroditeBlinkTrailTrailLingerA"
+		InheritFrom = "AphroditeBlinkTrailTrailA"
+		ClearCreateAnimations = true
+		Red = 0
+		Green = 0
+		Blue = 0
+		AddColor = false
+		GroupName = "FX_Dark"
+		RandomPlaySpeedMin = 30
+		RandomPlaySpeedMax = 40
+		ScaleY = 1.0
+		ScaleX = 1.5
+	}
+
+	{
+		Name = "AphroditeBlinkTrailTrailLingerB"
+		InheritFrom = "AphroditeBlinkTrailTrailLingerA"
+		FilePath = "Fx\ArtemisTrailB\ArtemisTrailB"
+		ClearCreateAnimations = true
+	}
+
+	{
+		Name = "AphroditeBlinkTrailTrailParticles"
+		FilePath = "Particles\particle_ember_03_glow_add"
+		Material = "Unlit"
+		GroupName = "FX_Standing_Add"
+		AddColor = true
+		RandomDurationMin = 1
+		RandomDurationMax = 2.0
+		ScaleMin = 0.2
+		ScaleMax = 0.7
+		RandomRotation = true
+		RandomRotationSpeedMin = -360
+		RandomRotationSpeedMax = 360
+		RandomOffsetX = 20
+		RandomOffsetY = 10
+		VelocityMin = 50
+		VelocityMax = 300
+		RandomAccelerationMin = -100
+		RandomAccelerationMax = -20
+		StartScale = 1
+		EndScale = 0
+		EaseIn = 0.9
+		EaseOut = 1.0
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Take"
+		Red = 1
+		Green = 0.6
+		Blue = 0.8
+		ScaleFromOwner = "Ignore"
+	}
+
+	{
+		Name = "AphroditeBlinkTrailTrailLight"
+		FilePath = "Particles\particle_quickFlashIris"
+		Red = 0.9
+		Green = 0.6
+		Blue = 0.8
+		StartAlpha = 0.3
+		EndAlpha = 0
+		EaseIn = 0.99
+		EaseOut = 1
+		Duration = 0.33
+		PostRotateScaleY = 0.5
+		GroupName = "FX_Terrain_Add"
+		LocationZFromOwner = "Ignore"
+		LocationFromOwner = "Ignore"
+		ScaleFromOwner = "Ignore"
+		Scale = 1.5
+	}
+
+	{
+		Name = "AphroditeBlinkTrailHelixRandom"
+		Random =
+		[
+			{ Name = "AphroditeBlinkTrailHelix" }
+			{ Name = null }
+			{ Name = null }
+			{ Name = null }
+			{ Name = null }
+		]
+	}
+
+	{
+		Name = "AphroditeBlinkTrailHelix"
+		FilePath = "Fx\ArtemisHelix\ArtemisHelix"
+		NumFrames = 37
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		RandomPlaySpeedMin = 50
+		RandomPlaySpeedMax = 70
+		Hue = -0.3
+		Scale = 1.5
+	}
+
+    {
+		Name = "BlinkTrailAphroditeTarget"
+		ChildAnimation = "BlinkTrailAphroditeProjectileGlow"
+		FilePath = "Fx\AphroditeHeartShape\AphroditeHeartShape"
+		GroupName = "Standing"
+		VisualFx = "ArtemisRangedTrail_Aphrodite"
+		Sound = "/SFX/AphroditeDevotionSFX"
+		EndFrame = 60
+		NumFrames = 60
+        PlaySpeed = 60
+		StartFrame = 1
+		Scale = 0.3
+        OffsetZ = 50
+		ScaleFromOwner = "Ignore"
+        Loop = true
+		VisualFxDistanceMax = 22.0
+		VisualFxDistanceMin = 20.0
+	}
+
+    {
+		Name = "BlinkTrailAphroditeTargetFast"
+		InheritFrom = "BlinkTrailAphroditeTarget"
+        CreateAnimations = [
+            { Name = "QuickFlashPink" }
+            { Name = "BlinkTrailAphroditeProjectileExplosion" }
+        ]
+        PlaySpeed = 300
+	}
+
+    {
+		Name = "BlinkTrailAphroditeProjectileGlow"
+		FilePath = "Particles\particle_glow"
+		
+		Alpha = 0.4
+		ColorFromOwner = "Ignore"
+		EndFrame = 1
+		NumFrames = 1
+		StartFrame = 1
+		ScaleFromOwner = "Ignore"
+		Ambient = 0.0
+        OffsetZ = 50
+        Scale = 0.7
+        DrawBehindOwner = true
+		Color = { Red = 0.70 Green = 0.0 Blue = 1.0 }
+	}
+
+    {
+		Name = "BlinkTrailAphroditeProjectileExplosion"
+		FilePath = "Fx\Aphrodite\AphroditeProjectileImpact\AphroditeProjectileImpact"
+		NumFrames = 60
+		Material = "Unlit"
+		ScaleFromOwner = "Ignore"
+		AngleFromOwner = "Ignore"
+		UseOwnAngle = false
+		ColorFromOwner = "Ignore"
+		Scale = 0.7
+		OffsetZ = 50
+		OverlayVfx = true
+		SortMode = "FromParent"
+		SortFromOwner = "Take"
+		RandomFlipHorizontal = true
+		RandomPlaySpeedMin = 60
+		RandomPlaySpeedMax = 70
+	}
+
 ]}
