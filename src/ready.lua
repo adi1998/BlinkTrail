@@ -12,32 +12,6 @@ function mod.dump(o, depth)
    end
 end
 
-function mod.tprint(tbl, indent)
-  if not indent then indent = 0 end
-  local toprint = string.rep(" ", indent) .. "{\n"
-  indent = indent + 2 
-  for k, v in pairs(tbl) do
-    toprint = toprint .. string.rep(" ", indent)
-    if (type(k) == "number") then
-      toprint = toprint .. "[" .. k .. "] = "
-    elseif (type(k) == "string") then
-      toprint = toprint  .. k ..  "= "   
-    end
-    if (type(v) == "number") then
-      toprint = toprint .. v .. ",\n"
-    elseif (type(v) == "string") then
-      toprint = toprint .. "\"" .. v .. "\",\n"
-    elseif (type(v) == "table") then
-      toprint = toprint .. mod.tprint(v, indent + 2) .. ",\n"
-    else
-      toprint = toprint .. "\"" .. tostring(v) .. "\",\n"
-    end
-  end
-  toprint = toprint .. string.rep(" ", indent-2) .. "}"
-  return toprint
-end
-
-
 mod.SprintBoons = {
     "HestiaSprintBoon",
     "AresSprintBoon",
@@ -49,7 +23,6 @@ mod.SprintBoons = {
     "AphroditeSprintBoon",
     "HephaestusSprintBoon",
 }
-
 
 game.OverwriteTableKeys( game.ProjectileData, {
     BlinkTrailProjectileHeraOmega =
@@ -105,7 +78,11 @@ game.OverwriteTableKeys( game.ProjectileData, {
     {
         InheritFrom = { "BlinkTrailDemeterProjectile" },
         OnDeathFunctionName = _PLUGIN.guid .. "." .. "CrystalBeamCleanup"
-    }
+    },
+    BlinkTrailProjectileAphrodite =
+    {
+        InheritFrom = { "AphroditeColorProjectile" },
+    },
 })
 
 game.ConcatTableValues(game.WeaponSets.OlympianProjectileNames,{
@@ -117,7 +94,8 @@ game.ConcatTableValues(game.WeaponSets.OlympianProjectileNames,{
     "BlinkTrailProjectileFireHestia",
     "BlinkTrailProjectileAres",
     "BlinkTrailDemeterProjectile",
-    "BlinkTrailDemeterProjectileTracking"
+    "BlinkTrailDemeterProjectileTracking",
+    "BlinkTrailProjectileAphrodite",
 })
 
 game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
@@ -130,6 +108,7 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileAres = gods.GetInternalBoonName("AresBlinkTrailBoon"),
     BlinkTrailDemeterProjectile = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
     BlinkTrailDemeterProjectileTracking = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
+    BlinkTrailProjectileAphrodite = gods.GetInternalBoonName("AphroditeBlinkTrailBoon")
 })
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)

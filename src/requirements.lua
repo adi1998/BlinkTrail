@@ -138,9 +138,6 @@ local traitData = {
             ValidProjectiles = {"ProjectileCastFireball", "ProjectileFireball", "HestiaSprintPuddle", "BlinkTrailProjectileHestia", "BlinkTrailProjectileFireHestia" },
         }
     },
-    -- DoubleBloodDropBoon = {
-    --     BloodDropMultiplier = 3
-    -- }
 }
 
 game.TraitData = DeepMergeUptoDepth(game.TraitData, traitData, 2)
