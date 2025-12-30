@@ -22,7 +22,7 @@ gods.CreateBoon({
             ExtractAs = "Damage",
             Format = "MultiplyByBase",
             BaseType = "Projectile",
-            BaseName = "BlinkTrailDemeterProjectile",
+            BaseName = "BlinkTrailProjectileHestia",
             BaseProperty = "Damage",
         },
         {
@@ -60,7 +60,7 @@ gods.CreateBoon({
             FunctionName = _PLUGIN.guid .. "." .. "StartHestiaBlink",
             FunctionArgs =
             {
-                ProjectileName = "BlinkTrailDemeterProjectile",
+                ProjectileName = "BlinkTrailProjectileHestia",
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
@@ -86,7 +86,6 @@ gods.CreateBoon({
     }
 })
 
-
 function mod.StartHestiaBlink( args )
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
@@ -96,7 +95,7 @@ function mod.StartHestiaBlink( args )
         game.MapState.BlinkDropTrail = {}
     end
     local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    -- local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
+    local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
     local prevProj = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local blinkIds = { initialId }
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
@@ -111,32 +110,27 @@ function mod.StartHestiaBlink( args )
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.25, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        
+        print("distance", distance)
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-            local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
             table.insert( blinkIds, targetId )
-            game.SetAnimation({ Name = "BlinkTrailDemeterTurret", DestinationId = blinkIds [#blinkIds - 1]})
-            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 5.4 )
-            -- game.CreateAnimationsBetween({
-            --     Animation = "BlinkGhostTrail_HestiaFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-            --     Stretch = true, UseZLocation = false})
+            game.SetAnimation({ Name = "HestiaBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
+            game.CreateAnimationsBetween({
+                Animation = "BlinkGhostTrail_HestiaFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
             game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, DataProperties = {Range = distance} }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
             , 0.4)
             prevProj = targetProjId
-            -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
+            angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
     game.wait(0.25, "BlinkTrailPresentation")
-    game.SetAnimation({ Name = "BlinkTrailDemeterTurret", DestinationId = blinkIds [#blinkIds]})
-    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 5.4 )
-    local angle = game.GetAngleBetween({ DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds-1] })
-    local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds-1] })
-    -- game.thread(mod.PoseidonProjectileWithDelay,
-    --     { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = blinkIds [#blinkIds-1], DataProperties = {Range = distance} }
-    -- , 0.4)
+    game.SetAnimation({ Name = "HestiaBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
+    game.thread(mod.PoseidonProjectileWithDelay,
+        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
+    , 0.4)
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
