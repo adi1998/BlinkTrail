@@ -105,7 +105,6 @@ function mod.StartHeraBlink( args )
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
         game.wait (0.13, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
@@ -137,6 +136,18 @@ function mod.StartHeraBlink( args )
                     DamageMultiplier = args.DamageMultiplier,
                     FizzleOldestProjectileCount = 4
                 })
+                local doubleChance = game.GetTotalHeroTraitValue("DoubleOlympianProjectileChance") * game.GetTotalHeroTraitValue( "LuckMultiplier", { IsMultiplier = true })
+                if game.RandomChance(doubleChance) then
+                    game.wait( game.GetTotalHeroTraitValue("DoubleOlympianProjectileInterval" )*(2/3) )
+                    game.CreateProjectileFromUnit({
+                        Name = args.ProjectileName,
+                        Id = game.CurrentRun.Hero.ObjectId,
+                        Angle = angle,
+                        FireFromId = animid,
+                        DamageMultiplier = args.DamageMultiplier,
+                        FizzleOldestProjectileCount = 4
+                    })
+                end
                 skipped = false
             else
                 skipped = true

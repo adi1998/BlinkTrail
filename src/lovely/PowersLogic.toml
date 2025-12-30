@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[vars]
+zerpBlinkTrailenv = "rom.mods['zerp-BlinkTrail'].lovely_env"
+
+[[patches]]
+[patches.pattern]
+target = "PowersLogic.lua"
+pattern = '''
+	local bloodDropCap = 0.5
+'''
+position = "after"
+payload = '''
+	local bloodDropCap = 0.5
+	if HeroHasTrait("DoubleBloodDropBoon") then
+		bloodDropCap = 1/3
+	end
+'''
+match_indent = false
+times = 1

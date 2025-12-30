@@ -98,6 +98,11 @@ function mod.ProjectileWithDelay(args, delay)
     end
     args.Angle = angle
     local addlProperties = {}
+    if game.HeroHasTrait("ReboundingSparkBoon") then
+        addlProperties.AllowRepeatedOwnerJumpHit = true
+        addlProperties.AffectsSelf = true
+        --addlProperties.MultipleUnitCollisions = true
+    end
     addlProperties.NumJumps = game.GetBaseDataValue({ Type = "Projectile", Name = args.Name, Property = "NumJumps"}) + game.GetTotalHeroTraitValue("ZeusSparkBonusBounces")
     args.DataProperties = addlProperties
     game.CreateProjectileFromUnit(args)

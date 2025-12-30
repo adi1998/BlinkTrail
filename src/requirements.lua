@@ -87,7 +87,7 @@ local traitRequirements = {
 
     SteamBoon = {
         OneFromEachSet = {
-            [2] = { "HestiaWeaponBoon", "HestiaSpecialBoon", "HestiaCastBoon", "OmegaZeroBurnBoon", "FireballManaSpecialBoon", "CastProjectileBoon", gods.GetInternalBoonName("HestiaBlinkTrailBoon") },
+            [2] = { "HestiaWeaponBoon", "HestiaSpecialBoon", "HestiaCastBoon", "HestiaSprintBoon", "FireballManaSpecialBoon", "CastProjectileBoon", gods.GetInternalBoonName("HestiaBlinkTrailBoon") },
         }
     },
 
@@ -131,3 +131,16 @@ function OverwriteUptoDepth(base, incoming, depth, currentDepth)
 end
 
 game.TraitRequirements = OverwriteUptoDepth(game.TraitRequirements, traitRequirements, 2)
+
+local traitData = {
+    SteamBoon = {
+        OnEnemyDamagedAction = {
+            ValidProjectiles = {"ProjectileCastFireball", "ProjectileFireball", "HestiaSprintPuddle", "BlinkTrailProjectileHestia", "BlinkTrailProjectileFireHestia" },
+        }
+    },
+    -- DoubleBloodDropBoon = {
+    --     BloodDropMultiplier = 3
+    -- }
+}
+
+game.TraitData = OverwriteUptoDepth(game.TraitData, traitData, 2)

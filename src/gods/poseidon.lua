@@ -86,6 +86,17 @@ function mod.PoseidonProjectileWithDelay(args, delay)
     game.CreateProjectileFromUnit(args)
 end
 
+function mod.PoseidonProjectileWithDelay2(args, delay)
+    game.wait(delay)
+    game.CreateProjectileFromUnit(args)
+    local doubleChance = game.GetTotalHeroTraitValue("DoubleOlympianProjectileChance") * game.GetTotalHeroTraitValue( "LuckMultiplier", { IsMultiplier = true })
+    if game.RandomChance(doubleChance) then
+        game.wait( game.GetTotalHeroTraitValue("DoubleOlympianProjectileInterval" )*(2/3) )
+        -- local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
+        game.CreateProjectileFromUnit(args)
+    end
+end
+
 function mod.AnimationWithDelay(args,delay)
     game.wait(delay)
     print(mod.dump(args))
@@ -125,10 +136,10 @@ function mod.StartPoseidonBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_PoseidonFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            game.thread(mod.PoseidonProjectileWithDelay,
+            game.thread(mod.PoseidonProjectileWithDelay2,
                 { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
             , 1.2)
-            game.thread(mod.PoseidonProjectileWithDelay,
+            game.thread(mod.PoseidonProjectileWithDelay2,
                 { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
             , 1.21)
             prevProj = targetProjId
@@ -137,10 +148,10 @@ function mod.StartPoseidonBlink( args )
     end
     game.wait(0.17, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
-    game.thread(mod.PoseidonProjectileWithDelay,
+    game.thread(mod.PoseidonProjectileWithDelay2,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
     , 1.2)
-    game.thread(mod.PoseidonProjectileWithDelay,
+    game.thread(mod.PoseidonProjectileWithDelay2,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
     , 1.21)
     if game.MapState.BlinkDropTrail then
