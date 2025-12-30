@@ -77,9 +77,9 @@ sjson.hook(playerProjectilesFile,function (data)
         elseif projectile.Name == "AresProjectile" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileAres"
-            newentry.Speed = 200
-            newentry.MaxAdjustRate = 200
-            newentry.DamageRadius = 180
+            newentry.Speed = 150
+            newentry.MaxAdjustRate = 120
+            newentry.DamageRadius = 100
             newentry.Thing.Graphic = "AresBlinkBladeSpinIn"
             newentry.Thing.AttachedAnim = "AresBlinkBladeSpinShadow"
             newentry.ImpactFx = nil
