@@ -182,13 +182,13 @@ function mod.StartAresBlink( args )
     local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.1
     local startTime = game._worldTime
     while not game.IsEmpty(game.MapState.BlinkDropTrail) and (game._worldTime - startTime) < waitPeriod do
-        game.wait(0.22, "BlinkTrailPresentation")
+        game.wait(0.2, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = prevProj, DestinationId = game.CurrentRun.Hero.ObjectId })
         if distance > 0 then
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             game.thread(mod.PoseidonProjectileWithDelay,
                 { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 6 }
-            , 0.1)
+            , 0.08)
             prevProj = targetProjId
         end
     end

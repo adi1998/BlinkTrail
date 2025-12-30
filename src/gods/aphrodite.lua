@@ -103,7 +103,7 @@ function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
         DamageMultiplier = functionArgs.DamageMultiplier,
     })
     game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 64 })
-    game.wait( 0.4 )
+    game.wait( 0.35 )
     game.SetAnimation({ Name = "BlinkTrailAphroditeTargetFast", DestinationId = blinkId})
     --IncrementTableValue( SessionState, "ArtemisCastProjectiles" )
     game.thread(game.DestroyOnDelay, {dropLocation}, 0.1)
@@ -141,7 +141,7 @@ function mod.StartAphroditeBlink( args )
             local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
             table.insert( blinkIds, targetId )
             game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds - 1]})
-            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.2)
+            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.8)
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_AphroditeFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
@@ -158,7 +158,7 @@ function mod.StartAphroditeBlink( args )
     end
     game.wait(0.22, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
-    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.1)
+    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.8)
     game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds])
     -- game.thread(mod.AphroditeProjectileWithDelay,
     --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
