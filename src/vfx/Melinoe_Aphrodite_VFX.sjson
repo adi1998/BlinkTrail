@@ -236,4 +236,69 @@
 		RandomPlaySpeedMax = 70
 	}
 
+    {
+		Name = "BlinkGhostTrail_AphroditeFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrail_AphroditeFxA" }
+			{ Name = "BlinkGhostTrail_AphroditeFxB" }
+		]
+	}
+
+    {
+		Name = "BlinkGhostTrail_AphroditeSecondaryFx"
+		AngleFromOwner = "Take"
+		Random = [
+			{ Name = "BlinkGhostTrail_AphroditeFxC" }
+			//{ Name = "BlinkGhostTrail_AphroditeFxD" }
+		]
+	}
+
+	{
+		Name = "BlinkGhostTrail_AphroditeFxA"
+		FilePath = "Fx\Aphrodite\AphroditeDirectionalTrailA\AphroditeDirectionalTrailA"
+		NumFrames = 50
+		Material = "Unlit"
+		LocationZFromOwner = "Take"
+		LocationFromOwner = "Ignore"
+		AngleFromOwner = "Ignore"
+		RandomPlaySpeedMin = 60
+		RandomPlaySpeedMax = 60
+		RandomFlipVertical = true
+		OffsetZ = 50
+		OriginY = 100
+		OriginX = 0
+		ScaleMin = 1
+		ScaleMax = 1.0
+        ScaleY = 0.4
+		ScaleLength = 300
+		TransferAngle = true
+		TransferFrameToThis = true
+	}
+
+	{
+		Name = "BlinkGhostTrail_AphroditeFxB"
+		InheritFrom = "BlinkGhostTrail_AphroditeFxA"
+		FilePath = "Fx\Aphrodite\AphroditeDirectionalTrailB\AphroditeDirectionalTrailB"
+	}
+
+    {
+		Name = "BlinkGhostTrail_AphroditeFxC"
+		InheritFrom = "BlinkGhostTrail_AphroditeFxA"
+		FilePath = "Fx\Aphrodite\AphroditeDirectionalTrailC_Front\AphroditeDirectionalTrailC_Front"
+	}
+
+    {
+		Name = "BlinkGhostTrail_AphroditeFxC_Back"
+		InheritFrom = "BlinkGhostTrail_AphroditeFxA"
+		FilePath = "Fx\Aphrodite\AphroditeDirectionalTrailC_Back\AphroditeDirectionalTrailC_Back"
+        GroupName = "FX_Dark"
+	}
+
+    {
+		Name = "BlinkGhostTrail_AphroditeFxD"
+		InheritFrom = "BlinkGhostTrail_AphroditeFxA"
+		FilePath = "Fx\Aphrodite\AphroditeDirectionalTrailD_Front\AphroditeDirectionalTrailD_Front"
+	}
+
 ]}

@@ -102,7 +102,7 @@ function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
         Angle = angle_reverse,
         DamageMultiplier = functionArgs.DamageMultiplier,
     })
-    game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 46 })
+    game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 64 })
     game.wait( 0.4 )
     game.SetAnimation({ Name = "BlinkTrailAphroditeTargetFast", DestinationId = blinkId})
     --IncrementTableValue( SessionState, "ArtemisCastProjectiles" )
@@ -132,7 +132,7 @@ function mod.StartAphroditeBlink( args )
     local delay_count = 0
     local anim_list = {}
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
-        game.wait(0.25, "BlinkTrailPresentation")
+        game.wait(0.22, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         
         if distance > 0 then
@@ -142,15 +142,21 @@ function mod.StartAphroditeBlink( args )
             table.insert( blinkIds, targetId )
             game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds - 1]})
             game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.2)
-            -- game.CreateAnimationsBetween({
-            --     Animation = "BlinkGhostTrail_AphroditeFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-            --     Stretch = true, UseZLocation = false})
+            game.CreateAnimationsBetween({
+                Animation = "BlinkGhostTrail_AphroditeFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
+            game.CreateAnimationsBetween({
+                Animation = "BlinkGhostTrail_AphroditeFxC", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
+            game.CreateAnimationsBetween({
+                Animation = "BlinkGhostTrail_AphroditeFxC_Back", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false})
             game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds - 1])
             prevProj = targetProjId
             -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
-    game.wait(0.25, "BlinkTrailPresentation")
+    game.wait(0.22, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
     game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.1)
     game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds])
