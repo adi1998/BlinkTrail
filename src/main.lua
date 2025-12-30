@@ -60,7 +60,7 @@ local function on_ready()
     import 'gods/apollo.lua'
     import 'gods/demeter.lua'
     import 'gods/aphrodite.lua'
-
+    import 'requirements.lua'
     game.ProcessDataStore(game.ProjectileData)
 end
 

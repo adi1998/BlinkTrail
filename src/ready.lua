@@ -1,15 +1,42 @@
-function mod.dump(o)
+function mod.dump(o, depth)
+   depth = depth or 0
    if type(o) == 'table' then
-      local s = '{ '
+      local s = string.rep("\t", depth) .. '{ '
       for k,v in pairs(o) do
          if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. mod.dump(v) .. ','
+         s = s .. string.rep("\t",(depth+1)) .. '['..k..'] = ' .. mod.dump(v, depth + 1) .. ',\n'
       end
-      return s .. '} '
+      return s .. string.rep("\t", depth) .. '} \n'
    else
       return tostring(o)
    end
 end
+
+function mod.tprint(tbl, indent)
+  if not indent then indent = 0 end
+  local toprint = string.rep(" ", indent) .. "{\n"
+  indent = indent + 2 
+  for k, v in pairs(tbl) do
+    toprint = toprint .. string.rep(" ", indent)
+    if (type(k) == "number") then
+      toprint = toprint .. "[" .. k .. "] = "
+    elseif (type(k) == "string") then
+      toprint = toprint  .. k ..  "= "   
+    end
+    if (type(v) == "number") then
+      toprint = toprint .. v .. ",\n"
+    elseif (type(v) == "string") then
+      toprint = toprint .. "\"" .. v .. "\",\n"
+    elseif (type(v) == "table") then
+      toprint = toprint .. mod.tprint(v, indent + 2) .. ",\n"
+    else
+      toprint = toprint .. "\"" .. tostring(v) .. "\",\n"
+    end
+  end
+  toprint = toprint .. string.rep(" ", indent-2) .. "}"
+  return toprint
+end
+
 
 mod.SprintBoons = {
     "HestiaSprintBoon",

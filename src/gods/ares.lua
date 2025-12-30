@@ -107,43 +107,43 @@ function mod.CheckAresRiftBloodDrop(victim, functionArgs, triggerArgs)
 end
 
 function mod.StartAresBlinkTrailPresentation()
-	if not IsEmpty(MapState.BlinkDropTrail) then
-		for id, ids in pairs(MapState.BlinkDropTrail) do	
-			SetAnimation({ Name = "AresBlinkTrailFxOut", DestinationId = id, CopyFromPrev = true })
-			thread(DestroyOnDelay, { id }, 0.1 )
+	if not game.IsEmpty(game.MapState.BlinkDropTrail) then
+		for id, ids in pairs(game.MapState.BlinkDropTrail) do	
+			game.SetAnimation({ Name = "AresBlinkTrailFxOut", DestinationId = id, CopyFromPrev = true })
+			game.thread(game.DestroyOnDelay, { id }, 0.1 )
 		end
 		
-		MapState.BlinkDropTrail = {}
+		game.MapState.BlinkDropTrail = {}
 	end
-	local initialId = SpawnObstacle({ Name = "BlankObstacle", DestinationId = CurrentRun.Hero.ObjectId, Group = "Standing" })
+	local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
 	local blinkIds = { initialId }
 	local blinkAnimationIds = {}
-	local nextClipRegenTime  = GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
-	local waitPeriod = nextClipRegenTime + (GetWeaponDataValue({ Id = CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
-	local startTime = _worldTime
+	local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
+	local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.08
+	local startTime = game._worldTime
 	local maxTrailLength = 99 
 
-	MapState.BlinkDropTrail = MapState.BlinkDropTrail or {}
-	MapState.BlinkDropTrail[initialId] = blinkIds
-	while MapState.BlinkDropTrail and MapState.BlinkDropTrail[initialId] and (_worldTime - startTime) < waitPeriod do
-		wait (0.0666, "BlinkTrailPresentation")
-		local distance = GetDistance({ Id = blinkIds [#blinkIds], DestinationId = CurrentRun.Hero.ObjectId })
+	game.MapState.BlinkDropTrail = game.MapState.BlinkDropTrail or {}
+	game.MapState.BlinkDropTrail[initialId] = blinkIds
+	while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
+		game.wait (0.0666, "BlinkTrailPresentation")
+		local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
 		if distance > 0 then
-			local targetId = SpawnObstacle({ Name = "BlankObstacle", DestinationId = CurrentRun.Hero.ObjectId, Group = "Standing" })
+			local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
 			table.insert( blinkIds, targetId )
-			CreateAnimationsBetween({ Animation = "AresBlinkTrailFxIn", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1], Stretch = true, UseZLocation = false, Group = "Standing", SetAnimation = true, MatchOwnerToAnimation = true})
-			if TableLength(blinkIds) > maxTrailLength then
+			game.CreateAnimationsBetween({ Animation = "AresBlinkTrailFxIn", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1], Stretch = true, UseZLocation = false, Group = "Standing", SetAnimation = true, MatchOwnerToAnimation = true})
+			if game.TableLength(blinkIds) > maxTrailLength then
 				local lastItemId = table.remove( blinkIds, 1 )
-				SetAnimation({ Name = "AresBlinkTrailFxOut", DestinationId = lastItemId, CopyFromPrev = true })
-				thread(DestroyOnDelay, { lastItemId }, 0.09 )
+				game.SetAnimation({ Name = "AresBlinkTrailFxOut", DestinationId = lastItemId, CopyFromPrev = true })
+				game.thread(game.DestroyOnDelay, { lastItemId }, 0.09 )
 			end
 		end
 	end
-	if MapState.BlinkDropTrail then
-		MapState.BlinkDropTrail[ initialId ] = nil
+	if game.MapState.BlinkDropTrail then
+		game.MapState.BlinkDropTrail[ initialId ] = nil
 	end
 	local lastItemId = table.remove( blinkIds )
-	Destroy({Id = lastItemId})
+	game.Destroy({Id = lastItemId})
 	local outDuration = 0.16 -- time to remove trail over
 	local waitInterval = outDuration/#blinkIds
 	local minWaitInterval = 0.06
@@ -155,22 +155,22 @@ function mod.StartAresBlinkTrailPresentation()
 		skipInterval = multiplier
 	end
 
-	local finalAnchor = SpawnObstacle({ Name = "BlankObstacle", DestinationId = CurrentRun.Hero.ObjectId, Group = "Standing" })
-	Attach({ Id = finalAnchor, DestinationId = CurrentRun.Hero.ObjectId })
-	if GetDistance({ Id = finalAnchor, DestinationId = CurrentRun.Hero.ObjectId }) > 0 then
-		CreateAnimationsBetween({ Animation = "AresBlinkTrailFxIn", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = true, UseZLocation = false, Group = "Standing", SetAnimation = true, MatchOwnerToAnimation = true})
+	local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+	game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
+	if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
+		game.CreateAnimationsBetween({ Animation = "AresBlinkTrailFxIn", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = true, UseZLocation = false, Group = "Standing", SetAnimation = true, MatchOwnerToAnimation = true})
 	end
-	while not IsEmpty( blinkIds ) do
+	while not game.IsEmpty( blinkIds ) do
 		while skipCounter < skipInterval do
 			local lastItemId = table.remove( blinkIds, 1 )
-			SetAnimation({ Name = "AresBlinkTrailFxOut", DestinationId = lastItemId, CopyFromPrev = true })
-			thread(DestroyOnDelay, { lastItemId }, 0.1 )
+			game.SetAnimation({ Name = "AresBlinkTrailFxOut", DestinationId = lastItemId, CopyFromPrev = true })
+			game.thread(game.DestroyOnDelay, { lastItemId }, 0.1 )
 			skipCounter = skipCounter + 1
 		end
 		skipCounter = 0
-		wait( waitInterval, "BlinkTrailPresentation")
+		game.wait( waitInterval, "BlinkTrailPresentation")
 	end
-	Destroy({ Id = finalAnchor })
+	game.Destroy({ Id = finalAnchor })
 end
 
 function mod.StartAresBlink( args )
