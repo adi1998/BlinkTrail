@@ -188,13 +188,12 @@ function mod.StartAresBlink( args )
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             game.thread(mod.PoseidonProjectileWithDelay,
                 { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 6 }
-            , 0.15)
+            , 0.1)
             prevProj = targetProjId
-            angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
-    game.wait(0.25, "BlinkTrailPresentation")
+    game.wait(0.2, "BlinkTrailPresentation")
     game.thread(mod.PoseidonProjectileWithDelay,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 6 }
-    , 0.15)
+    , 0.1)
 end

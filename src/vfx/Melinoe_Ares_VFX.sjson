@@ -139,6 +139,7 @@
         OriginY = 45
         OriginX = 0
         OffsetZ = 30
+        VisualFx = "AresBlinkTrailFxOutParticles"
     }
 
     {
@@ -151,6 +152,17 @@
         OriginX = 0
         OffsetZ = 30
         ChainTo = "AresBlinkTrailFxLoop"
+    }
+
+    {
+        Name = "AresBlinkTrailFxOutParticles"
+        InheritFrom = "BlinkTrailFxOutParticles"
+        StartRed = 0.7
+		StartGreen = 0.1
+		StartBlue = 0.1
+		EndRed = 1
+		EndGreen = 0.2
+		EndBlue = 0.2
     }
 
 ]}
