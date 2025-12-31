@@ -23,29 +23,30 @@
 		OriginX = 0
 		ScaleMin = 1
 		ScaleMax = 1.0
-		ScaleLength = 200
+		ScaleLength = 190
 		TransferAngle = true
 		TransferFrameToThis = true
-    ScaleFromOwner = true
+    	ScaleFromOwner = true
 	}
 
 	{
 		Name = "BlinkGhostTrail_ApolloFx2"
 		InheritFrom = "BlinkGhostTrail_ApolloFx1"
 		FilePath = "Fx\Apollo\ApolloSwirlDirectionalB\ApolloSwirlDirectionalB"
+		ScaleLength = 170
 	}
 
 	{
-			Name = "BlinkGhostTrail_ApolloFx3"
-			InheritFrom = "BlinkGhostTrail_ApolloFx1"
+		Name = "BlinkGhostTrail_ApolloFx3"
+		InheritFrom = "BlinkGhostTrail_ApolloFx1"
 		FlipVertical = true
-		}
+	}
 
 	{
-			Name = "BlinkGhostTrail_ApolloFx4"
-			InheritFrom = "BlinkGhostTrail_ApolloFx2"
+		Name = "BlinkGhostTrail_ApolloFx4"
+		InheritFrom = "BlinkGhostTrail_ApolloFx2"
 		FlipVertical = true
-		}
+	}
 
 		
 	{
@@ -56,12 +57,12 @@
 		EndFrame = 3
 		NumFrames = 1
 		RandomPlaySpeedMin = 2
-			RandomPlaySpeedMax = 2
+		RandomPlaySpeedMax = 2
 		OffsetZ = 60
-			OriginY = 60
-			OriginX = 0
+		OriginY = 60
+		OriginX = 0
 		ScaleLength = 200
-			TransferAngle = true
+		TransferAngle = true
 		AngleFromOwner = "Take"
 		ScaleFromOwner = "Take"
 	}

@@ -91,10 +91,10 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Fuse = 0.25
             newentry.TotalFuse = 0.75
             newentry.DamageRadius = 250
-            newentry.DetonateFx = "ApolloAoEStrikeBlink"
-            newentry.DissipateFx = "ApolloAoEGroundBurnLongBlink"
+            newentry.DetonateFx = nil
+            newentry.DissipateFx = nil
             newentry.ImpactFx = nil
-            newentry.Thing.Graphic = "ApolloAoECircleBlink"
+            newentry.Thing.Graphic = nil
             newentry.Thing.Points = {
                 {
 					X = 16,

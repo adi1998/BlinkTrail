@@ -120,7 +120,7 @@ function mod.StartHestiaBlink( args )
                 Animation = "BlinkGhostTrail_HestiaFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
             game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 5 }
             , 0.4)
             prevProj = targetProjId
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
@@ -129,7 +129,7 @@ function mod.StartHestiaBlink( args )
     game.wait(0.25, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "HestiaBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
     game.thread(mod.PoseidonProjectileWithDelay,
-        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
+        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 5 }
     , 0.4)
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil

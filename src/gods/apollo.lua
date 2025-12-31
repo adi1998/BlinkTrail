@@ -112,8 +112,14 @@ function mod.StartApolloBlink( args )
     game.MapState.BlinkDropTrail = game.MapState.BlinkDropTrail or {}
     game.MapState.BlinkDropTrail[initialId] = blinkIds
     local skipped = true
+    local count = 0
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
-        game.wait (0.2, "BlinkTrailPresentation")
+        if count > 2 then
+            game.wait (0.13, "BlinkTrailPresentation")
+        else
+            game.wait (0.066, "BlinkTrailPresentation")
+        end
+        count = count + 1
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         
         if distance > 0 then
@@ -137,7 +143,7 @@ function mod.StartApolloBlink( args )
             --     Stretch = true, UseZLocation = false})
             game.thread(mod.AnimationWithDelay, {
             Animation = "BlinkGhostTrail_ApolloFx"..random_anim, DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
-            Stretch = true, UseZLocation = false }, 0.3)
+            Stretch = true, UseZLocation = false }, 0.5)
 
             print("animid",animid)
             print("angle", angle)
@@ -202,6 +208,8 @@ function mod.SuperBlind(enemy, functionArgs, triggerArgs)
     game.CurrentRun.CurrentRoom[_PLUGIN.guid .. "InvisTargetTable"] = game.CurrentRun.CurrentRoom[_PLUGIN.guid .. "InvisTargetTable"] or {}
     local invisTargetTable = game.CurrentRun.CurrentRoom[_PLUGIN.guid .. "InvisTargetTable"]
     invisTargetTable[enemy.ObjectId] = game.SpawnObstacle({ Name = "InvisibleTarget", Group = "Scripting", DestinationId = game.CurrentRun.Hero.ObjectId })
+    local anim_obstacle = game.SpawnObstacle({ Name = "BlankObstacle", Group = "Standing", DestinationId = enemy.ObjectId })
+    game.SetAnimation({Name = "ApolloAoEStrikeBlink", DestinationId = anim_obstacle})
     game.FinishTargetMarker( enemy )
     game.thread( game.OnInvisStartPresentation, enemy )
     game.wait(functionArgs.Duration)

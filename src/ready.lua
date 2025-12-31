@@ -43,11 +43,13 @@ game.OverwriteTableKeys( game.ProjectileData, {
     },
     BlinkTrailProjectileHestia =
     {
-        InheritFrom = { "HestiaColorProjectile" }
+        InheritFrom = { "HestiaColorProjectile" },
+        CanIgnite = true,
     },
     BlinkTrailProjectileFireHestia =
     {
-        InheritFrom = { "HestiaColorProjectile" }
+        InheritFrom = { "HestiaColorProjectile" },
+        CanIgnite = true,
     },
     BlinkTrailProjectileAres =
     {
@@ -64,7 +66,14 @@ game.OverwriteTableKeys( game.ProjectileData, {
 		CancelVulnerabilitySpark = true,
         DamageTextStartColor = game.Color.Transparent,
         DamageTextColor = game.Color.Transparent,
-        IgnoreAllModifiers = true
+        IgnoreAllModifiers = true,
+        CancelRumble = true,
+        SkipDamageText = true,
+        BlockCrit = true,
+        BlockDoubleDamage = true,
+        BlockDamageFloor = true,
+        IgnoreIndestructibleHitPresentation = true,
+        IgnoreDamageShare = true,
     },
     BlinkTrailDemeterProjectile =
     {

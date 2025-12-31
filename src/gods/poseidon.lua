@@ -99,7 +99,6 @@ end
 
 function mod.AnimationWithDelay(args,delay)
     game.wait(delay)
-    print(mod.dump(args))
     game.CreateAnimationsBetween(args)
 end
 
