@@ -21,6 +21,7 @@ gods.CreateBoon({
             Key = "ReportedCooldown",
             ExtractAs = "Cooldown",
             Format = "SpeedModifiedDuration",
+            DecimalPlaces = 1,
         },
         {
             Key = "ReportedDuration",
@@ -212,7 +213,7 @@ function mod.SuperBlind(enemy, functionArgs, triggerArgs)
 end
 
 function mod.CheckSuperBlindApply(enemy, functionArgs, triggerArgs)
-    if not game.CheckCooldown( "ApolloSuperBlind" .. tostring(enemy.ObjectId), functionArgs.Cooldown ) then
+    if not game.CheckCooldown( "ApolloSuperBlind" .. tostring(enemy.ObjectId), functionArgs.Cooldown * game.GetTotalHeroTraitValue("OlympianRechargeMultiplier", { IsMultiplier = true }) ) then
 		return
 	end
     game.thread(mod.SuperBlind, enemy, functionArgs, triggerArgs)

@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 ---@meta _
 -- grabbing our dependencies,
 -- these funky (---@) comments are just there
