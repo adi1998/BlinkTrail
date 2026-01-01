@@ -13,3 +13,6 @@
 - Apollo: small prom flares/enemies lose sight of player
 - Demeter: icicles from the ground
 - Hestia: Lava pools
+
+- add distance check for heph mines
+- hestia vfx, scaling,

@@ -107,6 +107,19 @@ game.ConcatTableValues(game.WeaponSets.OlympianProjectileNames,{
     "BlinkTrailProjectileAphrodite",
 })
 
+game.ConcatTableValues(game.WeaponSets.SprintProjectileNames,{
+    "BlinkTrailProjectileHeraOmega",
+    "BlinkTrailZeusSpark",
+    "PoseidonBlinkWave",
+    "HephMineBlast",
+    "BlinkTrailProjectileHestia",
+    "BlinkTrailProjectileFireHestia",
+    "BlinkTrailProjectileAres",
+    "BlinkTrailDemeterProjectile",
+    "BlinkTrailDemeterProjectileTracking",
+    "BlinkTrailProjectileAphrodite",
+})
+
 game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileHeraOmega = gods.GetInternalBoonName("HeraBlinkTrailBoon"),
     BlinkTrailZeusSpark = "ChainLightning_Name",
