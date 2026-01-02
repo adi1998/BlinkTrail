@@ -13,8 +13,7 @@ gods.CreateBoon({
     displayName = "Sworn Blink",
     description = "Creates a rift in the shape of your dash trail.",
     StatLines = {"HeraRiftDamageStatDisplay1"},
-    boonIconPath = "GUI\\Screens\\BoonIcons\\Hera_28",
-    reuseBaseIcons = true,
+    boonIconPath = "zerp-BlinkTrail\\Icons\\Hera_Blink",
     ExtractValues =
     {
         {

@@ -13,8 +13,7 @@ gods.CreateBoon({
     displayName = "Flutter Blink",
     description = "Fires large arrows along targets mades by your dash trail.",
     StatLines = {"SupportFireDamageDisplay2"},
-    boonIconPath = "GUI\\Screens\\BoonIcons\\Aphrodite_28",
-    reuseBaseIcons = true,
+    boonIconPath = "zerp-BlinkTrail\\Icons\\Aphrodite_Blink",
     ExtractValues =
     {
         {

@@ -13,8 +13,7 @@ gods.CreateBoon({
     displayName = "Flame Blink",
     description = "Spawns lava pools from your dash trail.",
     StatLines = {"HestiaLavaPoolStatDisplay"},
-    boonIconPath = "GUI\\Screens\\BoonIcons\\Hestia_28",
-    reuseBaseIcons = true,
+    boonIconPath = "zerp-BlinkTrail\\Icons\\Hestia_Blink",
     ExtractValues =
     {
         {
