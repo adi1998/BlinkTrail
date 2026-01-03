@@ -21,8 +21,9 @@ gods.CreateBoon({
             ExtractAs = "Damage",
             Format = "MultiplyByBase",
             BaseType = "Projectile",
-            BaseName = "BlinkTrailProjectileHestia",
-            BaseProperty = "Damage",
+            BaseName = "BlinkTrailProjectileFireHestia",
+            BaseProperty = "DamagePerConsecutiveHit",
+            DecimalPlaces = 1
         },
         {
             ExtractAs = "Fuse",
@@ -30,7 +31,7 @@ gods.CreateBoon({
             External = true,
             BaseType = "ProjectileBase",
             BaseName = "BlinkTrailProjectileFireHestia",
-            BaseProperty = "Fuse",
+            BaseProperty = "ConsecutiveHitWindow",
             DecimalPlaces = 2,
         }
     },
@@ -38,19 +39,19 @@ gods.CreateBoon({
     {
         Common =
         {
-            Multiplier = 1.0,
+            Multiplier = 1,
         },
         Rare =
         {
-            Multiplier = 1.25,
+            Multiplier = 1.5,
         },
         Epic =
         {
-            Multiplier = 1.5,
+            Multiplier = 2,
         },
         Heroic =
         {
-            Multiplier = 1.75,
+            Multiplier = 2.5,
         }
     },
     ExtraFields =
@@ -60,19 +61,25 @@ gods.CreateBoon({
             FunctionArgs =
             {
                 ProjectileName = "BlinkTrailProjectileHestia",
+                DamageMultiplier = 1,
+            }
+        },
+        OnProjectileDeathFunction = {
+            ValidProjectiles = { "BlinkTrailProjectileHestia" },
+            Name = _PLUGIN.guid .. "." .. "CheckHestiaLavaPool",
+            Args = {
+                ValidProjectileName = "BlinkTrailProjectileHestia",
+                ProjectileName = "BlinkTrailProjectileFireHestia",
                 DamageMultiplier = {
                     BaseValue = 1,
-                    DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
-                    AbsoluteStackValues =
-                    {
-                        [1] = 0.25,
-                        [2] = 0.125,
-                    },
+                    DecimalPlaces = 2,
+                    AbsoluteStackValues = {
+                        [1] = 0.5,
+                        [2] = 0.3,
+                        [3] = 0.2
+                    }
                 },
-                ReportValues =
-                {
-                    ReportedMultiplier = "DamageMultiplier"
-                },
+                ReportValues = { ReportedMultiplier = "DamageMultiplier"},
             }
         },
         GameStateRequirements =
@@ -84,6 +91,31 @@ gods.CreateBoon({
         },
     }
 })
+
+function mod.CheckHestiaLavaPool(triggerArgs, functionArgs)
+    -- print("triggerArgs.name", triggerArgs.name)
+    -- print("functionArgs.ValidProjectileName", functionArgs.ValidProjectileName)
+    -- print("functionArgs.ProjectileName", functionArgs.ProjectileName)
+    -- print("triggerArgs.Armed", triggerArgs.Armed)
+    -- print("triggerArgs.LocationX", triggerArgs.LocationX)
+    -- print("triggerArgs.LocationY", triggerArgs.LocationY)
+    -- print("triggerArgs.Detonated", triggerArgs.Detonated)
+    -- print("functionArgs.DamageMultiplier", functionArgs.DamageMultiplier)
+    if triggerArgs.name == functionArgs.ValidProjectileName and triggerArgs.LocationX and triggerArgs.LocationY and triggerArgs.Detonated then
+        local dropLocation = game.SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY  })
+        local dataProperties = {
+            DamagePerConsecutiveHit = functionArgs.DamageMultiplier
+        }
+        game.CreateProjectileFromUnit({
+            Name = functionArgs.ProjectileName,
+            Id = game.CurrentRun.Hero.ObjectId,
+            DestinationId = dropLocation,
+            DataProperties = dataProperties,
+            FireFromTarget = true,
+            FizzleOldestProjectileCount = 5,
+        })
+    end
+end
 
 function mod.StartHestiaBlink( args )
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then

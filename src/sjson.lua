@@ -166,8 +166,8 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
         if projectile.Name == "DevotionHestia" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileHestia"
-            newentry.Damage = 15
-            newentry.SpawnOnDetonate = "BlinkTrailProjectileFireHestia"
+            newentry.Damage = 0
+            newentry.SpawnOnDetonate = nil
             newentry.Range = 300
             newentry.Speed = 600
             newentry.SpawnCap = 4
@@ -177,6 +177,8 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileFireHestia"
             newentry.TotalFuse = 3
+            newentry.DamagePerConsecutiveHit = 1
+            newentry.ConsecutiveHitWindow = 0.5
             table.insert(newdata,newentry)
         end
     end
@@ -276,7 +278,7 @@ sjson.hook(traitTextEnFile, function (data)
         {
             Id = "HestiaLavaPoolStatDisplay",
             InheritFrom = "BaseStatLine",
-            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Lava Damage:",
+            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Lava Damage Rampup:",
             Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1} {#Prev}{#ItalicFormat}(every {$TooltipData.ExtractData.Fuse} Sec.)",
         },
         {
