@@ -6,7 +6,7 @@ schemaVersion = "0.0.1"
 namespace = "zerp"
 name = "More_Dash_Boons"
 versionNumber = "0.1.0"
-description = "Adds new tier 2 dash boons for each god which upgrades the trail that Mel leaves behind after dashing."
+description = "Adds new tier 2 dash boons for each god which upgrades the trail that Mel leaves behind after dashing. Includes synergies with existing boons(where applicable)."
 websiteUrl = "https://github.com/adi1998/BlinkTrail"
 containsNsfwContent = false
 
