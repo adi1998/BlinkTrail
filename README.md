@@ -17,7 +17,7 @@ Adds new tier 2 dash boons for each god which upgrades the trail that Mel leaves
 <summary><strong>Boon preview clips</strong></summary>
 
 <div style="display: flex; justify-content: left;">
-  <img src="images/poseidon.mp4.gif" alt="poseidon" width="40%">
+  <img src="images/poseidon.mp4.gif" alt="poseidon" width="40%" style="max-width: 540px, height: auto;" >
   <img src="images/ares.mp4.gif" alt="ares" width="40%">
 </div>
 <div style="display: flex; justify-content: left;">
