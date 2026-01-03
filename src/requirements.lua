@@ -135,9 +135,24 @@ game.TraitRequirements = DeepMergeUptoDepth(game.TraitRequirements, traitRequire
 local traitData = {
     SteamBoon = {
         OnEnemyDamagedAction = {
-            ValidProjectiles = {"ProjectileCastFireball", "ProjectileFireball", "HestiaSprintPuddle", "BlinkTrailProjectileHestia", "BlinkTrailProjectileFireHestia" },
+            ValidProjectiles = { "ProjectileCastFireball", "ProjectileFireball", "HestiaSprintPuddle", "BlinkTrailProjectileHestia", "BlinkTrailProjectileFireHestia" },
         }
     },
+    LightningVulnerabilityBoon = {
+        AddOutgoingDamageModifiers = {
+            ValidProjectiles =
+			{
+				"ZeusEchoStrike",
+				"ZeusCastStrike",
+				"ZeusRootStrike",
+				"ZeusSprintStrike",
+				"ProjectileZeusSpark",
+				"ZeusZeroManaStrike",
+				"ZeusRetaliateStrike",
+                "BlinkTrailZeusSpark"
+			},
+        }
+    }
 }
 
 game.TraitData = DeepMergeUptoDepth(game.TraitData, traitData, 2)
