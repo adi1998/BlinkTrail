@@ -15,7 +15,7 @@
 tcli.exe
 
 # ignore unpacked package contents
-/data/zerp-BlinkTrail
+/data/zerp-More_Dash_Boons
 
 # ignore PSD files
 *.psd

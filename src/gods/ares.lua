@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Bloody Blink",
     description = "Create multiple {$Keywords.BladeRift} from your dash trail. Enemies damaged from {$Keywords.BladeRift} spill {!Icons.BloodDropIcon}",
     StatLines = {"BladeRiftDamageStatDisplay1"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Ares_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Ares_Blink",
     ExtractValues =
     {
         {

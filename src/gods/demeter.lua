@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Crystal Blink",
     description = "Create crystal beams along your dash trail.",
     StatLines = {"DemeterCrystalBeamStatDisplay"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Demeter_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Demeter_Blink",
     ExtractValues =
     {
         {

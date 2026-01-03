@@ -2,7 +2,7 @@
 
     {
         Name = "HeraBlinkRope"
-        FilePath = "zerp-BlinkTrail\HeraShort\HeraCastGroundLine"
+        FilePath = "zerp-More_Dash_Boons\HeraShort\HeraCastGroundLine"
         NumFrames = 30
         Material = "Unlit"
         OffsetZ = 60
@@ -30,25 +30,25 @@
     {
         Name = "HeraBlinkShort1"
         InheritFrom = "HeraBlinkRope"
-        FilePath = "zerp-BlinkTrail\HeraShort1\HeraCastGroundLine"
+        FilePath = "zerp-More_Dash_Boons\HeraShort1\HeraCastGroundLine"
     }
 
     {
         Name = "HeraBlinkShort2"
         InheritFrom = "HeraBlinkRope"
-        FilePath = "zerp-BlinkTrail\HeraShort2\HeraCastGroundLine"
+        FilePath = "zerp-More_Dash_Boons\HeraShort2\HeraCastGroundLine"
     }
 
     {
         Name = "HeraBlinkShort3"
         InheritFrom = "HeraBlinkRope"
-        FilePath = "zerp-BlinkTrail\HeraShort3\HeraCastGroundLine"
+        FilePath = "zerp-More_Dash_Boons\HeraShort3\HeraCastGroundLine"
     }
 
     {
         Name = "HeraBlinkDissShort1"
         InheritFrom = "HeraBlinkRope"
-        FilePath = "zerp-BlinkTrail\HeraDiss1\HeraCastGroundLineDissipate"
+        FilePath = "zerp-More_Dash_Boons\HeraDiss1\HeraCastGroundLineDissipate"
         NumFrames = 22
         RandomPlaySpeedMin = 30
         RandomPlaySpeedMax = 30
@@ -57,13 +57,13 @@
     {
         Name = "HeraBlinkDissShort2"
         InheritFrom = "HeraBlinkDissShort1"
-        FilePath = "zerp-BlinkTrail\HeraDiss2\HeraCastGroundLineDissipate"
+        FilePath = "zerp-More_Dash_Boons\HeraDiss2\HeraCastGroundLineDissipate"
     }
 
     {
         Name = "HeraBlinkDissShort3"
         InheritFrom = "HeraBlinkDissShort1"
-        FilePath = "zerp-BlinkTrail\HeraDiss3\HeraCastGroundLineDissipate"
+        FilePath = "zerp-More_Dash_Boons\HeraDiss3\HeraCastGroundLineDissipate"
     }
 
     {
@@ -85,7 +85,7 @@
 
     {
         Name = "HeraBlinkShortDark"
-        FilePath = "zerp-BlinkTrail\HeraShort\HeraCastGroundLineDark"
+        FilePath = "zerp-More_Dash_Boons\HeraShort\HeraCastGroundLineDark"
         NumFrames = 1
         Material = "Unlit"
         OffsetZ = 0
@@ -119,24 +119,24 @@
     {
         Name = "HeraBlinkShortDark1"
         InheritFrom = "HeraBlinkShortDark"
-        FilePath = "zerp-BlinkTrail\HeraShort1\HeraCastGroundLineDark"
+        FilePath = "zerp-More_Dash_Boons\HeraShort1\HeraCastGroundLineDark"
     }
 
     {
         Name = "HeraBlinkShortDark2"
         InheritFrom = "HeraBlinkShortDark"
-        FilePath = "zerp-BlinkTrail\HeraShort2\HeraCastGroundLineDark"
+        FilePath = "zerp-More_Dash_Boons\HeraShort2\HeraCastGroundLineDark"
     }
 
     {
         Name = "HeraBlinkShortDark3"
         InheritFrom = "HeraBlinkShortDark"
-        FilePath = "zerp-BlinkTrail\HeraShort3\HeraCastGroundLineDark"
+        FilePath = "zerp-More_Dash_Boons\HeraShort3\HeraCastGroundLineDark"
     }
 
     {
         Name = "HeraBlinkTrailProjectileAnim"
-        FilePath = "zerp-BlinkTrail\HeraCastGroundLine\HeraCastGroundLine"
+        FilePath = "zerp-More_Dash_Boons\HeraCastGroundLine\HeraCastGroundLine"
         GroupName = "FX_Terrain_Add"
         Hue = -0.33
         VisualFx = "HeraBlinkTrailProjectileAnimGlow"
@@ -163,7 +163,7 @@
     {
         Name = "HeraBlinkTrailProjectileAnimDark"
         InheritFrom = "HeraBlinkTrailProjectileAnim"
-        FilePath = "zerp-BlinkTrail\HeraCastGroundLine\HeraCastGroundLineDark"
+        FilePath = "zerp-More_Dash_Boons\HeraCastGroundLine\HeraCastGroundLineDark"
         GroupName = "FX_Terrain"
         Hue = -0.15
         Sound = "/EmptyCue"
@@ -249,7 +249,7 @@
 
     {
         Name = "HeraBlinkTrailCastDetonate"
-        FilePath = "zerp-BlinkTrail\HeraShort3\HeraCastGroundLine"
+        FilePath = "zerp-More_Dash_Boons\HeraShort3\HeraCastGroundLine"
         Hue = -0.33
         EndFrame = 22
         NumFrames = 22

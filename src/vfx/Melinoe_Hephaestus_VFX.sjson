@@ -65,7 +65,7 @@
 
     {
         Name = "HephMineBomb"
-        FilePath = "zerp-BlinkTrail\LuciferBomb\LuciferBomb"
+        FilePath = "zerp-More_Dash_Boons\LuciferBomb\LuciferBomb"
         NumFrames = 35
         Material = "Unlit"
         RandomPlaySpeedMin = 30
@@ -95,7 +95,7 @@
         DieWithOwner = true
         AddColor = false
         ColorFromOwner = "Ignore"
-        FilePath = "zerp-BlinkTrail\LuciferBombDark\LuciferBombDark"
+        FilePath = "zerp-More_Dash_Boons\LuciferBombDark\LuciferBombDark"
         GroupName = "FX_Dark"
         DrawBehindOwner = true
         Sound = "/SFX/Enemy Sounds/LuciferBombLoop"

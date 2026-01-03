@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Wave Blink",
     description = "Creates outward waves from your dash trail",
     StatLines = {"PoseidonOmegaProjectileDamageStatDisplay1"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Poseidon_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Poseidon_Blink",
     ExtractValues =
     {
         {

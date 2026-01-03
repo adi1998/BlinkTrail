@@ -59,7 +59,7 @@
 	{
 		Name = "ZeusBlinkTrailLoop"
 		InheritFrom = "BlinkTrailFxLoop"
-		FilePath = "zerp-BlinkTrail\ZeusTrailLoop\ZeusProjectileLoop"
+		FilePath = "zerp-More_Dash_Boons\ZeusTrailLoop\ZeusProjectileLoop"
 		NumFrames = 60
 		RandomPlaySpeedMin = 15
 		RandomPlaySpeedMax = 20

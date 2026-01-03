@@ -121,7 +121,7 @@
     {
         Name = "AresBlinkTrailFxLoop"
         InheritFrom = "BlinkTrailFxLoop"
-        FilePath  = "zerp-BlinkTrail\AresRage1\AresKillDamageBuff"
+        FilePath  = "zerp-More_Dash_Boons\AresRage1\AresKillDamageBuff"
         NumFrames = 30
         ScaleLength = 120
         OriginY = 45
@@ -133,7 +133,7 @@
     {
         Name = "AresBlinkTrailFxOut"
         InheritFrom = "BlinkTrailFxOut"
-        FilePath  = "zerp-BlinkTrail\AresRage1\AresKillDamageBuff"
+        FilePath  = "zerp-More_Dash_Boons\AresRage1\AresKillDamageBuff"
         NumFrames = 30
         ScaleLength = 120
         OriginY = 45
@@ -145,7 +145,7 @@
     {
         Name = "AresBlinkTrailFxIn"
         InheritFrom = "BlinkTrailFxIn"
-        FilePath  = "zerp-BlinkTrail\AresRage1\AresKillDamageBuff"
+        FilePath  = "zerp-More_Dash_Boons\AresRage1\AresKillDamageBuff"
         NumFrames = 30
         ScaleLength = 120
         OriginY = 45

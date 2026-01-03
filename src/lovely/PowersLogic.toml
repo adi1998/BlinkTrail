@@ -3,7 +3,7 @@ version = "1.0.0"
 priority = 0
 
 [vars]
-zerpBlinkTrailenv = "rom.mods['zerp-BlinkTrail'].lovely_env"
+zerpBlinkTrailenv = "rom.mods['zerp-More_Dash_Boons'].lovely_env"
 
 [[patches]]
 [patches.pattern]

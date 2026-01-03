@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Thunder Blink",
     description = "Creates chain lightning from your dash trail",
     StatLines = {"LightningDamageStatDisplay1"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Zeus_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Zeus_Blink",
     ExtractValues =
     {
         {

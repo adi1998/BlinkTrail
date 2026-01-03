@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Volcanic Blink",
     description = "Drops mines behind your dash trail.",
     StatLines = {"HephMineBlastBoonStatDisplay"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Hephaestus_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Hephaestus_Blink",
     ExtractValues =
     {
         {

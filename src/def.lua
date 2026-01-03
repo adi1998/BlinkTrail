@@ -1,4 +1,4 @@
----@meta zerp-BlinkTrail
+---@meta zerp-More_Dash_Boons
 local public = {}
 
 -- document whatever you made publicly available to other plugins here

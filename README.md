@@ -1,6 +1,6 @@
 ## Blink Trail Boons
 
-Adds new boons for each god which upgrades the trail that Mel leaves behind after dashing.
+Adds new tier 2 dash boons for each god which upgrades the trail that Mel leaves behind after dashing.
 
 ## Issues
 

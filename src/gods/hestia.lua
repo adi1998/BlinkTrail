@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Flame Blink",
     description = "Spawns lava pools from your dash trail.",
     StatLines = {"HestiaLavaPoolStatDisplay"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Hestia_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Hestia_Blink",
     ExtractValues =
     {
         {
@@ -151,7 +151,7 @@ function mod.StartHestiaBlink( args )
                 Animation = "BlinkGhostTrail_HestiaFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
             game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 5 }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj }
             , 0.4)
             prevProj = targetProjId
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
@@ -160,7 +160,7 @@ function mod.StartHestiaBlink( args )
     game.wait(0.25, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "HestiaBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
     game.thread(mod.PoseidonProjectileWithDelay,
-        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, FizzleOldestProjectileCount = 5 }
+        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj }
     , 0.4)
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil

@@ -134,7 +134,7 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
 })
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
-    game.LoadPackages({Name = _PLUGIN.guid .. "zerp-BlinkTrail"})
+    game.LoadPackages({Name = _PLUGIN.guid .. _PLUGIN.guid})
     base(...)
 end)
 

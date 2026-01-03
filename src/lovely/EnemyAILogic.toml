@@ -3,7 +3,7 @@ version = "1.0.0"
 priority = 0
 
 [vars]
-zerpBlinkTrailenv = "rom.mods['zerp-BlinkTrail'].lovely_env"
+zerpBlinkTrailenv = "rom.mods['zerp-More_Dash_Boons'].lovely_env"
 
 [[patches]]
 [patches.pattern]
@@ -18,9 +18,9 @@ pattern = '''
 '''
 position = "after"
 payload = '''
-	elseif targetId == CurrentRun.Hero.ObjectId and CurrentRun.CurrentRoom["zerp-BlinkTrail" .. "InvisTargetTable"] ~= nil and 
-		   CurrentRun.CurrentRoom["zerp-BlinkTrail" .. "InvisTargetTable"][enemy.ObjectId] ~= nil then
-		targetId = CurrentRun.CurrentRoom["zerp-BlinkTrail" .. "InvisTargetTable"][enemy.ObjectId]
+	elseif targetId == CurrentRun.Hero.ObjectId and CurrentRun.CurrentRoom["zerp-More_Dash_Boons" .. "InvisTargetTable"] ~= nil and 
+		   CurrentRun.CurrentRoom["zerp-More_Dash_Boons" .. "InvisTargetTable"][enemy.ObjectId] ~= nil then
+		targetId = CurrentRun.CurrentRoom["zerp-More_Dash_Boons" .. "InvisTargetTable"][enemy.ObjectId]
 		if aiData.CancelIfInvisTarget then
 			targetId = nil
 		end

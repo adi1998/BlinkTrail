@@ -13,7 +13,7 @@ gods.CreateBoon({
     displayName = "Blinding Blink",
     description = "Completely blind enemies caught in your dash trail for {#BoldFormatGraft}{$TooltipData.ExtractData.Duration} Sec {#Prev}.",
     StatLines = {"ApolloBlinkCooldownStatDisplay"},
-    boonIconPath = "zerp-BlinkTrail\\Icons\\Apollo_Blink",
+    boonIconPath = _PLUGIN.guid .. "\\Icons\\Apollo_Blink",
     ExtractValues =
     {
         {

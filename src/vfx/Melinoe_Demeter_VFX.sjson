@@ -2,7 +2,7 @@
 
     {
         Name = "BlinkTrailDemeterLaserPreview"
-        FilePath = "zerp-BlinkTrail\EnemyLaserPreview\EnemyLaserPreview"
+        FilePath = "zerp-More_Dash_Boons\EnemyLaserPreview\EnemyLaserPreview"
         //Type = "Book"
         //Sound ="/SFX/Player Sounds/DemeterFreezeRangedAttackStart"
         AddColor = true
@@ -33,7 +33,7 @@
     {
         Name = "BlinkTrailDemeterTurret"
         //Type = "Book"
-        FilePath = "zerp-BlinkTrail\DemeterTurret\DemeterTurret"
+        FilePath = "zerp-More_Dash_Boons\DemeterTurret\DemeterTurret"
         NumFrames = 30
         PlaySpeed = 30
         Loop = true
@@ -58,7 +58,7 @@
     {
         Name = "BlinkTrailDemeterIceCrystalB"
         //Type = "Book"
-        FilePath = "zerp-BlinkTrail\DemeterIceCrystalB\DemeterIceCrystalB"
+        FilePath = "zerp-More_Dash_Boons\DemeterIceCrystalB\DemeterIceCrystalB"
         NumFrames = 12
         RandomPlaySpeedMin = 30
         RandomPlaySpeedMax = 60
@@ -75,7 +75,7 @@
     {
         Name = "BlinkTrailDemeterIceCrystalC"
         InheritFrom = "BlinkTrailDemeterIceCrystalB"
-        FilePath = "zerp-BlinkTrail\DemeterIceCrystalC\DemeterIceCrystalC"
+        FilePath = "zerp-More_Dash_Boons\DemeterIceCrystalC\DemeterIceCrystalC"
         NumFrames = 12
     }
 
@@ -109,7 +109,7 @@
     {
         Name = "BlinkTrailDemeterSmokeA"
         //Type = "Slide"
-        FilePath = "zerp-BlinkTrail\DemeterSmokeA\DemeterSmokeA"
+        FilePath = "zerp-More_Dash_Boons\DemeterSmokeA\DemeterSmokeA"
         NumFrames = 47
         StartFrame = 1
         PlaySpeed = 60
@@ -294,7 +294,7 @@
     {
         Name = "BlinkTrailDemeterLaser"
         //Type = "Book"
-        FilePath = "zerp-BlinkTrail\DemeterBeam\DemeterBeam"
+        FilePath = "zerp-More_Dash_Boons\DemeterBeam\DemeterBeam"
         //Sound ="/SFX/Player Sounds/DemeterFreezeRangedAttack"
         //StopSoundOnFinishFade = 0.25
         EndFrame = 30
@@ -393,7 +393,7 @@
     {
         Name = "BlinkTrailDemeterTurretFlash"
         InheritFrom = "BlinkTrailDemeterTurret"
-        FilePath = "zerp-BlinkTrail\DemeterTurret\DemeterTurret"
+        FilePath = "zerp-More_Dash_Boons\DemeterTurret\DemeterTurret"
         PlaySpeed = 100
         GroupName = "FX_Standing_Add"
         OffsetZ = 60
@@ -413,7 +413,7 @@
     {
       Name = "BlinkTrailDemeterLaserStartBurst"
       //Type = "Book"
-      FilePath = "zerp-BlinkTrail\DemeterBeam\DemeterBeam"
+      FilePath = "zerp-More_Dash_Boons\DemeterBeam\DemeterBeam"
       LoopFramesOnly = true
       EndFrame = 30
       NumFrames = 30
