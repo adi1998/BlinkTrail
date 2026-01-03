@@ -17,12 +17,12 @@ Adds new tier 2 dash boons for each god which upgrades the trail that Mel leaves
 <summary><strong>Boon preview clips</strong></summary>
 
 <div style="display: flex;">
-  <img src="images/poseidon.mp4.gif" alt="aphrodite" width="30%">
-  <img src="images/ares.mp4.gif" alt="ares" width="30%">
+  <img src="images/poseidon.mp4.gif" alt="poseidon">
+  <img src="images/ares.mp4.gif" alt="ares">
 </div>
 <div style="display: flex;">
-  <img src="images/zeus.mp4.gif" alt="aphrodite" width="30%">
-  <img src="images/demeter.mp4.gif" alt="ares" width="30%">
+  <img src="images/zeus.mp4.gif" alt="zeus">
+  <img src="images/demeter.mp4.gif" alt="demeter">
 </div>
 
 </details>
