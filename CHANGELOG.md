@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- stop blink trail fx from triggering during yound mel transfrom
+- add bloody blink as a carnal pleasure prereq
+- update ares legendary stat line to include increase move/strike speed cap
+- add perfect rarities for Perfectionist support
+
 ## [1.0.0] - 2026-01-03
 
 - First version of the mod!
