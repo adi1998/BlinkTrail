@@ -2,6 +2,14 @@
 
 Adds new tier 2 dash boons for each god which upgrades the trail that Mel leaves behind after dashing. Includes synergies with existing boons(where applicable).
 
+Also supports Perfect rarity from the [Perfectoinist](https://thunderstore.io/c/hades-ii/p/Jowday/Perfectoinist/) mod
+
+## Installation
+
+Use r2modman by ebkr from [Thunderstore](https://thunderstore.io/package/ebkr/r2modman/) or [GitHub](https://github.com/ebkr/r2modmanPlus/releases/latest).
+
+While the mod has been tested decently well it is recommended to backup your save from `%USERPROFILE%\Saved Games\Hades II\Profile*.sav` in case there are issues.
+
 ## Boon List
 
 <div style="display: flex;">
