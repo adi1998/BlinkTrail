@@ -7,7 +7,7 @@ gods.CreateBoon({
         "WaterBoon",
     },
     characterName = "Poseidon",
-    addToExistingGod = true,
+    addToExistingGod = { boonPosition = 5 },
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Wave Blink",

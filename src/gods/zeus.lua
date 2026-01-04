@@ -7,7 +7,7 @@ gods.CreateBoon({
         "AirBoon",
     },
     characterName = "Zeus",
-    addToExistingGod = true,
+    addToExistingGod = { boonPosition = 5 },
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Thunder Blink",

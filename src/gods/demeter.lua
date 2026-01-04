@@ -7,7 +7,7 @@ gods.CreateBoon({
         "EarthBoon",
     },
     characterName = "Demeter",
-    addToExistingGod = true,
+    addToExistingGod = { boonPosition = 5 },
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Crystal Blink",

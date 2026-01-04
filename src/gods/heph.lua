@@ -7,7 +7,7 @@ gods.CreateBoon({
         "FireBoon",
     },
     characterName = "Hephaestus",
-    addToExistingGod = true,
+    addToExistingGod = { boonPosition = 5 },
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Volcanic Blink",

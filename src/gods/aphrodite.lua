@@ -7,7 +7,7 @@ gods.CreateBoon({
         "WaterBoon",
     },
     characterName = "Aphrodite",
-    addToExistingGod = true,
+    addToExistingGod = { boonPosition = 5 },
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Flutter Blink",

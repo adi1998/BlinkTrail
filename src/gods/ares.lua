@@ -7,7 +7,7 @@ gods.CreateBoon({
         "EarthBoon",
     },
     characterName = "Ares",
-    addToExistingGod = true,
+    addToExistingGod = { boonPosition = 5 },
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Bloody Blink",
