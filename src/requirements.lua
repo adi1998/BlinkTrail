@@ -128,6 +128,12 @@ local traitRequirements = {
             [1] = { "AresManaBoon", "BloodDropRevengeBoon", "RendBloodDropBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
         }
     },
+
+    BloodManaBurstBoon = {
+        OneFromEachSet = {
+            [1] = { "AresManaBoon", "BloodDropRevengeBoon", "RendBloodDropBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+        }
+    }
 }
 
 game.TraitRequirements = DeepMergeUptoDepth(game.TraitRequirements, traitRequirements, 2)
