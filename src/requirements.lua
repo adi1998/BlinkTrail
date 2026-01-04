@@ -152,6 +152,12 @@ local traitData = {
                 "BlinkTrailZeusSpark"
 			},
         }
+    },
+    DoubleBloodDropBoon = {
+        StatLines = {
+            "BloodDropStatDisplay",
+            "AresIncreasesMoveStrikeSpeedDisplay"
+        }
     }
 }
 

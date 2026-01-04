@@ -293,6 +293,12 @@ sjson.hook(traitTextEnFile, function (data)
             DisplayName = "{!Icons.Bullet}{#PropertyFormat}Beam damage:",
             Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1} {#Prev}{#ItalicFormat}(every {$TooltipData.ExtractData.Fuse} Sec.)"
         },
+        {
+            Id = "AresIncreasesMoveStrikeSpeedDisplay",
+            InheritFrom = "BaseStatLine",
+            DisplayName = "{!Icons.Bullet}{#PropertyFormat}Maximum Move & Strike Speed:",
+            Description = "{#UpgradeFormat}+200%"
+        }
     }
     for index, value in ipairs(traitTextList) do
         table.insert(data.Texts, sjson.to_object(value, traitTextOrder))
