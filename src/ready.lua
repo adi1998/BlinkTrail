@@ -64,8 +64,6 @@ game.OverwriteTableKeys( game.ProjectileData, {
 		CancelHitSpark = true,
 		CancelUnitHitFlash = true,
 		CancelVulnerabilitySpark = true,
-        DamageTextStartColor = game.Color.Transparent,
-        DamageTextColor = game.Color.Transparent,
         IgnoreAllModifiers = true,
         CancelRumble = true,
         SkipDamageText = true,
@@ -130,7 +128,8 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileAres = gods.GetInternalBoonName("AresBlinkTrailBoon"),
     BlinkTrailDemeterProjectile = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
     BlinkTrailDemeterProjectileTracking = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
-    BlinkTrailProjectileAphrodite = gods.GetInternalBoonName("AphroditeBlinkTrailBoon")
+    BlinkTrailProjectileAphrodite = gods.GetInternalBoonName("AphroditeBlinkTrailBoon"),
+    BlinkTrailProjectileApollo = gods.GetInternalBoonName("ApolloBlinkTrailBoon"),
 })
 
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
@@ -140,11 +139,13 @@ end)
 
 modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
     local isBlinkFired = false
-    for _, data in pairs( game.GetHeroTraitValues( _PLUGIN.guid .. "OnSprintAction")) do
-        print(data.FunctionName, data.FunctionArgs.DamageMultiplier)
-        game.CallFunctionName( data.FunctionName, data.FunctionArgs )
-        isBlinkFired = true
-        break
+    if not game.MapState.BabyPolymorph then
+        for _, data in pairs( game.GetHeroTraitValues( _PLUGIN.guid .. "OnSprintAction")) do
+            print(data.FunctionName, data.FunctionArgs.DamageMultiplier)
+            game.CallFunctionName( data.FunctionName, data.FunctionArgs )
+            isBlinkFired = true
+            break
+        end
     end
     if not isBlinkFired then
         base(...)
