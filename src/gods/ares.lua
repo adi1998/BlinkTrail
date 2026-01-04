@@ -51,6 +51,10 @@ gods.CreateBoon({
         Heroic =
         {
             Multiplier = 1.75,
+        },
+        Perfect =
+        {
+            Multiplier = 2.25,
         }
     },
     ExtraFields =
