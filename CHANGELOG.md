@@ -7,6 +7,7 @@
 - update ares legendary stat line to include increase move/strike speed cap
 - add perfect rarities for Perfectionist support
 - Heph mines now trigger from typhon
+- bufs demeter - more damage, scaling and thicker hitbox
 
 ## [1.0.0] - 2026-01-03
 
