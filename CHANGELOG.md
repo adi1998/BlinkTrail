@@ -4,6 +4,7 @@
 
 - buff hestia again
 - make poseidon quieter
+- import H1 ares fx for blood blink
 
 ## [1.2.0] - 2026-01-05
 
