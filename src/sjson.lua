@@ -172,13 +172,32 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             newentry.Speed = 400
             newentry.SpawnCap = 4
 		    newentry.FizzleOldSpawnsOnDetonate = true
+            newentry.Thing.Graphic = "BlinkTrailLavaSplashProjectileHead"
             table.insert(newdata,newentry)
         elseif projectile.Name == "DevotionHestiaFire" then
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailProjectileFireHestia"
-            newentry.TotalFuse = 3
+            newentry.TotalFuse = 3.6
             newentry.DamagePerConsecutiveHit = 1
             newentry.ConsecutiveHitWindow = 0.5
+            newentry.DamageRadius = 170
+            newentry.Effects = {
+                {
+                    Name = "LavaVignette",
+                    Duration = 0.5,
+                    Active = true,
+                    CanAffectInvulnerable = false,
+                },
+                {
+                    Name = "LavaSlow",
+                    Type = "SPEED",
+                    Duration = 0.5,
+                    Modifier = 0.5,
+                    Active = true,
+                    CanAffectInvulnerable = false,
+                    FrontFx = "null",
+                }
+            }
             table.insert(newdata,newentry)
         end
     end

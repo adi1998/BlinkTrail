@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- buff hestia - faster lob animation, boosted damage rampup by 5x
+- buff hestia - faster lob animation, boosted damage rampup by 7.5x
 
 ## [1.1.0] - 2026-01-05
 

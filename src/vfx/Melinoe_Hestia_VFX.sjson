@@ -112,4 +112,22 @@
 		PingPongScale = false
 	}
 
+	{
+		Name = "BlinkTrailLavaSplashProjectileHead"
+		FilePath = "Fx\LavaSplashProjectileHead\LavaSplashProjectileHead"			
+		VisualFx = "LavaSplashProjectileTrail"
+		VisualFxManagerCap = 400
+		VisualFxManagerFrameCap = 18
+		EndFrame = 40
+		Loop = true
+		NumFrames = 40
+		PlaySpeed = 30.0
+		StartFrame = 1
+		Ambient = 0.0
+		VisualFxCap = 40
+		VisualFxDistanceMax = 30.0
+		VisualFxDistanceMin = 20.0
+		StopSoundOnFinishFade = 0.2
+	}
+
 ]}
