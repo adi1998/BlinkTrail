@@ -106,7 +106,7 @@
 		ScaleX = 1.2
 		DieWithOwner = true
 		ChainTo = null
-		Sound = "/SFX/Player Sounds/PoseidonOceanSwellSFX"
+		//Sound = "/SFX/Player Sounds/PoseidonOceanSwellSFX"
 	}
 
     {
