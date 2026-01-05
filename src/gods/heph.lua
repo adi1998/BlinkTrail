@@ -89,7 +89,8 @@ function mod.CreateMine(delay, id, args)
     while game.MapState[_PLUGIN.guid .. "HephMineMap"][id] do
         game.wait(delay)
         local enemyId = game.GetClosest({Id = id, DestinationName = "EnemyTeam"})
-        if enemyId ~= 0 then
+        local typhonId = game.GetIdsByType({ Name = "TyphonHead" })[1]
+        if enemyId ~= 0 and enemyId ~= typhonId then
             local angle = math.rad(game.GetAngleBetween({Id = enemyId, DestinationId = id}))
             local a = 200
             local b = a/2
@@ -102,11 +103,27 @@ function mod.CreateMine(delay, id, args)
             local sqrt_term = math.sqrt(sqr_term_x + sqr_term_y)
             local r = 1/sqrt_term
             local distance = math.sqrt((r*cos_angle)^2 + (r*sin_angle)^2)
-            print("mine range", distance)
+            -- print("mine range", distance)
             local enemy_distance = game.GetDistance({Id = enemyId, DestinationId = id})
-            print("enemy distance", enemy_distance)
+            -- print("enemy distance", enemy_distance)
+            -- print("angle", game.GetAngleBetween({Id = id, DestinationId = enemyId}))
+            -- print("mine location", mineLocation.X, mineLocation.Y)
+            -- print("typhonLocation", typhonLocation.X, typhonLocation.Y)
+            -- print("offset", mineLocation.X-typhonLocation.X, mineLocation.Y-typhonLocation.Y)
+            -- print("---")
             if enemy_distance <= distance + 20 then
                 -- detonate mine
+                game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
+                game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
+                game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = nil
+                break
+            end
+        elseif typhonId ~= nil and game.ActiveEnemies[typhonId] then
+            local mineLocation = game.GetLocation({ Id = id })
+            local typhonLocation = game.GetLocation({ Id = typhonId })
+            local offsetX = mineLocation.X-typhonLocation.X
+            local offsetY = mineLocation.Y-typhonLocation.Y
+            if offsetY <= 450 and offsetX >= -530 and offsetX <= 530 then
                 game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
                 game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
                 game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = nil
