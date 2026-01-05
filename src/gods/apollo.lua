@@ -11,7 +11,7 @@ gods.CreateBoon({
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Blinding Blink",
-    description = "Completely blind enemies caught in your dash trail for {#BoldFormatGraft}{$TooltipData.ExtractData.Duration} Sec {#Prev}.",
+    description = "Completely blind enemies caught in your dash trail for {#BoldFormatGraft}{$TooltipData.ExtractData.Duration} Sec{#Prev}.",
     StatLines = {"ApolloBlinkCooldownStatDisplay"},
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Apollo_Blink",
     ExtractValues =

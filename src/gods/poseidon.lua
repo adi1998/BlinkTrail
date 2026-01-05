@@ -11,7 +11,7 @@ gods.CreateBoon({
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Wave Blink",
-    description = "Creates outward waves from your dash trail",
+    description = "Creates outward waves from your dash trail.",
     StatLines = {"PoseidonOmegaProjectileDamageStatDisplay1"},
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Poseidon_Blink",
     ExtractValues =

@@ -11,7 +11,7 @@ gods.CreateBoon({
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Thunder Blink",
-    description = "Creates chain lightning from your dash trail",
+    description = "Creates chain lightning from your dash trail.",
     StatLines = {"LightningDamageStatDisplay1"},
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Zeus_Blink",
     ExtractValues =
