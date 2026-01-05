@@ -67,7 +67,7 @@
             AttachedAnim = "BlinkTrailDemeterLaserTipFlare"
             OffsetZ = 60
             Grip = 999999
-            Tallness = 20
+            Tallness = 40
             UseBoundsForSortDrawArea = true
             Points = [
                 {
