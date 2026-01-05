@@ -169,7 +169,7 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             newentry.Damage = 0
             newentry.SpawnOnDetonate = nil
             newentry.Range = 300
-            newentry.Speed = 600
+            newentry.Speed = 800
             newentry.SpawnCap = 4
 		    newentry.FizzleOldSpawnsOnDetonate = true
             table.insert(newdata,newentry)
