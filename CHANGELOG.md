@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - buff hestia again
+- make poseidon quieter
 
 ## [1.2.0] - 2026-01-05
 

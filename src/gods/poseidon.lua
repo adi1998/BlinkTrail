@@ -92,7 +92,7 @@ end
 function mod.PoseidonProjectileWithDelay2(args, delay, sound)
     game.wait(delay)
     game.CreateProjectileFromUnit(args)
-    game.PlaySound({Name = sound, Id = args.FireFromId, ManagerCap = 64 })
+    if sound then game.PlaySound({Name = sound, Id = args.FireFromId, ManagerCap = 64 }) end
     local doubleChance = game.GetTotalHeroTraitValue("DoubleOlympianProjectileChance") * game.GetTotalHeroTraitValue( "LuckMultiplier", { IsMultiplier = true })
     if game.RandomChance(doubleChance) then
         game.wait( game.GetTotalHeroTraitValue("DoubleOlympianProjectileInterval" )*(2/3) )
@@ -153,7 +153,7 @@ function mod.StartPoseidonBlink( args )
     game.SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
     game.thread(mod.PoseidonProjectileWithDelay2,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8, DataProperties = {DetonateSound = "null"} }
-    , 1.2)
+    , 1.2, "/SFX/Player Sounds/PoseidonOceanSwellSFX")
     game.thread(mod.PoseidonProjectileWithDelay2,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
     , 1.2)
