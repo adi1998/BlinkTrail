@@ -39,23 +39,23 @@ gods.CreateBoon({
     {
         Common =
         {
-            Multiplier = 1,
+            Multiplier = 10/2,
         },
         Rare =
         {
-            Multiplier = 1.5,
+            Multiplier = 15/2,
         },
         Epic =
         {
-            Multiplier = 2,
+            Multiplier = 20/2,
         },
         Heroic =
         {
-            Multiplier = 2.5,
+            Multiplier = 25/2,
         },
         Perfect =
         {
-            Multiplier = 3.5,
+            Multiplier = 35/2,
         }
     },
     ExtraFields =
@@ -78,9 +78,9 @@ gods.CreateBoon({
                     BaseValue = 1,
                     DecimalPlaces = 2,
                     AbsoluteStackValues = {
-                        [1] = 0.5,
-                        [2] = 0.3,
-                        [3] = 0.2
+                        [1] = 5/2,
+                        [2] = 3/2,
+                        [3] = 2/2,
                     }
                 },
                 ReportValues = { ReportedMultiplier = "DamageMultiplier"},
