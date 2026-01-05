@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- buff hestia again
+- buff hestia again, now has a higher base value, bigger hitbox, lava slows enemies.
 - make poseidon quieter
 - import H1 ares fx for blood blink
 - zeus lingering trail, slightly bigger interval b/w projectiles
