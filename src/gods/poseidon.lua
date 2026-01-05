@@ -144,7 +144,7 @@ function mod.StartPoseidonBlink( args )
             , 1.2, "/SFX/Player Sounds/PoseidonOceanSwellSFX")
             game.thread(mod.PoseidonProjectileWithDelay2,
                 { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
-            , 1.21)
+            , 1.2)
             prevProj = targetProjId
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
