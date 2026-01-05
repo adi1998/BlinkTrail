@@ -42,19 +42,19 @@ gods.CreateBoon({
         },
         Rare =
         {
-            Multiplier = 8/5,
+            Multiplier = 1.5,
         },
         Epic =
         {
-            Multiplier = 11/5,
+            Multiplier = 2.0,
         },
         Heroic =
         {
-            Multiplier = 14/5,
+            Multiplier = 2.5,
         },
         Perfect =
         {
-            Multiplier = 20/5,
+            Multiplier = 3.5,
         }
     },
     ExtraFields =
@@ -69,10 +69,9 @@ gods.CreateBoon({
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
                     AbsoluteStackValues =
                     {
-                        [1] = 3/5,
-                        [2] = 2/5,
-                        [3] = 2/5,
-                        [4] = 1/5,
+                        [1] = 0.5,
+                        [2] = 0.3,
+                        [3] = 0.2,
                     },
                 },
                 ReportValues =

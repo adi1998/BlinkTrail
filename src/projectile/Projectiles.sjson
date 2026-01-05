@@ -14,7 +14,7 @@
         MaxAdjustRate = 0
         Range = 200.0
         Speed = 0.0
-        Damage = 5
+        Damage = 10
         ImpactVelocity = 0
         MultiDetonate = true
         Fuse = 0.2
@@ -32,20 +32,20 @@
             UseBoundsForSortDrawArea = true
             Points = [
                 {
-                    X = 48
-                    Y = 48
+                    X = 100
+                    Y = 100
                 }
                 {
-                    X = 48
-                    Y = -48
+                    X = 100
+                    Y = -100
                 }
                     {
-                    X = -48
-                    Y = -48
+                    X = -100
+                    Y = -100
                 }
                 {
-                    X = -48
-                    Y = 48
+                    X = -100
+                    Y = 100
                 }
             ]
         }
@@ -67,24 +67,24 @@
             AttachedAnim = "BlinkTrailDemeterLaserTipFlare"
             OffsetZ = 60
             Grip = 999999
-            Tallness = 10
+            Tallness = 20
             UseBoundsForSortDrawArea = true
             Points = [
                 {
-                    X = 48
-                    Y = 48
+                    X = 100
+                    Y = 100
                 }
                 {
-                    X = 48
-                    Y = -48
+                    X = 100
+                    Y = -100
                 }
                     {
-                    X = -48
-                    Y = -48
+                    X = -100
+                    Y = -100
                 }
                 {
-                    X = -48
-                    Y = 48
+                    X = -100
+                    Y = 100
                 }
             ]
         }
