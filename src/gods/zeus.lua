@@ -140,6 +140,9 @@ function mod.StartZeusBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_ZeusFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
+            game.thread(mod.AnimationWithDelay, {
+                Animation = "BlinkGhostTrail_ZeusFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
+                Stretch = true, UseZLocation = false}, 0.7)
             game.SetAnimation({ Name = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1]})
             game.thread(mod.ProjectileWithDelay,{
                 Name = args.ProjectileName,

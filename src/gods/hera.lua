@@ -148,7 +148,7 @@ function mod.StartHeraBlink( args )
                         Angle = angle,
                         FireFromId = animid,
                         DamageMultiplier = args.DamageMultiplier,
-                        FizzleOldestProjectileCount = 4
+                        FizzleOldestProjectileCount = 5
                     })
                 end
                 skipped = false
