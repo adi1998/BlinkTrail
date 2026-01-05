@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- buff hestia - faster lob animation, boosted damage rampup by 5x
+
 ## [1.1.0] - 2026-01-05
 
 - stop blink trail fx from triggering during yound mel transfrom
