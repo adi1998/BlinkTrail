@@ -113,8 +113,8 @@
 		LocationZFromOwner = "Take"
 		LocationFromOwner = "Ignore"
 		AngleFromOwner = "Ignore"
-		RandomPlaySpeedMin = 22
-		RandomPlaySpeedMax = 22
+		RandomPlaySpeedMin = 26
+		RandomPlaySpeedMax = 26
 		RandomFlipVertical = true
 		OffsetZ = 30
 		OriginY = 80

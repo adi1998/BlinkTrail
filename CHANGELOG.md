@@ -5,6 +5,7 @@
 - buff hestia again
 - make poseidon quieter
 - import H1 ares fx for blood blink
+- zeus lingering trail, slightly bigger interval b/w projectiles
 
 ## [1.2.0] - 2026-01-05
 
