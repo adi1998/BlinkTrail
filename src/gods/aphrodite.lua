@@ -7,7 +7,8 @@ gods.CreateBoon({
         "WaterBoon",
     },
     characterName = "Aphrodite",
-    addToExistingGod = { boonPosition = 5 },
+    addToExistingGod = { boonPosition = 6 },
+    Slot = "Blink",
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Flutter Blink",
@@ -75,8 +76,10 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
-                FunctionArgs = {}
+                FunctionName = _PLUGIN.guid .. "." .. "CheckOneOfSlotFilled",
+                FunctionArgs = {
+                    Slots = { "Rush", "Blink" }
+                }
             },
         },
     }
