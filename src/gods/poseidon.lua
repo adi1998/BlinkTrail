@@ -8,6 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Poseidon",
     addToExistingGod = { boonPosition = 5 },
+    Slot = "Blink",
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Wave Blink",
@@ -72,9 +73,9 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
+                FunctionName = _PLUGIN.guid .. "." .. "CheckOneOfSlotFilled",
                 FunctionArgs = {
-                    Except = "PoseidonBlinkTrailBoon"
+                    Slots = { "Rush", "Blink" }
                 }
             },
         },

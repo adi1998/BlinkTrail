@@ -159,3 +159,11 @@ function mod.CheckNoExistingBlinkBoons( source, args )
     end
     return true
 end
+
+function mod.CheckOneOfSlotFilled( source, args )
+    local result = false
+    for _, slot in ipairs(args.Slots) do
+        result = result or game.HeroSlotFilled(slot)
+    end
+    return result
+end

@@ -8,6 +8,7 @@ gods.CreateBoon({
     },
     characterName = "Hestia",
     addToExistingGod = { boonPosition = 5 },
+    Slot = "Blink",
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Flame Blink",
@@ -88,8 +89,10 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
-                FunctionArgs = {}
+                FunctionName = _PLUGIN.guid .. "." .. "CheckOneOfSlotFilled",
+                FunctionArgs = {
+                    Slots = { "Rush", "Blink" }
+                }
             },
         },
     }

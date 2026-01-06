@@ -7,7 +7,8 @@ gods.CreateBoon({
         "AirBoon",
     },
     characterName = "Apollo",
-    addToExistingGod = { boonPosition = 5 },
+    addToExistingGod = { boonPosition = 6 },
+    Slot = "Blink",
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Blinding Blink",
@@ -87,8 +88,10 @@ gods.CreateBoon({
         GameStateRequirements =
         {
             {
-                FunctionName = _PLUGIN.guid .. "." .. "CheckNoExistingBlinkBoons",
-                FunctionArgs = {}
+                FunctionName = _PLUGIN.guid .. "." .. "CheckOneOfSlotFilled",
+                FunctionArgs = {
+                    Slots = { "Rush", "Blink" }
+                }
             },
         },
     }
