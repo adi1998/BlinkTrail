@@ -13,7 +13,6 @@ pattern = '''
 '''
 position = "after"
 payload = '''
-	local bloodDropCap = 0.5
 	if HeroHasTrait("DoubleBloodDropBoon") then
 		bloodDropCap = 1/3
 	end
