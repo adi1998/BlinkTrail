@@ -141,7 +141,7 @@ modutil.mod.Path.Wrap("StartBlinkTrailPresentation",function (base, ...)
     local isBlinkFired = false
     if not game.MapState.BabyPolymorph then
         for _, data in pairs( game.GetHeroTraitValues( _PLUGIN.guid .. "OnSprintAction")) do
-            print(data.FunctionName, data.FunctionArgs.DamageMultiplier)
+            -- print(data.FunctionName, data.FunctionArgs.DamageMultiplier)
             game.CallFunctionName( data.FunctionName, data.FunctionArgs )
             isBlinkFired = true
             break

@@ -111,7 +111,6 @@ function mod.StartHeraBlink( args )
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            print(targetId)
             local newangle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
             local newlocation = game.GetLocation({ Id = game.CurrentRun.Hero.ObjectId })
             angle = (angle + newangle)/2
@@ -126,9 +125,6 @@ function mod.StartHeraBlink( args )
             game.thread(mod.AnimationWithDelay, {
                 Animation = "HeraBlinkDissShort" .. tostring(math.random(3)), DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false }, 0.5)
-            print("animid",animid)
-            print("angle", angle)
-            print("loc angle", loc_angle)
             angle = game.GetAngleBetween({Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds - 1]})
             if distance > 90 or (skipped and distance > 30) then
                 game.CreateProjectileFromUnit({
@@ -167,7 +163,6 @@ function mod.StartHeraBlink( args )
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
-    print("blink id count", #blinkIds)
     local lastItemId = table.remove( blinkIds )
     -- Destroy({Id = lastItemId})
     local outDuration = 0.16 -- time to remove trail over

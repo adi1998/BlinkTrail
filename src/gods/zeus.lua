@@ -169,7 +169,7 @@ function mod.StartZeusBlink( args )
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
-    print("blink id count", #blinkIds)
+
     local lastItemId = table.remove( blinkIds )
     -- Destroy({Id = lastItemId})
     local outDuration = 0.16 -- time to remove trail over

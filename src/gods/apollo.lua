@@ -128,7 +128,6 @@ function mod.StartApolloBlink( args )
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            print(targetId)
             local newangle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
             local newlocation = game.GetLocation({ Id = game.CurrentRun.Hero.ObjectId })
             angle = (angle + newangle)/2
@@ -147,10 +146,6 @@ function mod.StartApolloBlink( args )
             game.thread(mod.AnimationWithDelay, {
             Animation = "BlinkGhostTrail_ApolloFx"..random_anim, DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
             Stretch = true, UseZLocation = false }, 0.5)
-
-            print("animid",animid)
-            print("angle", angle)
-            print("loc angle", loc_angle)
             angle = game.GetAngleBetween({Id = blinkIds [#blinkIds], DestinationId = blinkIds [#blinkIds - 1]})
             
             game.thread(mod.PoseidonProjectileWithDelay,
@@ -169,7 +164,7 @@ function mod.StartApolloBlink( args )
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
-    print("blink id count", #blinkIds)
+    -- print("blink id count", #blinkIds)
     local lastItemId = table.remove( blinkIds )
     -- Destroy({Id = lastItemId})
     local outDuration = 0.16 -- time to remove trail over
