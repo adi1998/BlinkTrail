@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- fix master conductor self-damaging player
+
 ## [1.3.0] - 2026-01-05
 
 - buff hestia again, now has a higher base value, bigger hitbox, lava slows enemies.
