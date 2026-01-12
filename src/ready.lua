@@ -32,6 +32,7 @@ game.OverwriteTableKeys( game.ProjectileData, {
     BlinkTrailZeusSpark =
     {
         InheritFrom = { "ZeusColorProjectile" },
+        SelfMultiplier = 0,
     },
     PoseidonBlinkWave =
     {
