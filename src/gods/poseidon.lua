@@ -103,7 +103,9 @@ end
 
 function mod.AnimationWithDelay(args,delay)
     game.wait(delay)
-    game.CreateAnimationsBetween(args)
+    if game.IsAlive({ Id = args.Id}) and game.IsAlive({ Id = args.DestinationId}) then
+        game.CreateAnimationsBetween(args)
+    end
 end
 
 function mod.StartPoseidonBlink( args )

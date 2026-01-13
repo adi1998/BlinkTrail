@@ -128,11 +128,11 @@ function mod.StartZeusBlink( args )
     local maxTrailLength = 99
     game.MapState.BlinkDropTrail = game.MapState.BlinkDropTrail or {}
     game.MapState.BlinkDropTrail[initialId] = blinkIds
-
+    local skippedLast = false
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod do
         game.wait(0.16, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        
+        print("distance", distance)
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
@@ -143,16 +143,22 @@ function mod.StartZeusBlink( args )
             game.thread(mod.AnimationWithDelay, {
                 Animation = "BlinkGhostTrail_ZeusFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false}, 0.7)
-            game.SetAnimation({ Name = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1]})
-            game.thread(mod.ProjectileWithDelay,{
-                Name = args.ProjectileName,
-                Id = game.CurrentRun.Hero.ObjectId,
-                FireFromId = prevProj,
-                DamageMultiplier = args.DamageMultiplier,
-                ProjectileCap = 8
-            }, 1)
+            if distance > 100 or skippedLast then
+                game.SetAnimation({ Name = "BlinkLightningBall", DestinationId = prevProj})
+                game.thread(mod.ProjectileWithDelay,{
+                    Name = args.ProjectileName,
+                    Id = game.CurrentRun.Hero.ObjectId,
+                    FireFromId = prevProj,
+                    DamageMultiplier = args.DamageMultiplier,
+                    ProjectileCap = 8
+                }, 1)
+                game.thread(game.DestroyOnDelay, { prevProj }, 1.1 )
+                skippedLast = false
+            else
+                skippedLast = true
+            end
+
             prevProj = targetProjId
-            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.1 )
         end
     end
 
