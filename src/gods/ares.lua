@@ -11,7 +11,7 @@ gods.CreateBoon({
     requirements = { OneOf = mod.SprintBoons },
     BlockStacking = false,
     displayName = "Bloody Blink",
-    description = "Create multiple {$Keywords.BladeRift} from your dash trail. Enemies damaged from {$Keywords.BladeRift} spill {!Icons.BloodDropIcon}.",
+    description = "Create multiple {$Keywords.BladeRift} from your dash trail which spill {!Icons.BloodDropIcon} on hit.",
     StatLines = {"BladeRiftDamageStatDisplay1"},
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Ares_Blink",
     ExtractValues =
