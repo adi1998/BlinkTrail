@@ -197,7 +197,7 @@
             { Name = "QuickFlashPink" }
             { Name = "BlinkTrailAphroditeProjectileExplosion" }
         ]
-        PlaySpeed = 300
+        PlaySpeed = 500
 	}
 
     {

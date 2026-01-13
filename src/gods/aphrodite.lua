@@ -56,7 +56,7 @@ gods.CreateBoon({
             {
                 ProjectileName = "BlinkTrailProjectileAphrodite",
                 SpawnDistance = 2600,
-                Delay = 0.7,
+                Delay = 0.6,
                 DamageMultiplier = {
                     BaseValue = 1,
                     DecimalPlaces = 4, -- Needs additional precision due to the number being operated on
@@ -90,25 +90,42 @@ function mod.AphroditeProjectileWithDelay(args, delay, turretId)
 end
 
 function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
+    game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] or 0
     local angle = math.rad( math.random(0,360) )
     local offset = game.CalcOffset( angle , functionArgs.SpawnDistance )
     local dropLocation = game.SpawnObstacle({ Name = "InvisibleTarget", DestinationId = id })
     local angle_reverse = math.deg(angle) + 180
+    game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] + 1
     game.wait( functionArgs.Delay )
-    game.CreateProjectileFromUnit({
-        Name = functionArgs.ProjectileName,
-        Id = game.CurrentRun.Hero.ObjectId,
-        DestinationId = dropLocation,
-        FireFromTarget = true,
-        OffsetX = offset.X,
-        OffsetY = offset.Y,
-        Angle = angle_reverse,
-        DamageMultiplier = functionArgs.DamageMultiplier,
-    })
-    game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 64 })
-    game.wait( 0.35 )
-    game.SetAnimation({ Name = "BlinkTrailAphroditeTargetFast", DestinationId = blinkId})
-    --IncrementTableValue( SessionState, "ArtemisCastProjectiles" )
+    if game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] <= 5 then
+        game.CreateProjectileFromUnit({
+            Name = functionArgs.ProjectileName,
+            Id = game.CurrentRun.Hero.ObjectId,
+            DestinationId = dropLocation,
+            FireFromTarget = true,
+            OffsetX = offset.X,
+            OffsetY = offset.Y,
+            Angle = angle_reverse,
+            DamageMultiplier = functionArgs.DamageMultiplier,
+        })
+        game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] - 1
+        if game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] < 0 then
+            game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = 0
+        end
+        -- print("shot aphro", game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"])
+        game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 46 })
+        game.wait( 0.35 )
+        game.SetAnimation({ Name = "BlinkTrailAphroditeTargetFast", DestinationId = blinkId})
+    else
+        game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] - 1
+        if game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] < 0 then
+            game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = 0
+        end
+        -- print("Skipped aphro", game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"])
+        -- game.SetAnimation({ Name = "QuickFlashPink", DestinationId = blinkId})
+        game.Destroy({ Ids = {blinkId} })
+    end
+
     game.thread(game.DestroyOnDelay, {dropLocation}, 0.1)
 end
 
@@ -137,14 +154,13 @@ function mod.StartAphroditeBlink( args )
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.22, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        
+        print("distance", distance)
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
             table.insert( blinkIds, targetId )
-            game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds - 1]})
-            game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.8)
+            
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_AphroditeFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
@@ -154,15 +170,23 @@ function mod.StartAphroditeBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_AphroditeFxC_Back", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds - 1])
+            if distance > 100 then
+                game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds - 1]})
+                game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds - 1] }, 1.35)
+                game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds - 1])
+            end
             prevProj = targetProjId
             -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
     game.wait(0.22, "BlinkTrailPresentation")
-    game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
-    game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.8)
-    game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds])
+    local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
+    print("distance", distance)
+    if distance > 100 then
+        game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
+        game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.35)
+        game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds])
+    end
     -- game.thread(mod.AphroditeProjectileWithDelay,
     --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
     -- , 0.4)
