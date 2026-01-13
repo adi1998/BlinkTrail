@@ -88,7 +88,7 @@ function mod.CreateMine(delay, id, args)
     game.SetAnimation({Name = "HephMineAoe", DestinationId = id})
     while game.MapState[_PLUGIN.guid .. "HephMineMap"][id] do
         game.wait(delay)
-        local enemyId = game.GetClosest({Id = id, DestinationName = "EnemyTeam"})
+        local enemyId = game.GetClosest({ Id = id, DestinationName = "EnemyTeam", IgnoreInvulnerable = true, IgnoreHomingIneligible = true })
         local typhonId = game.GetIdsByType({ Name = "TyphonHead" })[1]
         if enemyId ~= 0 and enemyId ~= typhonId then
             local angle = math.rad(game.GetAngleBetween({Id = enemyId, DestinationId = id}))
