@@ -5,6 +5,8 @@
         FilePath = "zerp-More_Dash_Boons\AresBladeSpin\AresBladeSpin"
         ChainTo = "AresBlinkBladeSpinOut"
         Scale = 0.333
+        SoundManagerCap = 40
+        OffsetZ = 20
     }
 
     {
@@ -13,7 +15,7 @@
         ChainTo = "AresBlinkBladeSpin"
         CreateAnimation = "QuickFlashRed"
         FilePath = "zerp-More_Dash_Boons\AresBladeSpinIn\AresBladeSpinIn"
-        Sound = "/SFX/FlameTrapFire"
+        Sound = "/EmptyCue"
         EndFrame = 12
         Loop = false
         NumFrames = 12
@@ -25,7 +27,7 @@
         InheritFrom = "AresBlinkBladeSpin"
         ChainTo = "null"
         FilePath = "zerp-More_Dash_Boons\AresBladeSpinOut\AresBladeSpinOut"
-        Sound = "/SFX/Player Sounds/AresDelayedDamageHit"
+        Sound = "/EmptyCue"
         EndFrame = 21
         Loop = false
         NumFrames = 21

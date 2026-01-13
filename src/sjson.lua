@@ -82,7 +82,7 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.MaxAdjustRate = 120
             newentry.DamageRadius = 100
             newentry.Thing.Graphic = "AresBlinkBladeSpinIn"
-            newentry.Thing.AttachedAnim = "AresBlinkBladeSpinShadow"
+            newentry.Thing.AttachedAnim = "null"
             newentry.ImpactFx = nil
             table.insert(newdata,newentry)
         elseif projectile.Name == "ApolloCast" then
