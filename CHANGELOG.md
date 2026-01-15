@@ -3,7 +3,9 @@
 ## [Unreleased]
 
 - heph mine can now also explode on hit
-
+- add a limit to how close projectiles can spawn to each other
+- replaced hestia vfx to avoid confusion.
+- made some effects quieter
 
 ## [1.3.1] - 2026-01-12
 
