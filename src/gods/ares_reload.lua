@@ -78,7 +78,7 @@ function mod.StartAresBlink( args )
     local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
     local prevProj = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
-    local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.1
+    local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.2
     local startTime = game._worldTime
     local skippedLast = false
     while not game.IsEmpty(game.MapState.BlinkDropTrail) and (game._worldTime - startTime) < waitPeriod do
