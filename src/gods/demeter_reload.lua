@@ -34,11 +34,12 @@ function mod.StartDemeterBlink( args )
     local fx_index = 5
     local delay_count = 0
     local anim_list = {}
+    local skippedLast = false
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.25, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        
-        if distance > 120 then
+        print("distance", distance)
+        if distance > 140 or distance > 40 and skippedLast then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
@@ -53,6 +54,9 @@ function mod.StartDemeterBlink( args )
             , 0.4, blinkIds[#blinkIds - 1] )
             prevProj = targetProjId
             -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
+            skippedLast = false
+        else
+            skippedLast = true
         end
     end
     game.wait(0.25, "BlinkTrailPresentation")
