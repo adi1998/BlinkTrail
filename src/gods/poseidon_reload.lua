@@ -43,6 +43,7 @@ function mod.StartPoseidonBlink( args )
     local fx_index = 5
     local delay_count = 0
     local anim_list = {}
+    local skippedLast = false
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.18, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
@@ -51,17 +52,20 @@ function mod.StartPoseidonBlink( args )
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             table.insert( blinkIds, targetId )
-            game.SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_PoseidonFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            if distance > 140 then
+            if distance > 130 or (distance > 40 and skippedLast) then
+                game.SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
                 game.thread(mod.PoseidonProjectileWithDelay2,
                     { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
                 , 1.2, "/SFX/Player Sounds/PoseidonOceanSwellSFX")
                 game.thread(mod.PoseidonProjectileWithDelay2,
                     { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
                 , 1.2)
+                skippedLast = false
+            else
+                skippedLast = true
             end
             prevProj = targetProjId
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })

@@ -38,7 +38,7 @@ function mod.StartDemeterBlink( args )
         game.wait(0.25, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         
-        if distance > 0 then
+        if distance > 120 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
