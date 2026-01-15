@@ -325,21 +325,9 @@ sjson.hook(traitTextEnFile, function (data)
     end
 end)
 
-local unitsEnemiesFile = rom.path.combine(rom.path.combine, "Game\\Units\\Enemies.sjson")
+local obstaclesFxFile = rom.path.combine(rom.path.combine, "Game\\Obstacles\\FX.sjson")
 
-sjson.hook(unitsEnemiesFile, function (data)
-    local newdata = {}
-    for index, unit in ipairs(data.Units) do
-        if unit.Name == "DummyOlympusTarget" then
-            local newentry = game.DeepCopyTable(unit)
-            newentry.Name = "DummyHephMineUnit"
-            newentry.Life.TriggerOnHit = true
-            newentry.Life.SilentImpact = true
-            table.insert(newdata, newentry)
-            break
-        end
-    end
-    for index, unit in ipairs(newdata) do
-        table.insert(data.Units, unit)
-    end
+sjson.hook(obstaclesFxFile, function (data)
+    local projectileFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\obstacles\\Obstacles.sjson")
+    mod.readSjson(projectileFile, data, "Obstacles")
 end)

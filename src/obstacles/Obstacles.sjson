@@ -1,0 +1,34 @@
+{ Obstacles =
+[
+    {
+      Name = "DummyHephMineObs"
+      InheritFrom = "1_BaseVulnerableObstacle"
+      //CollisionSound = "/Leftovers/World Sounds/LeavesRustle"
+      CollidesWithObstacles = false
+      DisplayInEditor = true
+      Life =
+      {
+        TriggerOnHit = true
+      }
+      Thing = 
+      {
+        EditorOutlineDrawBounds = false
+        StopsProjectiles = true
+        StopsUnits = false
+        Graphic = "null"
+        Tallness = 50.0
+        Offset = { X = 0 Y = 0 }
+        Scale = 1
+        ExtentScale = 0.5
+        Grip = 2500.0
+        Points = [
+          { X = 32 Y = 32 }
+          { X = 32 Y = -32 }
+          { X = -32 Y = -32 }
+          { X = -32 Y = 32 }
+        ]
+      }
+    }
+]
+
+}
