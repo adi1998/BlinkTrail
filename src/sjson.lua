@@ -207,74 +207,74 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
     end
 end)
 
+local obstaclesFxFile = rom.path.combine(rom.path.combine, "Game\\Obstacles\\FX.sjson")
+
+sjson.hook(obstaclesFxFile, function (data)
+    local projectileFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\obstacles\\Obstacles.sjson")
+    mod.readSjson(projectileFile, data, "Obstacles")
+end)
+
 local melHeraVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hera_VFX.sjson")
 
 sjson.hook(melHeraVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Hera_VFX.sjson")
-    local fileHandle = io.open(blinkAnimFile,"r")
-    if fileHandle ~= nil then
-        local heraBlinkContent = fileHandle:read("*a")
-        local heraBlinkTable = sjson.decode(heraBlinkContent)
-        for key, value in pairs(heraBlinkTable.Animations) do
-            table.insert(data.Animations, value)
-        end
-    end
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melZeusVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Zeus_VFX.sjson")
 
 sjson.hook(melZeusVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Zeus_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melPoseidonVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Poseidon_VFX.sjson")
 
 sjson.hook(melPoseidonVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Poseidon_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melHestiaVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hestia_VFX.sjson")
 
 sjson.hook(melHestiaVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Hestia_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melHephVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Hephaestus_VFX.sjson")
 
 sjson.hook(melHephVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Hephaestus_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melAresVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Ares_VFX.sjson")
 
 sjson.hook(melAresVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Ares_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melApolloVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Apollo_VFX.sjson")
 
 sjson.hook(melApolloVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Apollo_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melDemeterVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Demeter_VFX.sjson")
 
 sjson.hook(melDemeterVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Demeter_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local melAphroditeVfxFile = rom.path.combine(rom.paths.Content,"Game\\Animations\\Melinoe_Aphrodite_VFX.sjson")
 
 sjson.hook(melAphroditeVfxFile, function (data)
     local blinkAnimFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\vfx\\Melinoe_Aphrodite_VFX.sjson")
-    mod.readSjson(blinkAnimFile,data,"Animations")
+    mod.readSjson(blinkAnimFile, data, "Animations")
 end)
 
 local traitTextOrder = {
@@ -323,11 +323,4 @@ sjson.hook(traitTextEnFile, function (data)
     for index, value in ipairs(traitTextList) do
         table.insert(data.Texts, sjson.to_object(value, traitTextOrder))
     end
-end)
-
-local obstaclesFxFile = rom.path.combine(rom.path.combine, "Game\\Obstacles\\FX.sjson")
-
-sjson.hook(obstaclesFxFile, function (data)
-    local projectileFile = rom.path.combine(rom.paths.plugins(), _PLUGIN.guid .. "\\obstacles\\Obstacles.sjson")
-    mod.readSjson(projectileFile, data, "Obstacles")
 end)
