@@ -1,7 +1,7 @@
 function mod.ExplodeMineOnHit(victim)
-    print("mine hit", victim.ObjectId, game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] )
+    -- print("mine hit", victim.ObjectId, game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] )
     if  game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] == 1 then
-        print("update mine to 2")
+        -- print("update mine to 2")
         game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] = 2
     end
 end
@@ -20,7 +20,7 @@ function mod.CreateMine(delay, id, args)
     game.SetupObstacle(mine)
     local unitId = mine.ObjectId
     table.insert(game.MapState[_PLUGIN.guid .. "HephMineUnitList"], unitId)
-    print("heph unit", unitId)
+    -- print("heph unit", unitId)
     game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][unitId] = 1
     local detonate = false
     -- id = unitId
@@ -64,7 +64,7 @@ function mod.CreateMine(delay, id, args)
             end
         end
         if game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][unitId] == 2 then
-            print("detonating on hit", unitId)
+            -- print("detonating on hit", unitId)
             detonate = true
         end
         if detonate == true then
@@ -111,7 +111,7 @@ function mod.StartHephBlink( args )
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.3, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        print("distance",distance)
+        -- print("distance",distance)
         if distance > 0  then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })

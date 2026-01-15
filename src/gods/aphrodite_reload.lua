@@ -71,7 +71,7 @@ function mod.StartAphroditeBlink( args )
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.22, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-        print("distance", distance)
+        -- print("distance", distance)
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
@@ -98,7 +98,7 @@ function mod.StartAphroditeBlink( args )
     end
     game.wait(0.22, "BlinkTrailPresentation")
     local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-    print("distance", distance)
+    -- print("distance", distance)
     if distance > 100 then
         game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
         game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.35)
