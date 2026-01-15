@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-01-15
+
 - heph mine can now also explode on hit
 - add a limit to how close projectiles can spawn to each other
 - replaced hestia lava vfx to avoid confusion with existing effects.
@@ -36,7 +38,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.3.1...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.4.0...HEAD
+[1.4.0]: https://github.com/adi1998/BlinkTrail/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/adi1998/BlinkTrail/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/adi1998/BlinkTrail/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/adi1998/BlinkTrail/compare/1.1.0...1.2.0
