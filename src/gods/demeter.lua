@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Crystal Blink",
     description = "Create crystal beams along your dash trail.",
-    StatLines = {"DemeterCrystalBeamStatDisplay"},
+    StatLines = {
+        "DemeterCrystalBeamStatDisplay",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Demeter_Blink",
     ExtractValues =
     {
@@ -32,6 +35,10 @@ gods.CreateBoon({
             BaseName = "BlinkTrailDemeterProjectileTracking",
             BaseProperty = "Fuse",
             DecimalPlaces = 2,
+        },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
         }
     },
     RarityLevels =
@@ -87,5 +94,23 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("DemeterBlinkTrailBoon"),
+				ManaReservationCost = 15,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("DemeterBlinkTrailBoon") },
+		},
     }
 })

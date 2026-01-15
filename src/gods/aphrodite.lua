@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Flutter Blink",
     description = "Fires large arrows along targets mades by your dash trail.",
-    StatLines = {"SupportFireDamageDisplay2"},
+    StatLines = {
+        "SupportFireDamageDisplay2",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Aphrodite_Blink",
     ExtractValues =
     {
@@ -24,6 +27,10 @@ gods.CreateBoon({
             BaseName = "BlinkTrailProjectileAphrodite",
             BaseProperty = "Damage",
         },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
+        }
     },
     RarityLevels =
     {
@@ -79,5 +86,23 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon"),
+				ManaReservationCost = 20,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
+		},
     }
 })

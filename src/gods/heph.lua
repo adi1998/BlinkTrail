@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Volcanic Blink",
     description = "Drops mines behind your dash trail.",
-    StatLines = {"HephMineBlastBoonStatDisplay"},
+    StatLines = {
+        "HephMineBlastBoonStatDisplay",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Hephaestus_Blink",
     ExtractValues =
     {
@@ -24,6 +27,10 @@ gods.CreateBoon({
             BaseName = "HephMineBlast",
             BaseProperty = "Damage",
         },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
+        }
     },
     RarityLevels =
     {
@@ -77,5 +84,23 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("HephaestusBlinkTrailBoon"),
+				ManaReservationCost = 20,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("HephaestusBlinkTrailBoon") },
+		},
     }
 })

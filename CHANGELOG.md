@@ -6,6 +6,7 @@
 - add a limit to how close projectiles can spawn to each other
 - replaced hestia lava vfx to avoid confusion with existing effects.
 - made some effects quieter
+- most boons now prime some magic on account of being just free passive damage boost most of the time.
 
 ## [1.3.1] - 2026-01-12
 

@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Wave Blink",
     description = "Creates outward waves from your dash trail.",
-    StatLines = {"PoseidonOmegaProjectileDamageStatDisplay1"},
+    StatLines = {
+        "PoseidonOmegaProjectileDamageStatDisplay1",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Poseidon_Blink",
     ExtractValues =
     {
@@ -24,6 +27,10 @@ gods.CreateBoon({
             BaseName = "PoseidonBlinkWave",
             BaseProperty = "Damage",
         },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
+        }
     },
     RarityLevels =
     {
@@ -78,5 +85,23 @@ gods.CreateBoon({
                 }
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon"),
+				ManaReservationCost = 20,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
+		},
     }
 })

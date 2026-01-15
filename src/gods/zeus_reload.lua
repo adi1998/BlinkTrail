@@ -56,7 +56,7 @@ function mod.StartZeusBlink( args )
                     Id = game.CurrentRun.Hero.ObjectId,
                     FireFromId = prevProj,
                     DamageMultiplier = args.DamageMultiplier,
-                    ProjectileCap = 8
+                    FizzleOldestProjectileCount = 7
                 }, 1)
                 game.thread(game.DestroyOnDelay, { prevProj }, 1.1 )
                 skippedLast = false
@@ -75,7 +75,7 @@ function mod.StartZeusBlink( args )
         Id = game.CurrentRun.Hero.ObjectId,
         FireFromId = prevProj,
         DamageMultiplier = args.DamageMultiplier,
-        ProjectileCap = 8
+        FizzleOldestProjectileCount = 7
     }, 1)
 
     if game.MapState.BlinkDropTrail then

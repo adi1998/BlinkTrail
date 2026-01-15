@@ -46,6 +46,7 @@ sjson.hook(playerProjectilesFile,function (data)
             local newentry = game.DeepCopyTable(projectile)
             newentry.Name = "BlinkTrailZeusSpark"
             newentry.Range = 750
+            newentry.SoundManagerCap = 40
             -- newentry.StartDelay = 1
             table.insert(newdata,newentry)
         elseif projectile.Name == "PoseidonOmegaWave" then
@@ -322,6 +323,12 @@ sjson.hook(traitTextEnFile, function (data)
             InheritFrom = "BaseStatLine",
             DisplayName = "{!Icons.Bullet}{#PropertyFormat}Maximum Move & Strike Speed:",
             Description = "{#UpgradeFormat}+200%"
+        },
+        {
+            Id = "BlinkTrailReserveManaStatDisplay2",
+            InheritFrom = "BaseStatLine",
+            DisplayName = "{!Icons.Bullet}{$Keywords.ReserveManaAlt} {!Icons.Mana}:",
+            Description = "{$TooltipData.ExtractData.TooltipManaReservation}",
         }
     }
     for index, value in ipairs(traitTextList) do

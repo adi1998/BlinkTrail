@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Thunder Blink",
     description = "Creates chain lightning from your dash trail.",
-    StatLines = {"LightningDamageStatDisplay1"},
+    StatLines = {
+        "LightningDamageStatDisplay1",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Zeus_Blink",
     ExtractValues =
     {
@@ -33,6 +36,10 @@ gods.CreateBoon({
             ExtractAs = "Bounces",
             SkipAutoExtract = true,
         },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
+        }
     },
     RarityLevels =
     {
@@ -86,5 +93,23 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon"),
+				ManaReservationCost = 30,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
+		},
     }
 })

@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Flame Blink",
     description = "Spawns lava pools from your dash trail.",
-    StatLines = {"HestiaLavaPoolStatDisplay"},
+    StatLines = {
+        "HestiaLavaPoolStatDisplay",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Hestia_Blink",
     ExtractValues =
     {
@@ -33,6 +36,10 @@ gods.CreateBoon({
             BaseName = "BlinkTrailProjectileFireHestia",
             BaseProperty = "ConsecutiveHitWindow",
             DecimalPlaces = 2,
+        },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
         }
     },
     RarityLevels =
@@ -92,5 +99,23 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon"),
+				ManaReservationCost = 20,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
+		},
     }
 })

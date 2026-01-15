@@ -12,7 +12,10 @@ gods.CreateBoon({
     BlockStacking = false,
     displayName = "Sworn Blink",
     description = "Creates a rift in the shape of your dash trail.",
-    StatLines = {"HeraRiftDamageStatDisplay1"},
+    StatLines = {
+        "HeraRiftDamageStatDisplay1",
+        "BlinkTrailReserveManaStatDisplay2",
+    },
     boonIconPath = _PLUGIN.guid .. "\\Icons\\Hera_Blink",
     ExtractValues =
     {
@@ -24,6 +27,10 @@ gods.CreateBoon({
             BaseName = "BlinkTrailProjectileHeraOmega",
             BaseProperty = "Damage",
         },
+        {
+            Key = "ReportedManaReservationCost",
+            ExtractAs = "TooltipManaReservation",
+        }
     },
     RarityLevels =
     {
@@ -78,5 +85,23 @@ gods.CreateBoon({
                 FunctionArgs = {}
             },
         },
+        SetupFunction =
+		{
+			Name = "TraitReserveMana",
+			Args =
+			{
+				Name = gods.GetInternalBoonName("HeraBlinkTrailBoon"),
+				ManaReservationCost = 20,
+				ReportValues =
+				{
+					ReportedManaReservationCost = "ManaReservationCost",
+				}
+			},
+		},
+        OnExpire =
+		{
+			FunctionName = "TraitUnreserveMana",
+			FunctionArgs = { Name = gods.GetInternalBoonName("HeraBlinkTrailBoon") },
+		},
     }
 })
