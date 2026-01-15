@@ -130,4 +130,81 @@
 		StopSoundOnFinishFade = 0.2
 	}
 
+	{
+		Name = "HestiaBlinkTrailFireRingFx"
+		FilePath = "zerp-More_Dash_Boons\GreekFire\GreekFire"
+		NumFrames = 60
+		RandomFlipHorizontal = true
+		Loop = true
+		UseOwnAngle = false
+		AngleFromOwner = "Ignore"
+		Material = "Unlit"
+		ScaleRadius = 180
+		RandomPlaySpeedMin = 30
+		RandomPlaySpeedMax = 34
+		Hue = 0.05
+		ChainTo = "HestiaBlinkTrailFireRingFxFade"
+		TransferFrameFromThis = true
+		CreateAnimations = [
+			{ Name = "HestiaBlinkTrailFireScorchMarkIn" }
+			//{ Name = "HestiaStatueFireIgniteGlow" }
+			//{ Name = "HestiaStatueFireGlowAmbient" }
+		]
+	}
+
+	{
+		Name = "HestiaBlinkTrailFireRingFxFade"
+		InheritFrom = "HestiaBlinkTrailFireRingFx"
+		ClearCreateAnimations = true
+		LoopFramesOnly = true
+		TransferFrameToThis = true
+		Loop = false
+		Duration = 0.4
+		StartAlpha = 1
+		EndAlpha = 0
+		StartRed = 1
+		StartGreen = 1
+		StartBlue = 1
+		EndRed = 0.99
+		EndGreen = 0.2
+		EndBlue = 0
+		ChainTo = null
+	}
+
+	{
+		Name = "HestiaBlinkTrailFireScorchMarkIn"
+		FilePath = "zerp-More_Dash_Boons\GreekFire\GreekFireScorchMark"
+		GroupName = "FX_Terrain_Dark"
+		StartAlpha = 0
+		EndAlpha = 1
+		Duration = 1
+		EaseIn = 0
+		EaseOut = 1
+		UseOwnAngle = false
+		AngleFromOwner = "Ignore"
+		ChainTo = "HestiaBlinkTrailFireScorchMarkHold"
+		ScaleRadius = 180
+	}
+
+	{
+		Name = "HestiaBlinkTrailFireScorchMarkHold"
+		FilePath = "zerp-More_Dash_Boons\GreekFire\GreekFireScorchMark"
+		UseOwnAngle = false
+		AngleFromOwner = "Ignore"
+		Duration = 4
+		ChainTo = "HestiaBlinkTrailFireScorchMarkOut"
+		ScaleRadius = 180
+	}
+
+	{
+		Name = "HestiaBlinkTrailFireScorchMarkOut"
+		InheritFrom = "HestiaBlinkTrailFireScorchMarkIn"
+		StartAlpha = 1
+		EndAlpha = 0
+		EaseIn = 0
+		EaseOut = 0.1
+		Duration = 4
+		ChainTo = null
+	}
+
 ]}

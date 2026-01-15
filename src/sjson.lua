@@ -173,7 +173,7 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             newentry.Speed = 400
             newentry.SpawnCap = 4
 		    newentry.FizzleOldSpawnsOnDetonate = true
-            newentry.DetonateFx = nil
+            -- newentry.DetonateFx = nil
             newentry.Thing.Graphic = "BlinkTrailLavaSplashProjectileHead"
             table.insert(newdata,newentry)
         elseif projectile.Name == "DevotionHestiaFire" then
@@ -201,7 +201,7 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
                     FrontFx = "null",
                 }
             }
-            newentry.Thing.Graphic = "HestiaStatueFireRingFx"
+            newentry.Thing.Graphic = "HestiaBlinkTrailFireRingFx"
             newentry.Thing.Color = nil
             table.insert(newdata,newentry)
         end

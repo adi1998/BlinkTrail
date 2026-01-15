@@ -25,7 +25,7 @@ function mod.CheckHestiaLavaPool(triggerArgs, functionArgs)
 end
 
 function mod.StartHestiaBlink( args )
-    game.LoadPackages({Name = "BiomeN"})
+    -- game.LoadPackages({Name = "BiomeN"})
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
             -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})
