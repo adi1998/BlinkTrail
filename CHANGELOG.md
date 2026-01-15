@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- heph mine can now also explode on hit
+
+
 ## [1.3.1] - 2026-01-12
 
 - fix master conductor self-damaging player

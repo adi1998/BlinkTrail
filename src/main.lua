@@ -56,6 +56,7 @@ local function on_ready()
     import 'gods/zeus.lua'
     import 'gods/poseidon.lua'
     import 'gods/heph.lua'
+    import 'gods/heph_reload.lua'
     import 'gods/hestia.lua'
     import 'gods/ares.lua'
     import 'gods/apollo.lua'
@@ -70,6 +71,7 @@ local function on_reload()
     -- what to do when we are ready, but also again on every reload.
     -- only do things that are safe to run over and over.
     if config.enabled == false then return end
+    import 'gods/heph_reload.lua'
 end
 
 -- this allows us to limit certain functions to not be reloaded.
