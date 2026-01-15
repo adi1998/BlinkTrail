@@ -44,7 +44,7 @@ function mod.StartPoseidonBlink( args )
     local delay_count = 0
     local anim_list = {}
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
-        game.wait(0.17, "BlinkTrailPresentation")
+        game.wait(0.18, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         
         if distance > 0 then
@@ -55,12 +55,14 @@ function mod.StartPoseidonBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_PoseidonFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            game.thread(mod.PoseidonProjectileWithDelay2,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
-            , 1.2, "/SFX/Player Sounds/PoseidonOceanSwellSFX")
-            game.thread(mod.PoseidonProjectileWithDelay2,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
-            , 1.2)
+            if distance > 140 then
+                game.thread(mod.PoseidonProjectileWithDelay2,
+                    { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle+90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
+                , 1.2, "/SFX/Player Sounds/PoseidonOceanSwellSFX")
+                game.thread(mod.PoseidonProjectileWithDelay2,
+                    { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
+                , 1.2)
+            end
             prevProj = targetProjId
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
