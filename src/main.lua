@@ -56,12 +56,21 @@ local function on_ready()
     import 'gods/zeus.lua'
     import 'gods/poseidon.lua'
     import 'gods/heph.lua'
-    import 'gods/heph_reload.lua'
     import 'gods/hestia.lua'
     import 'gods/ares.lua'
     import 'gods/apollo.lua'
     import 'gods/demeter.lua'
     import 'gods/aphrodite.lua'
+
+    import 'gods/hera_reload.lua'
+    import 'gods/zeus_reload.lua'
+    import 'gods/poseidon_reload.lua'
+    import 'gods/heph_reload.lua'
+    import 'gods/hestia_reload.lua'
+    import 'gods/ares_reload.lua'
+    import 'gods/apollo_reload.lua'
+    import 'gods/demeter_reload.lua'
+    import 'gods/aphrodite_reload.lua'
 
     import 'requirements.lua'
     game.ProcessDataStore(game.ProjectileData)
@@ -71,7 +80,15 @@ local function on_reload()
     -- what to do when we are ready, but also again on every reload.
     -- only do things that are safe to run over and over.
     if config.enabled == false then return end
+    import 'gods/hera_reload.lua'
+    import 'gods/zeus_reload.lua'
+    import 'gods/poseidon_reload.lua'
     import 'gods/heph_reload.lua'
+    import 'gods/hestia_reload.lua'
+    import 'gods/ares_reload.lua'
+    import 'gods/apollo_reload.lua'
+    import 'gods/demeter_reload.lua'
+    import 'gods/aphrodite_reload.lua'
 end
 
 -- this allows us to limit certain functions to not be reloaded.
