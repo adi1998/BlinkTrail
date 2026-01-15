@@ -25,6 +25,7 @@ function mod.CheckHestiaLavaPool(triggerArgs, functionArgs)
 end
 
 function mod.StartHestiaBlink( args )
+    game.LoadPackages({Name = "BiomeN"})
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
             -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})
@@ -56,9 +57,11 @@ function mod.StartHestiaBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_HestiaFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
-            game.thread(mod.PoseidonProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj }
-            , 0.4)
+            if distance > 130 then
+                game.thread(mod.PoseidonProjectileWithDelay,
+                    { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj }
+                , 0.4)
+            end
             prevProj = targetProjId
             angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end

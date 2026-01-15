@@ -173,6 +173,7 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             newentry.Speed = 400
             newentry.SpawnCap = 4
 		    newentry.FizzleOldSpawnsOnDetonate = true
+            newentry.DetonateFx = nil
             newentry.Thing.Graphic = "BlinkTrailLavaSplashProjectileHead"
             table.insert(newdata,newentry)
         elseif projectile.Name == "DevotionHestiaFire" then
@@ -182,6 +183,7 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
             newentry.DamagePerConsecutiveHit = 1
             newentry.ConsecutiveHitWindow = 0.5
             newentry.DamageRadius = 170
+            newentry.DissipateFx = "null"
             newentry.Effects = {
                 {
                     Name = "LavaVignette",
@@ -199,6 +201,8 @@ sjson.hook(enemyGeneralProjectileFile, function (data)
                     FrontFx = "null",
                 }
             }
+            newentry.Thing.Graphic = "HestiaStatueFireRingFx"
+            newentry.Thing.Color = nil
             table.insert(newdata,newentry)
         end
     end
