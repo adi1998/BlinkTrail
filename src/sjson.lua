@@ -325,40 +325,21 @@ sjson.hook(traitTextEnFile, function (data)
     end
 end)
 
--- local helpTextFile = rom.path.combine(rom.paths.Content, "Game/Text/en/HelpText.en.sjson")
+local unitsEnemiesFile = rom.path.combine(rom.path.combine, "Game\\Units\\Enemies.sjson")
 
--- sjson.hook(helpTextFile, function (data)
---     local helpTextList = {
---         {
---             Id = "BlinkTrailProjectileHeraOmega",
---             DisplayName = "Sworn Blink"
---         },
---         {
---             Id = "PoseidonBlinkWave",
---             DisplayName = "Wave Blink"
---         },
---         {
---             Id = "HephMineBlast",
---             DisplayName = "Volcanic Blink"
---         },
---         {
---             Id = "BlinkTrailProjectileHestia",
---             DisplayName = "Flame Blink"
---         },
---         {
---             Id = "BlinkTrailProjectileFireHestia",
---             DisplayName = "Flame Blink Lava"
---         },
---         {
---             Id = "BlinkTrailProjectileAres",
---             DisplayName = "Bloody Blink"
---         },
---         {
---             Id = "BlinkTrailZeusSpark",
---             DisplayName = "Thunder Blink"
---         },
---     }
---     for index, value in ipairs(helpTextList) do
---         table.insert(data.Texts, sjson.to_object(value, traitTextOrder))
---     end
--- end)
+sjson.hook(unitsEnemiesFile, function (data)
+    local newdata = {}
+    for index, unit in ipairs(data.Units) do
+        if unit.Name == "DummyOlympusTarget" then
+            local newentry = game.DeepCopyTable(unit)
+            newentry.Name = "DummyHephMineUnit"
+            newentry.Life.TriggerOnHit = true
+            newentry.Life.SilentImpact = true
+            table.insert(newdata, newentry)
+            break
+        end
+    end
+    for index, unit in ipairs(newdata) do
+        table.insert(data.Units, unit)
+    end
+end)

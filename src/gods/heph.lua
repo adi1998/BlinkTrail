@@ -80,12 +80,32 @@ gods.CreateBoon({
     }
 })
 
+function mod.ExplodeMineOnHit(victim)
+    print("mine hit", victim.ObjectId, game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] )
+    if  game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] == 1 then
+        print("update mine to 2")
+        game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] = 2
+    end
+end
+
 function mod.CreateMine(delay, id, args)
     game.MapState[_PLUGIN.guid .. "HephMineTable"] = game.MapState[_PLUGIN.guid .. "HephMineTable"] or {}
+    game.MapState[_PLUGIN.guid .. "HephMineUnitMap"] = game.MapState[_PLUGIN.guid .. "HephMineUnitMap"] or {}
+    game.MapState[_PLUGIN.guid .. "HephMineUnitList"] = game.MapState[_PLUGIN.guid .. "HephMineUnitList"] or {}
     game.MapState[_PLUGIN.guid .. "HephMineMap"] = game.MapState[_PLUGIN.guid .. "HephMineMap"] or {}
     table.insert(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
     game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = true
     game.SetAnimation({Name = "HephMineAoe", DestinationId = id})
+    -- local unitId = game.SpawnUnit({ Name = "DummyHephMineUnit", Group = "Standing", DestinationId = id })
+    local mine = game.DeepCopyTable(game.ObstacleData.DummyHephMineObs)
+    mine.ObjectId = game.SpawnObstacle({ Name = "DummyHephMineObs", Group = "Standing", DestinationId = id })
+    game.SetupObstacle(mine)
+    local unitId = mine.ObjectId
+    table.insert(game.MapState[_PLUGIN.guid .. "HephMineUnitList"], unitId)
+    print("heph unit", unitId)
+    game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][unitId] = 1
+    local detonate = false
+    -- id = unitId
     while game.MapState[_PLUGIN.guid .. "HephMineMap"][id] do
         game.wait(delay)
         local enemyId = game.GetClosest({ Id = id, DestinationName = "EnemyTeam", IgnoreInvulnerable = true, IgnoreHomingIneligible = true })
@@ -113,28 +133,38 @@ function mod.CreateMine(delay, id, args)
             -- print("---")
             if enemy_distance <= distance + 20 then
                 -- detonate mine
-                game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
-                game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
-                game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = nil
-                break
+                detonate = true
             end
-        elseif typhonId ~= nil and game.ActiveEnemies[typhonId] then
+        end
+        if typhonId ~= nil and game.ActiveEnemies[typhonId] then
             local mineLocation = game.GetLocation({ Id = id })
             local typhonLocation = game.GetLocation({ Id = typhonId })
             local offsetX = mineLocation.X-typhonLocation.X
             local offsetY = mineLocation.Y-typhonLocation.Y
             if offsetY <= 450 and offsetX >= -530 and offsetX <= 530 then
-                game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
-                game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
-                game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = nil
-                break
+                detonate = true
             end
+        end
+        if game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][unitId] == 2 then
+            print("detonating on hit", unitId)
+            detonate = true
+        end
+        if detonate == true then
+            game.CreateProjectileFromUnit({ Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DamageMultiplier = args.DamageMultiplier, FireFromId = id })
+            game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
+            game.RemoveValueAndCollapse(game.MapState[_PLUGIN.guid .. "HephMineUnitList"], unitId)
+            game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = nil
+            game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][unitId] = nil
+            break
         end
         if #game.MapState[_PLUGIN.guid .. "HephMineTable"] >= 5 then
             local oldestId = table.remove(game.MapState[_PLUGIN.guid .. "HephMineTable"], 1)
+            local oldestUnitId = table.remove(game.MapState[_PLUGIN.guid .. "HephMineUnitList"], 1)
             game.MapState[_PLUGIN.guid .. "HephMineMap"][oldestId] = nil
+            game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][oldestUnitId] = nil
         end
     end
+    game.Destroy({Id = unitId})
     game.Destroy({Id = id})
 end
 
@@ -166,6 +196,7 @@ function mod.StartHephBlink( args )
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+            
             table.insert( blinkIds, targetId )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_HephFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],

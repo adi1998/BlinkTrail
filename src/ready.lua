@@ -133,6 +133,40 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileApollo = gods.GetInternalBoonName("ApolloBlinkTrailBoon"),
 })
 
+game.OverwriteTableKeys( game.EnemyData, {
+    DummyHephMineUnit =
+    {
+        InheritFrom = { "BaseTrap", },
+		RequiredKill = false,
+        SilentImpact = true,
+		TriggersOnHitEffects = true,
+        OnHitFunctionName = _PLUGIN.guid .. "." .. "ExplodeMineOnHit",
+		CanBeFrozen = false,
+		HideHealthBar = true,
+    }
+})
+
+local hephObstacle =
+{
+    DummyHephMineObs = {
+        InheritFrom = { "BaseDestructible" },
+        OnHitFunctionName = _PLUGIN.guid .. "." .. "ExplodeMineOnHit",
+        CannotDieFromDamage = true,
+        MaxHealth = 0,
+        HealthTicks = 1,
+        MoneyDropOnDeath =
+		{
+			Chance = 0,
+			IgnoreRoomMoneyStore = true,
+		},
+    }
+}
+
+game.OverwriteTableKeys( game.ObstacleData, hephObstacle)
+hephObstacle = game.ObstacleData["DummyHephMineObs"]
+hephObstacle.Name = "DummyHephMineObs"
+game.ProcessDataInheritance( hephObstacle, game.ObstacleData )
+
 modutil.mod.Path.Wrap("SetupMap", function (base,...)
     game.LoadPackages({Name = _PLUGIN.guid .. _PLUGIN.guid})
     base(...)
