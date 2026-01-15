@@ -142,7 +142,7 @@
 		ScaleRadius = 180
 		RandomPlaySpeedMin = 30
 		RandomPlaySpeedMax = 34
-		Hue = 0.05
+		Hue = 0.04
 		ChainTo = "HestiaBlinkTrailFireRingFxFade"
 		TransferFrameFromThis = true
 		CreateAnimations = [
