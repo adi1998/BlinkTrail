@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-02-09
+
 - add bloody blink to Ares Wrath requirements
 - remove extra logging
 
@@ -41,7 +43,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.4.0...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.4.1...HEAD
+[1.4.1]: https://github.com/adi1998/BlinkTrail/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/adi1998/BlinkTrail/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/adi1998/BlinkTrail/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/adi1998/BlinkTrail/compare/1.2.0...1.3.0
