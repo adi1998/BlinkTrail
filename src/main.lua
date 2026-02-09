@@ -76,6 +76,12 @@ local function on_ready()
     game.ProcessDataStore(game.ProjectileData)
 end
 
+local function on_ready_late()
+    if config.enabled == false then return end
+
+    import "wrath_compat.lua"
+end
+
 local function on_reload()
     -- what to do when we are ready, but also again on every reload.
     -- only do things that are safe to run over and over.
@@ -91,10 +97,20 @@ local function on_reload()
     import 'gods/aphrodite_reload.lua'
 end
 
+local function on_reload_late()
+    if config.enabled == false then return end
+end
+
 -- this allows us to limit certain functions to not be reloaded.
-local loader = reload.auto_single()
+local loader = reload.auto_multiple()
 
 -- this runs only when modutil and the game's lua is ready
 modutil.once_loaded.game(function()
-    loader.load(on_ready, on_reload)
+    loader.load("early", on_ready, on_reload)
+end)
+
+mods.on_all_mods_loaded(function()
+	modutil.once_loaded.game(function()
+		loader.load("late", on_ready_late, on_reload_late)
+	end)
 end)

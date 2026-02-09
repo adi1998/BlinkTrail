@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- add bloody blink to Ares Wrath requirements
+- remove extra logging
+
 ## [1.4.0] - 2026-01-15
 
 - heph mine can now also explode on hit
