@@ -6,7 +6,10 @@ end
 function mod.PoseidonProjectileWithDelay2(args, delay, sound)
     game.wait(delay)
     game.CreateProjectileFromUnit(args)
-    if sound then game.PlaySound({Name = sound, Id = args.FireFromId, ManagerCap = 64 }) end
+    if sound then
+       local waveSound = game.PlaySound({Name = sound, Id = args.FireFromId, ManagerCap = 64 })
+       game.SetVolume({ Id = waveSound, Value = 0.5, Duration = 0.0 })
+    end
     local doubleChance = game.GetTotalHeroTraitValue("DoubleOlympianProjectileChance") * game.GetTotalHeroTraitValue( "LuckMultiplier", { IsMultiplier = true })
     if game.RandomChance(doubleChance) then
         game.wait( game.GetTotalHeroTraitValue("DoubleOlympianProjectileInterval" )*(2/3) )

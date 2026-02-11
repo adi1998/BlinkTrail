@@ -30,7 +30,8 @@ function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
             game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = 0
         end
         -- print("shot aphro", game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"])
-        game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 46 })
+        local arrowSound = game.PlaySound({ Name = "/Leftovers/SFX/AuraPerfectThrow", Id = dropLocation, ManagerCap = 46 })
+        game.SetVolume({Id = arrowSound, Value = 0.3, Duration = 0.0})
         game.wait( 0.35 )
         game.SetAnimation({ Name = "BlinkTrailAphroditeTargetFast", DestinationId = blinkId})
     else
