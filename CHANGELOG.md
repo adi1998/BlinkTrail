@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- lower poseidon and aphro fx volume
+- bugfix: extended alter of ashes compat issue
+
 ## [1.4.1] - 2026-02-09
 
 - add bloody blink to Ares Wrath requirements
