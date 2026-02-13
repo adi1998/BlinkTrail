@@ -1,13 +1,13 @@
-function DeepMergeUptoDepth(base, incoming, depth, currentDepth)
+function MergeUptoDepth(base, incoming, depth, currentDepth)
     depth = depth or 0
     currentDepth = currentDepth or 0
-    local returnTable = game.DeepCopyTable( base )
+    local returnTable = base
     for k, v in pairs( incoming ) do
 		if type(v) == "table" and currentDepth<depth then
 			if next(v) == nil then
 				returnTable[k] = {}
 			else
-				returnTable[k] = DeepMergeUptoDepth( returnTable[k], v, depth, currentDepth + 1 )
+				returnTable[k] = MergeUptoDepth( returnTable[k], v, depth, currentDepth + 1 )
 			end
 		elseif v == "nil" then
 			returnTable[k] = nil
@@ -136,7 +136,7 @@ local traitRequirements = {
     }
 }
 
-game.TraitRequirements = DeepMergeUptoDepth(game.TraitRequirements, traitRequirements, 2)
+game.TraitRequirements = MergeUptoDepth(game.TraitRequirements, traitRequirements, 2)
 
 local traitData = {
     SteamBoon = {
@@ -167,4 +167,4 @@ local traitData = {
     }
 }
 
-game.TraitData = DeepMergeUptoDepth(game.TraitData, traitData, 2)
+game.TraitData = MergeUptoDepth(game.TraitData, traitData, 2)

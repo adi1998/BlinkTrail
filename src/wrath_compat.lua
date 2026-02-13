@@ -8,6 +8,6 @@ local wrathRequirements = {
 
 if rom.mods["Wistiti-WrathOfOlympus"] and rom.mods["Wistiti-WrathOfOlympus"].config and rom.mods["Wistiti-WrathOfOlympus"].config.enabled then
     if game.TraitRequirements["Wistiti-WrathOfOlympus" .. "-" .. "AresWrathBoon"] then
-        game.TraitRequirements = DeepMergeUptoDepth(game.TraitRequirements, wrathRequirements, 2)
+        game.TraitRequirements = MergeUptoDepth(game.TraitRequirements, wrathRequirements, 2)
     end
 end
