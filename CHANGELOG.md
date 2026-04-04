@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- hestia and demeter rush boons no longer trigger heph mines
+- hestia, demeter and poseidon rush boons no longer trigger hephaestus mines
 
 ## [1.4.2] - 2026-02-13
 
