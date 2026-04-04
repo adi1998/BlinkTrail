@@ -1,6 +1,6 @@
 function mod.ExplodeMineOnHit(victim, _, onHitArgs, triggerArgs)
     -- print("mine hit", victim.ObjectId, game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] )
-
+    -- print("triggerArgs.SourceProjectile", triggerArgs.SourceProjectile)
     if onHitArgs and game.Contains(onHitArgs.InvalidProjectiles, triggerArgs.SourceProjectile) then
         return
     end

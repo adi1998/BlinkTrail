@@ -141,7 +141,8 @@ local hephObstacle =
         OnHitFunctionArgs = {
             InvalidProjectiles = {
                 "HestiaSprintPuddle",
-                "DemeterSprintStorm"
+                "DemeterSprintStorm",
+                "PoseidonSprintBlast",
             }
         },
         MoneyDropOnDeath =
