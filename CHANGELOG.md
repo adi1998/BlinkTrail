@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.4.3] - 2026-04-04
+
 - hestia, demeter and poseidon rush boons no longer trigger hephaestus mines
 
 ## [1.4.2] - 2026-02-13
@@ -50,7 +52,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.4.2...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.4.3...HEAD
+[1.4.3]: https://github.com/adi1998/BlinkTrail/compare/1.4.2...1.4.3
 [1.4.2]: https://github.com/adi1998/BlinkTrail/compare/1.4.1...1.4.2
 [1.4.1]: https://github.com/adi1998/BlinkTrail/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/adi1998/BlinkTrail/compare/1.3.1...1.4.0
