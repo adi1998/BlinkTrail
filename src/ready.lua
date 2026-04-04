@@ -133,27 +133,17 @@ game.OverwriteTableKeys( game.ScreenData.RunClear.DamageSourceMap, {
     BlinkTrailProjectileApollo = gods.GetInternalBoonName("ApolloBlinkTrailBoon"),
 })
 
-game.OverwriteTableKeys( game.EnemyData, {
-    DummyHephMineUnit =
-    {
-        InheritFrom = { "BaseTrap", },
-		RequiredKill = false,
-        SilentImpact = true,
-		TriggersOnHitEffects = true,
-        OnHitFunctionName = _PLUGIN.guid .. "." .. "ExplodeMineOnHit",
-		CanBeFrozen = false,
-		HideHealthBar = true,
-    }
-})
-
 local hephObstacle =
 {
     DummyHephMineObs = {
         InheritFrom = { "BaseDestructible" },
         OnHitFunctionName = _PLUGIN.guid .. "." .. "ExplodeMineOnHit",
-        CannotDieFromDamage = true,
-        MaxHealth = 0,
-        HealthTicks = 1,
+        OnHitFunctionArgs = {
+            InvalidProjectiles = {
+                "HestiaSprintPuddle",
+                "DemeterSprintStorm"
+            }
+        },
         MoneyDropOnDeath =
 		{
 			Chance = 0,

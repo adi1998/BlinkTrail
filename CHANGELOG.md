@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- hestia and demeter rush boons no longer trigger heph mines
+
 ## [1.4.2] - 2026-02-13
 
 - lower poseidon and aphro fx volume

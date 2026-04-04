@@ -1,5 +1,10 @@
-function mod.ExplodeMineOnHit(victim)
+function mod.ExplodeMineOnHit(victim, _, onHitArgs, triggerArgs)
     -- print("mine hit", victim.ObjectId, game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] )
+
+    if onHitArgs and game.Contains(onHitArgs.InvalidProjectiles, triggerArgs.SourceProjectile) then
+        return
+    end
+
     if  game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] == 1 then
         -- print("update mine to 2")
         game.MapState[_PLUGIN.guid .. "HephMineUnitMap"][victim.ObjectId] = 2
@@ -14,7 +19,6 @@ function mod.CreateMine(delay, id, args)
     table.insert(game.MapState[_PLUGIN.guid .. "HephMineTable"], id)
     game.MapState[_PLUGIN.guid .. "HephMineMap"][id] = true
     game.SetAnimation({Name = "HephMineAoe", DestinationId = id})
-    -- local unitId = game.SpawnUnit({ Name = "DummyHephMineUnit", Group = "Standing", DestinationId = id })
     local mine = game.DeepCopyTable(game.ObstacleData.DummyHephMineObs)
     mine.ObjectId = game.SpawnObstacle({ Name = "DummyHephMineObs", Group = "Standing", DestinationId = id })
     game.SetupObstacle(mine)
