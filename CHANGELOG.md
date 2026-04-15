@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Post-Launch Patch 2 fixes
+
 ## [1.4.3] - 2026-04-04
 
 - hestia, demeter and poseidon rush boons no longer trigger hephaestus mines
