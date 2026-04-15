@@ -1,7 +1,7 @@
 local wrathRequirements = {
     ["Wistiti-WrathOfOlympus" .. "-" .. "AresWrathBoon"] = {
         OneFromEachSet = {
-            [2] = { "AresManaBoon", "BloodDropRevengeBoon", "RendBloodDropBoon", gods.GetInternalBoonName("AresBlinkTrailBoon")},
+            [2] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon")},
         }
     }
 }

@@ -74,7 +74,7 @@ local traitRequirements = {
 
     DoubleBloodDropBoon = {
         OneFromEachSet = {
-            [2] = { "AresManaBoon", "BloodDropRevengeBoon", "RendBloodDropBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+            [2] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
         }
     },
 
@@ -125,13 +125,13 @@ local traitRequirements = {
 
     BloodRetentionBoon = {
         OneFromEachSet = {
-            [1] = { "AresManaBoon", "BloodDropRevengeBoon", "RendBloodDropBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+            [1] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
         }
     },
 
     BloodManaBurstBoon = {
         OneFromEachSet = {
-            [1] = { "AresManaBoon", "BloodDropRevengeBoon", "RendBloodDropBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+            [1] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
         }
     }
 }
