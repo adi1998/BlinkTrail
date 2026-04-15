@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-04-15
+
 - Post-Launch Patch 2 fixes
 
 ## [1.4.3] - 2026-04-04
@@ -54,7 +56,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.4.3...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.5.0...HEAD
+[1.5.0]: https://github.com/adi1998/BlinkTrail/compare/1.4.3...1.5.0
 [1.4.3]: https://github.com/adi1998/BlinkTrail/compare/1.4.2...1.4.3
 [1.4.2]: https://github.com/adi1998/BlinkTrail/compare/1.4.1...1.4.2
 [1.4.1]: https://github.com/adi1998/BlinkTrail/compare/1.4.0...1.4.1
