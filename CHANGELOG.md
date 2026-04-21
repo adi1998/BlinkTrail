@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-04-21
+
 - demeter visual adjustments and lower projectile cap
 
 ## [1.5.0] - 2026-04-15
@@ -58,7 +60,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.5.0...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.5.1...HEAD
+[1.5.1]: https://github.com/adi1998/BlinkTrail/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/adi1998/BlinkTrail/compare/1.4.3...1.5.0
 [1.4.3]: https://github.com/adi1998/BlinkTrail/compare/1.4.2...1.4.3
 [1.4.2]: https://github.com/adi1998/BlinkTrail/compare/1.4.1...1.4.2
