@@ -43,7 +43,7 @@
         ScaleFromOwner = "Ignore"
         SortMode = "FromParent"
         DrawBehindOwner = true
-        Scale = 1
+        Scale = 0.6
         OffsetZ = 60
         VisualFx = "BlinkTrailDemeterIceCrystalRandomOffset"
         VisualFxIntervalMin = 0.05
@@ -181,7 +181,7 @@
     {
         Name = "BlinkTrailDemeterSmokeA_TurretPlace"
         InheritFrom = "BlinkTrailDemeterSmokeA"
-        Scale = 0.55
+        Scale = 0.33
         OffsetZ = 80
         StartAlpha = 1
         EndAlpha = 0
@@ -317,10 +317,10 @@
         SortMode = "Isometric"
         GroupName = "FX_Dark"
         ChainTo = "BlinkTrailDemeterLaserEnd"
-        //ChildAnimation = "BlinkTrailDemeterLaserStartBurst"
+        ChildAnimation = "BlinkTrailDemeterLaserAdd"
         CreateAnimations = [
             //{ Name = "BlinkTrailDemeterLaserGlow" }
-            { Name = "BlinkTrailDemeterLaserAdd" }
+            // { Name = "BlinkTrailDemeterLaserAdd" }
         ]
     }
 
@@ -359,7 +359,7 @@
         ClearCreateAnimations = true
         DieWithOwner = true
         SortMode = "FromParent"
-        ScaleY = 0.4
+        // ScaleY = 0.4
         Red = 1
         Green = 1
         Blue = 1

@@ -36,7 +36,7 @@ function mod.StartDemeterBlink( args )
     local anim_list = {}
     local skippedLast = false
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
-        game.wait(0.25, "BlinkTrailPresentation")
+        game.wait(0.2, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         -- print("distance", distance)
         if distance > 140 or distance > 40 and skippedLast then
@@ -50,7 +50,7 @@ function mod.StartDemeterBlink( args )
             --     Animation = "BlinkGhostTrail_DemeterFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
             --     Stretch = true, UseZLocation = false})
             game.thread(mod.DemeterProjectileWithDelay,
-                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, DataProperties = {Range = distance, MaxAdjustRate = 0, AttachToOwner = false}, FizzleOldestProjectileCount = 7 }
+                { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = (180 + angle) % 360, DamageMultiplier = args.DamageMultiplier, FireFromId = targetProjId, DataProperties = {Range = distance, MaxAdjustRate = 0, AttachToOwner = false}, FizzleOldestProjectileCount = 6 }
             , 0.4, blinkIds[#blinkIds - 1] )
             prevProj = targetProjId
             -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
@@ -68,7 +68,7 @@ function mod.StartDemeterBlink( args )
     game.thread(game.DestroyOnDelay, { unitId }, 3.4 )
     game.SetUnitProperty({ DestinationId = unitId, Property = "CollideWithUnits", Value = false })
     game.thread(mod.DemeterProjectileWithDelay,
-        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier, FizzleOldestProjectileCount = 7 }
+        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier, FizzleOldestProjectileCount = 6 }
     , 0.4, blinkIds[#blinkIds])
     -- game.thread(mod.DemeterProjectileWithDelay,
     --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }

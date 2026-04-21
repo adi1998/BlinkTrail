@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- demeter visual adjustments and lower projectile cap
+
 ## [1.5.0] - 2026-04-15
 
 - Post-Launch Patch 2 fixes
