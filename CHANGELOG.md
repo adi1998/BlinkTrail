@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- cleanup stale Obstacles and Units, prevents crash from hitting entity limits.
+
 ## [1.5.1] - 2026-04-21
 
 - demeter visual adjustments and lower projectile cap
