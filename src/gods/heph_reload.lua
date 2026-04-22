@@ -154,20 +154,14 @@ function mod.StartHephBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
-    if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
-        -- game.CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
-    end
     while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
             -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
-            -- game.thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            game.thread(game.DestroyOnDelay, { lastItemId }, 0.1 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
         game.wait( waitInterval, "BlinkTrailPresentation")
     end
-    -- Destroy({ Id = finalAnchor })
 end

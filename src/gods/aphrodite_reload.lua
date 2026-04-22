@@ -1,11 +1,3 @@
-
-function mod.AphroditeProjectileWithDelay(args, delay, turretId)
-    game.wait(delay)
-    game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] = game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] or {}
-    local projId = game.CreateProjectileFromUnit(args)
-    game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"][projId] = turretId
-end
-
 function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
     game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] or 0
     local angle = math.rad( math.random(0,360) )
@@ -39,36 +31,28 @@ function mod.CreateAphroditeProjectile( id, functionArgs, blinkId )
         if game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] < 0 then
             game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"] = 0
         end
-        -- print("Skipped aphro", game.MapState[_PLUGIN.guid .. "AphroBlinkActiveCount"])
-        -- game.SetAnimation({ Name = "QuickFlashPink", DestinationId = blinkId})
         game.Destroy({ Ids = {blinkId} })
     end
 
-    game.thread(game.DestroyOnDelay, {dropLocation}, 0.1)
+    game.thread(game.DestroyOnDelay, {dropLocation, id}, 0.1)
 end
 
 function mod.StartAphroditeBlink( args )
-    game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] = game.MapState[_PLUGIN.guid .. "AphroditeTurretMap"] or {}
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do
-            -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = id , DataProperties = {Duration = 0.2}})
             game.thread(game.DestroyOnDelay, { id }, 0.1 )
         end
         game.MapState.BlinkDropTrail = {}
     end
     local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    -- local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
     local prevProj = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
     local blinkIds = { initialId }
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
     local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.1
     local startTime = game._worldTime
-    local maxTrailLength = 99
     game.MapState.BlinkDropTrail = game.MapState.BlinkDropTrail or {}
     game.MapState.BlinkDropTrail[initialId] = blinkIds
     local fx_index = 5
-    local delay_count = 0
-    local anim_list = {}
     while game.MapState.BlinkDropTrail and game.MapState.BlinkDropTrail[initialId] and (game._worldTime - startTime) < waitPeriod and fx_index >= 0 do
         game.wait(0.22, "BlinkTrailPresentation")
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
@@ -76,9 +60,9 @@ function mod.StartAphroditeBlink( args )
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
             local targetProjId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-            local angle = game.GetAngleBetween({ DestinationId = targetId, Id = blinkIds [#blinkIds] })
+
             table.insert( blinkIds, targetId )
-            
+
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_AphroditeFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
@@ -94,26 +78,22 @@ function mod.StartAphroditeBlink( args )
                 game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds - 1])
             end
             prevProj = targetProjId
-            -- angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         end
     end
     game.wait(0.22, "BlinkTrailPresentation")
     local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
-    -- print("distance", distance)
+
     if distance > 100 then
         game.SetAnimation({ Name = "BlinkTrailAphroditeTarget", DestinationId = blinkIds [#blinkIds]})
         game.thread(game.DestroyOnDelay, { blinkIds [#blinkIds] }, 1.35)
         game.thread(mod.CreateAphroditeProjectile, prevProj, args, blinkIds [#blinkIds])
     end
-    -- game.thread(mod.AphroditeProjectileWithDelay,
-    --     { Name = "FamiliarLinkLaser", Id = game.CurrentRun.Hero.ObjectId, DestinationId = unitId, DamageMultiplier = args.DamageMultiplier,  }
-    -- , 0.4)
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
-    -- print("blink id count", #blinkIds)
+
     local lastItemId = table.remove( blinkIds )
-    -- game.Destroy({Id = lastItemId})
+    game.thread(game.DestroyOnDelay, { lastItemId }, 2 )
     local outDuration = 0.16 -- time to remove trail over
     local waitInterval = outDuration/#blinkIds
     local minWaitInterval = 0.06
@@ -125,20 +105,14 @@ function mod.StartAphroditeBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
-    if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
-        -- game.CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
-    end
     while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
-            local lastItemId = table.remove( blinkIds, 1 )
+            lastItemId = table.remove( blinkIds, 1 )
             -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
-            -- game.thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            game.thread(game.DestroyOnDelay, { lastItemId }, 2 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
         game.wait( waitInterval, "BlinkTrailPresentation")
     end
-    -- Destroy({ Id = finalAnchor })
 end
