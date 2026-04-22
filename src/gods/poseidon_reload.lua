@@ -16,6 +16,7 @@ function mod.PoseidonProjectileWithDelay2(args, delay, sound)
         -- local angle = game.GetAngle({ Id = game.CurrentRun.Hero.ObjectId })
         game.CreateProjectileFromUnit(args)
     end
+    game.thread(game.DestroyOnDelay, {args.FireFromId}, 1)
 end
 
 function mod.AnimationWithDelay(args,delay)
@@ -58,6 +59,7 @@ function mod.StartPoseidonBlink( args )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_PoseidonFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
                 Stretch = true, UseZLocation = false})
+
             if distance > 130 or (distance > 40 and skippedLast) then
                 game.SetAnimation({ Name = "PoseidonBlinkBallIn", DestinationId = blinkIds [#blinkIds - 1]})
                 game.thread(mod.PoseidonProjectileWithDelay2,
@@ -82,12 +84,13 @@ function mod.StartPoseidonBlink( args )
     game.thread(mod.PoseidonProjectileWithDelay2,
         { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = angle-90, DamageMultiplier = args.DamageMultiplier, FireFromId = prevProj, ProjectileCap = 8 }
     , 1.2)
+
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
 
     local lastItemId = table.remove( blinkIds )
-    -- game.Destroy({Id = lastItemId})
+    game.thread(game.DestroyOnDelay, {lastItemId}, 1)
     local outDuration = 0.16 -- time to remove trail over
     local waitInterval = outDuration/#blinkIds
     local minWaitInterval = 0.06
@@ -99,20 +102,11 @@ function mod.StartPoseidonBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
-    if game.GetDistance({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId }) > 0 then
-        -- game.CreateAnimationsBetween({ Animation = "BlinkLightningBall", DestinationId = blinkIds [#blinkIds - 1], Id = finalAnchor, Stretch = false, UseZLocation = false})
-    end
     while not game.IsEmpty( blinkIds ) do
-        while skipCounter < skipInterval do
-            local lastItemId = table.remove( blinkIds, 1 )
-            -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
-            -- game.thread(DestroyOnDelay, { lastItemId }, 0.1 )
-            skipCounter = skipCounter + 1
-        end
-        skipCounter = 0
+        lastItemId = table.remove( blinkIds, 1 )
+        -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
+        game.thread(game.DestroyOnDelay, { lastItemId }, 1 )
+        skipCounter = skipCounter + 1
         game.wait( waitInterval, "BlinkTrailPresentation")
     end
-    -- game.Destroy({ Id = finalAnchor })
 end

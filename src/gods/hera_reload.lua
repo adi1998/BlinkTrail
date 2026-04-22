@@ -3,7 +3,7 @@ function mod.StartHeraBlink( args )
     if not game.IsEmpty(game.MapState.BlinkDropTrail) then
         for id, ids in pairs(game.MapState.BlinkDropTrail) do    
             -- game.SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = id, CopyFromPrev = true })
-            -- game.thread(DestroyOnDelay, { id }, 0.1 )
+            game.thread(game.DestroyOnDelay, { id }, 0.1 )
         end
         game.MapState.BlinkDropTrail = {}
     end
@@ -106,11 +106,11 @@ function mod.StartHeraBlink( args )
         while skipCounter < skipInterval do
             local lastItemId = table.remove( blinkIds, 1 )
             -- game.SetAnimation({ Name = "HeraBlinkRopeOut", DestinationId = lastItemId, CopyFromPrev = true })
-            -- game.thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            game.thread(game.DestroyOnDelay, { lastItemId }, 0.1 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
         game.wait( waitInterval, "BlinkTrailPresentation")
     end
-    -- Destroy({ Id = finalAnchor })
+    game.Destroy({ Id = finalAnchor })
 end

@@ -58,12 +58,11 @@ function mod.StartZeusBlink( args )
                     DamageMultiplier = args.DamageMultiplier,
                     FizzleOldestProjectileCount = 7
                 }, 1)
-                game.thread(game.DestroyOnDelay, { prevProj }, 1.1 )
                 skippedLast = false
             else
                 skippedLast = true
             end
-
+            game.thread(game.DestroyOnDelay, { prevProj }, 1.1 )
             prevProj = targetProjId
         end
     end
@@ -77,13 +76,13 @@ function mod.StartZeusBlink( args )
         DamageMultiplier = args.DamageMultiplier,
         FizzleOldestProjectileCount = 7
     }, 1)
-
+    game.thread(game.DestroyOnDelay, { prevProj }, 1.1 )
     if game.MapState.BlinkDropTrail then
         game.MapState.BlinkDropTrail[ initialId ] = nil
     end
 
     local lastItemId = table.remove( blinkIds )
-    -- Destroy({Id = lastItemId})
+    game.thread(game.DestroyOnDelay, { lastItemId }, 1 )
     local outDuration = 0.16 -- time to remove trail over
     local waitInterval = outDuration/#blinkIds
     local minWaitInterval = 0.06
@@ -95,17 +94,13 @@ function mod.StartZeusBlink( args )
         skipInterval = multiplier
     end
 
-    local finalAnchor = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
-    game.Attach({ Id = finalAnchor, DestinationId = game.CurrentRun.Hero.ObjectId })
     while not game.IsEmpty( blinkIds ) do
         while skipCounter < skipInterval do
-            local lastItemId = table.remove( blinkIds, 1 )
-            -- game.SetAnimation({ Name = "ProjectileLightningBallEnd", DestinationId = lastItemId, DataProperties = {Duration = 0.2} })
-            -- game.thread(DestroyOnDelay, { lastItemId }, 0.1 )
+            lastItemId = table.remove( blinkIds, 1 )
+            game.thread(game.DestroyOnDelay, { lastItemId }, 1 )
             skipCounter = skipCounter + 1
         end
         skipCounter = 0
         game.wait( waitInterval, "BlinkTrailPresentation")
     end
-    -- Destroy({ Id = finalAnchor })
 end

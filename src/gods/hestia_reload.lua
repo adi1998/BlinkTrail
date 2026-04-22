@@ -21,6 +21,7 @@ function mod.CheckHestiaLavaPool(triggerArgs, functionArgs)
             FireFromTarget = true,
             FizzleOldestProjectileCount = 5,
         })
+        game.Destroy({Id = dropLocation})
     end
 end
 
@@ -35,6 +36,7 @@ function mod.StartHestiaBlink( args )
         game.MapState.BlinkDropTrail = {}
     end
     local initialId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+    game.thread(game.DestroyOnDelay, { initialId }, 2)
     local blinkIds = { initialId }
     local nextClipRegenTime  = game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "ClipRegenInterval" }) or 0
     local waitPeriod = nextClipRegenTime + (game.GetWeaponDataValue({ Id = game.CurrentRun.Hero.ObjectId, WeaponName = "WeaponBlink", Property = "BlinkDuration" }) or 0) - 0.1
@@ -48,6 +50,7 @@ function mod.StartHestiaBlink( args )
         local distance = game.GetDistance({ Id = blinkIds [#blinkIds], DestinationId = game.CurrentRun.Hero.ObjectId })
         if distance > 0 then
             local targetId = game.SpawnObstacle({ Name = "BlankObstacle", DestinationId = game.CurrentRun.Hero.ObjectId, Group = "Standing" })
+            game.thread(game.DestroyOnDelay, { targetId }, 2)
             table.insert( blinkIds, targetId )
             game.CreateAnimationsBetween({
                 Animation = "BlinkGhostTrail_HestiaFx", DestinationId = blinkIds [#blinkIds], Id = blinkIds [#blinkIds - 1],
@@ -66,6 +69,6 @@ function mod.StartHestiaBlink( args )
     game.wait(0.25, "BlinkTrailPresentation")
     game.SetAnimation({ Name = "HestiaBlinkBallIn", DestinationId = blinkIds [#blinkIds]})
     game.thread(mod.PoseidonProjectileWithDelay,
-        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, blinkIds [#blinkIds] }
+        { Name = args.ProjectileName, Id = game.CurrentRun.Hero.ObjectId, Angle = math.random(360), DamageMultiplier = args.DamageMultiplier, FireFromId = blinkIds [#blinkIds] }
     , 0.4)
 end
