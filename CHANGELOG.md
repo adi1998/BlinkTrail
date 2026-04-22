@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-04-22
+
 - cleanup stale Obstacles and Units, prevents crash from hitting entity limits.
 
 ## [1.5.1] - 2026-04-21
@@ -62,7 +64,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.5.1...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.0...HEAD
+[1.6.0]: https://github.com/adi1998/BlinkTrail/compare/1.5.1...1.6.0
 [1.5.1]: https://github.com/adi1998/BlinkTrail/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/adi1998/BlinkTrail/compare/1.4.3...1.5.0
 [1.4.3]: https://github.com/adi1998/BlinkTrail/compare/1.4.2...1.4.3
