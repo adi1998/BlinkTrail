@@ -138,6 +138,10 @@ local traitRequirements = {
 
 game.TraitRequirements = MergeUptoDepth(game.TraitRequirements, traitRequirements, 2)
 
+game.TraitRequirements.RendBloodDropBoon = {
+    OneOf = { "AresWeaponBoon", "AresSpecialBoon", "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") }
+}
+
 local traitData = {
     SteamBoon = {
         OnEnemyDamagedAction = {

@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- add Bloody Blink to Profuse Bleeding requirements
+- loading the save mid-run should now apply all modifications correctly
+
 ## [1.6.0] - 2026-04-22
 
 - cleanup stale Obstacles and Units, prevents crash from hitting entity limits.
