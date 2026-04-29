@@ -98,7 +98,7 @@ gods.CreateBoon({
 			Name = "TraitReserveMana",
 			Args =
 			{
-				Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon"),
+				Name = gods.GetInternalBoonName("ZeusBlinkTrailBoon"),
 				ManaReservationCost = 30,
 				ReportValues =
 				{
@@ -109,7 +109,7 @@ gods.CreateBoon({
         OnExpire =
 		{
 			FunctionName = "TraitUnreserveMana",
-			FunctionArgs = { Name = gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
+			FunctionArgs = { Name = gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
 		},
     }
 })

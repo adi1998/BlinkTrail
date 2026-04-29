@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- zeus blink now doesn't target enemies and bounces 2 times instead of 3.
+
 ## [1.6.1] - 2026-04-23
 
 - add Bloody Blink to Profuse Bleeding requirements

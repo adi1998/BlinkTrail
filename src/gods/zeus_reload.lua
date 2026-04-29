@@ -1,10 +1,7 @@
 function mod.ProjectileWithDelay(args, delay)
     game.wait(delay)
-    local enemyId = game.GetClosest({Id = args.FireFromId, DestinationName = "EnemyTeam", Distance = 730})
-    local angle = game.GetAngleBetween({ Id = args.FireFromId, DestinationId = enemyId })
-    if enemyId == 0 then
-        angle = math.random(1,360)
-    end
+    -- local enemyId = game.GetClosest({Id = args.FireFromId, DestinationName = "EnemyTeam", Distance = 730})
+    local angle = math.random(1,360)
     args.Angle = angle
     local addlProperties = {}
     if game.HeroHasTrait("ReboundingSparkBoon") then

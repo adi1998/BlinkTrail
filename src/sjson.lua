@@ -47,7 +47,7 @@ sjson.hook(playerProjectilesFile,function (data)
             newentry.Name = "BlinkTrailZeusSpark"
             newentry.Range = 750
             newentry.SoundManagerCap = 40
-            -- newentry.StartDelay = 1
+            newentry.NumJumps = 2
             table.insert(newdata,newentry)
         elseif projectile.Name == "PoseidonOmegaWave" then
             local newentry = game.DeepCopyTable(projectile)
