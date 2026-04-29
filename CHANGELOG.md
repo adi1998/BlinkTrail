@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.6.2] - 2026-04-29
+
 - zeus blink now doesn't target enemies and bounces 2 times instead of 3.
 
 ## [1.6.1] - 2026-04-23
@@ -71,7 +73,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.1...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.2...HEAD
+[1.6.2]: https://github.com/adi1998/BlinkTrail/compare/1.6.1...1.6.2
 [1.6.1]: https://github.com/adi1998/BlinkTrail/compare/1.6.0...1.6.1
 [1.6.0]: https://github.com/adi1998/BlinkTrail/compare/1.5.1...1.6.0
 [1.5.1]: https://github.com/adi1998/BlinkTrail/compare/1.5.0...1.5.1
