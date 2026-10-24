@@ -1,155 +1,167 @@
-function MergeUptoDepth(base, incoming, depth, currentDepth)
-    depth = depth or 0
-    currentDepth = currentDepth or 0
-    local returnTable = base
+function MergeUptoDepth(incoming, path)
+    path = path or {}
+    if incoming.Append then
+        for index, value in ipairs(incoming) do
+            local target = modutil.mod.IndexArray.Get(game, path)
+            if target then
+                table.insert(target, value)
+            end
+        end
+    end
     for k, v in pairs( incoming ) do
-		if type(v) == "table" and currentDepth<depth then
-			if next(v) == nil then
-				returnTable[k] = {}
-			else
-				returnTable[k] = MergeUptoDepth( returnTable[k], v, depth, currentDepth + 1 )
-			end
-		elseif v == "nil" then
-			returnTable[k] = nil
-		else
-			returnTable[k] = v
+		if type(v) == "table" then
+            local newpath = game.DeepCopyTable(path)
+            table.insert(newpath, k)
+			MergeUptoDepth( v, newpath )
 		end
 	end
-    return returnTable
 end
 
 local traitRequirements = {
     RandomStatusBoon = {
         OneFromEachSet =
 		{
-			[3] = {  "WeakPotencyBoon", "WeakVulnerabilityBoon", "HighHealthOffenseBoon", "FocusRawDamageBoon", gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
+			[3] = { Append = true, gods.GetInternalBoonName("AphroditeBlinkTrailBoon") },
 		},
     },
 
     DoubleExManaBoon = {
         OneFromEachSet = {
-            [3] = { "DoubleStrikeChanceBoon", "ApolloCastAreaBoon", "ApolloBlindBoon", "ApolloExCastBoon", gods.GetInternalBoonName("ApolloBlinkTrailBoon") },
+            [3] = { Append = true, gods.GetInternalBoonName("ApolloBlinkTrailBoon") },
         }
     },
 
     InstantRootKill = {
         OneFromEachSet = {
-            [3] = { "SlowExAttackBoon", "RootDurationBoon", "CastAttachBoon", gods.GetInternalBoonName("DemeterBlinkTrailBoon") },
+            [3] = { Append = true, gods.GetInternalBoonName("DemeterBlinkTrailBoon") },
         }
     },
 
     WeaponUpgradeBoon = {
         OneFromEachSet = {
-            [3] = { "MassiveDamageBoon", "AntiArmorBoon", "MassiveKnockupBoon", gods.GetInternalBoonName("HephaestusBlinkTrailBoon") },
+            [3] = { Append = true, gods.GetInternalBoonName("HephaestusBlinkTrailBoon") },
         }
     },
 
     AllElementalBoon = {
         OneFromEachSet = {
-            [3] = { "DamageSharePotencyBoon", "SpawnCastDamageBoon", gods.GetInternalBoonName("HeraBlinkTrailBoon")},
+            [3] = { Append = true, gods.GetInternalBoonName("HeraBlinkTrailBoon")},
         }
     },
 
     BurnSprintBoon = {
         OneFromEachSet = {
-            [3] = { "CastProjectileBoon", "FireballManaSpecialBoon", gods.GetInternalBoonName("HestiaBlinkTrailBoon") },
+            [3] = { Append = true, gods.GetInternalBoonName("HestiaBlinkTrailBoon") },
         }
     },
 
     AmplifyConeBoon = {
         OneFromEachSet = {
-            [2] = { "PoseidonSprintBoon", "PoseidonManaBoon", "PoseidonExCastBoon", gods.GetInternalBoonName("PoseidonBlinkTrailBoon") },
+            [2] = { Append = true, gods.GetInternalBoonName("PoseidonBlinkTrailBoon") },
         }
     },
 
     LightningDebuffGeneratorBoon = {
-        OneOf = { "FocusLightningBoon", gods.GetInternalBoonName("ZeusBlinkTrailBoon") }
+        OneOf = { Append = true, gods.GetInternalBoonName("ZeusBlinkTrailBoon") }
     },
 
     SpawnKillBoon = {
         OneFromEachSet = {
-            [2] = { "FocusLightningBoon",  "ZeusManaBoltBoon", "CastAnywhereBoon", "BoltRetaliateBoon", gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
+            [2] = { Append = true, gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
         }
     },
 
     DoubleBloodDropBoon = {
         OneFromEachSet = {
-            [2] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+            [2] = { Append = true, gods.GetInternalBoonName("AresBlinkTrailBoon") },
         }
     },
 
     ManaShieldBoon = {
         OneFromEachSet = {
-            { "DamageShareRetaliateBoon", "LinkedDeathDamageBoon", "DamageSharePotencyBoon", "SpawnCastDamageBoon", "OmegaHeraProjectileBoon", gods.GetInternalBoonName("HeraBlinkTrailBoon") },
-            { "MassiveDamageBoon", "AntiArmorBoon", "HeavyArmorBoon", "ArmorBoon", "EncounterStartDefenseBuffBoon", "ManaToHealthBoon", "MassiveKnockupBoon", gods.GetInternalBoonName("HephaestusBlinkTrailBoon") },
+            { Append = true, gods.GetInternalBoonName("HeraBlinkTrailBoon") },
+            { Append = true, gods.GetInternalBoonName("HephaestusBlinkTrailBoon") },
         }
     },
 
     MoneyDamageBoon = {
 		OneFromEachSet = {
-			{ "HeraWeaponBoon", "HeraSpecialBoon", "HeraCastBoon", "OmegaHeraProjectileBoon", gods.GetInternalBoonName("HeraBlinkTrailBoon") },
-			{ "PoseidonWeaponBoon", "PoseidonSpecialBoon", "PoseidonCastBoon", "OmegaPoseidonProjectileBoon", gods.GetInternalBoonName("PoseidonBlinkTrailBoon")  },
-			{ "OmegaHeraProjectileBoon", "OmegaPoseidonProjectileBoon", gods.GetInternalBoonName("HeraBlinkTrailBoon"), gods.GetInternalBoonName("PoseidonBlinkTrailBoon") },
+			{ Append = true, gods.GetInternalBoonName("HeraBlinkTrailBoon") },
+			{ Append = true, gods.GetInternalBoonName("PoseidonBlinkTrailBoon")  },
+			{ Append = true, gods.GetInternalBoonName("HeraBlinkTrailBoon"), gods.GetInternalBoonName("PoseidonBlinkTrailBoon") },
 		},
 	},
 
     GoodStuffBoon = {
         OneFromEachSet = {
-            [3] = { "RoomRewardBonusBoon", "DoubleRewardBoon", "BoonGrowthBoon", "PlantHealthBoon", gods.GetInternalBoonName("DemeterBlinkTrailBoon") },
+            [3] = { Append = true, gods.GetInternalBoonName("DemeterBlinkTrailBoon") },
         }
     },
 
     PoseidonSplashSprintBoon = {
         OneFromEachSet = {
-            [3] = { "ApolloSprintBoon", "PoseidonSprintBoon", gods.GetInternalBoonName("PoseidonBlinkTrailBoon"), gods.GetInternalBoonName("ApolloBlinkTrailBoon") },
+            [3] = { Append = true, gods.GetInternalBoonName("PoseidonBlinkTrailBoon"), gods.GetInternalBoonName("ApolloBlinkTrailBoon") },
         }
     },
 
     SteamBoon = {
         OneFromEachSet = {
-            [2] = { "HestiaWeaponBoon", "HestiaSpecialBoon", "HestiaCastBoon", "HestiaSprintBoon", "FireballManaSpecialBoon", "CastProjectileBoon", gods.GetInternalBoonName("HestiaBlinkTrailBoon") },
+            [2] = { Append = true, gods.GetInternalBoonName("HestiaBlinkTrailBoon") },
         }
     },
 
     ReboundingSparkBoon = {
         OneFromEachSet = {
-            [1] = { "FocusLightningBoon", gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
+            [1] = { Append = true, gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
         }
     },
 
     LightningVulnerabilityBoon = {
         OneFromEachSet = {
-            [2] = { "ZeusWeaponBoon", "ZeusSpecialBoon", "ZeusCastBoon", "ZeusSprintBoon", "BoltRetaliateBoon", "CastAnywhereBoon", gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
+            [2] = { Append = true, gods.GetInternalBoonName("ZeusBlinkTrailBoon") },
         }
     },
 
     BloodRetentionBoon = {
         OneFromEachSet = {
-            [1] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+            [1] = { Append = true, gods.GetInternalBoonName("AresBlinkTrailBoon") },
         }
     },
 
     BloodManaBurstBoon = {
         OneFromEachSet = {
-            [1] = { "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") },
+            [1] = { Append = true, gods.GetInternalBoonName("AresBlinkTrailBoon") },
+        }
+    },
+
+    RendBloodDropBoon = {
+        OneOf = { Append = true, gods.GetInternalBoonName("AresBlinkTrailBoon") }
+    }
+}
+
+MergeUptoDepth(traitRequirements, {"TraitRequirements"})
+
+local traitData = {
+    SteamBoon = {
+        OnEnemyDamagedAction = {
+            ValidProjectiles = { Append = true, "BlinkTrailProjectileHestia", "BlinkTrailProjectileFireHestia" },
+        }
+    },
+    LightningVulnerabilityBoon = {
+        AddOutgoingDamageModifiers = {
+            ValidProjectiles =
+			{
+				Append = true,
+                "BlinkTrailZeusSpark"
+			},
+        }
+    },
+    DoubleBloodDropBoon = {
+        StatLines = {
+            Append = true,
+            "AresIncreasesMoveStrikeSpeedDisplay"
         }
     }
 }
 
-game.TraitRequirements = MergeUptoDepth(game.TraitRequirements, traitRequirements, 2)
-
-game.TraitRequirements.RendBloodDropBoon = {
-    OneOf = { "AresWeaponBoon", "AresSpecialBoon", "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") }
-}
-
-if modutil.mod.Path.Get("LightningVulnerabilityBoon.AddOutgoingDamageModifiers.ValidProjectiles", game.TraitData) then
-    table.insert(game.LightningVulnerabilityBoon.AddOutgoingDamageModifiers.ValidProjectiles, "BlinkTrailZeusSpark")
-end
-
-if modutil.mod.Path.Get("SteamBoon.OnEnemyDamagedAction.ValidProjectiles", game.TraitData) then
-    table.insert(game.SteamBoon.OnEnemyDamagedAction.ValidProjectiles, "BlinkTrailProjectileFireHestia")
-end
-
-if modutil.mod.Path.Get("DoubleBloodDropBoon.StatLines", game.TraitData) then
-    table.insert(game.DoubleBloodDropBoon.StatLines, "AresIncreasesMoveStrikeSpeedDisplay")
-end
+MergeUptoDepth(traitData, {"TraitData"})

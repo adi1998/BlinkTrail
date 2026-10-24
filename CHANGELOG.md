@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Make TraitRequirements and TraitData edits less error prone.
+
 ## [1.6.2] - 2026-04-29
 
 - zeus blink now doesn't target enemies and bounces 2 times instead of 3.
