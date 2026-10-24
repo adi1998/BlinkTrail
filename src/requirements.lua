@@ -142,33 +142,14 @@ game.TraitRequirements.RendBloodDropBoon = {
     OneOf = { "AresWeaponBoon", "AresSpecialBoon", "AresManaBoon", "BloodDropRevengeBoon", gods.GetInternalBoonName("AresBlinkTrailBoon") }
 }
 
-local traitData = {
-    SteamBoon = {
-        OnEnemyDamagedAction = {
-            ValidProjectiles = { "ProjectileCastFireball", "ProjectileFireball", "HestiaSprintPuddle", "BlinkTrailProjectileHestia", "BlinkTrailProjectileFireHestia" },
-        }
-    },
-    LightningVulnerabilityBoon = {
-        AddOutgoingDamageModifiers = {
-            ValidProjectiles =
-			{
-				"ZeusEchoStrike",
-				"ZeusCastStrike",
-				"ZeusRootStrike",
-				"ZeusSprintStrike",
-				"ProjectileZeusSpark",
-				"ZeusZeroManaStrike",
-				"ZeusRetaliateStrike",
-                "BlinkTrailZeusSpark"
-			},
-        }
-    },
-    DoubleBloodDropBoon = {
-        StatLines = {
-            "BloodDropStatDisplay",
-            "AresIncreasesMoveStrikeSpeedDisplay"
-        }
-    }
-}
+if modutil.mod.Path.Get("LightningVulnerabilityBoon.AddOutgoingDamageModifiers.ValidProjectiles", game.TraitData) then
+    table.insert(game.LightningVulnerabilityBoon.AddOutgoingDamageModifiers.ValidProjectiles, "BlinkTrailZeusSpark")
+end
 
-game.TraitData = MergeUptoDepth(game.TraitData, traitData, 2)
+if modutil.mod.Path.Get("SteamBoon.OnEnemyDamagedAction.ValidProjectiles", game.TraitData) then
+    table.insert(game.SteamBoon.OnEnemyDamagedAction.ValidProjectiles, "BlinkTrailProjectileFireHestia")
+end
+
+if modutil.mod.Path.Get("DoubleBloodDropBoon.StatLines", game.TraitData) then
+    table.insert(game.DoubleBloodDropBoon.StatLines, "AresIncreasesMoveStrikeSpeedDisplay")
+end
