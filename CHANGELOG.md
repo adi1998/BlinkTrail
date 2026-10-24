@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.6.3] - 2026-10-24
+
 - Dev: Make TraitRequirements and TraitData edits less error prone.
 
 ## [1.6.2] - 2026-04-29
@@ -75,7 +77,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.2...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.3...HEAD
+[1.6.3]: https://github.com/adi1998/BlinkTrail/compare/1.6.2...1.6.3
 [1.6.2]: https://github.com/adi1998/BlinkTrail/compare/1.6.1...1.6.2
 [1.6.1]: https://github.com/adi1998/BlinkTrail/compare/1.6.0...1.6.1
 [1.6.0]: https://github.com/adi1998/BlinkTrail/compare/1.5.1...1.6.0
