@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- Make TraitRequirements and TraitData edits less error prone.
+- Dev: Make TraitRequirements and TraitData edits less error prone.
 
 ## [1.6.2] - 2026-04-29
 
