@@ -191,3 +191,12 @@ function mod.CheckNoExistingBlinkBoons( source, args )
     end
     return true
 end
+
+if modutil.mod.Path.Get("TraitData.ReboundingSparkBoon.AddOutgoingDamageModifiers") then
+    game.TraitData.ReboundingSparkBoon.AddOutgoingDamageModifiersArray = {game.TraitData.ReboundingSparkBoon.AddOutgoingDamageModifiers}
+    game.TraitData.ReboundingSparkBoon.AddOutgoingDamageModifiers = nil
+    table.insert(game.TraitData.ReboundingSparkBoon.AddOutgoingDamageModifiersArray, {
+        ProjectileName = "BlinkTrailZeusSpark",
+        JumpMultiplier = 0.15,
+    })
+end

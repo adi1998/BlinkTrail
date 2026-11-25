@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "CombatLogic.lua"
+pattern = '''
+and triggerArgs.SourceProjectile ~= "ProjectileZeusSpark"
+'''
+position = "after"
+payload = '''
+and triggerArgs.SourceProjectile ~= "BlinkTrailZeusSpark" -- inserted by MoreDashBoons to block Zeus blink from triggering on-hit effects on Melinoe
+'''
+match_indent = true
+times = 1

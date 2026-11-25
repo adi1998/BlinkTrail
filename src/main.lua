@@ -40,7 +40,6 @@ reload = mods['SGG_Modding-ReLoad']
 config = chalk.auto 'config.lua'
 -- ^ this updates our `.cfg` file in the config folder!
 public.config = config -- so other mods can access our config
-public.lovely_env = private
 
 ---@module 'zannc-GodsAPI-auto'
 gods = mods['zannc-GodsAPI'].auto()

@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- Fix Zeus blink triggering on-hit effects on Melinoe with Zeus x Heph duo.
+- Fix Zeus blink not getting +15% damage increase with Zeus x Heph duo.
+
 ## [1.6.3] - 2026-10-24
 
 - Dev: Make TraitRequirements and TraitData edits less error prone.

@@ -2,9 +2,6 @@
 version = "1.0.0"
 priority = 0
 
-[vars]
-zerpBlinkTrailenv = "rom.mods['zerp-More_Dash_Boons'].lovely_env"
-
 [[patches]]
 [patches.pattern]
 target = "EnemyAILogic.lua"
@@ -18,12 +15,14 @@ pattern = '''
 '''
 position = "after"
 payload = '''
+	--#region inserted by MoreDashBoons to handle Apollo's Blink boon
 	elseif targetId == CurrentRun.Hero.ObjectId and CurrentRun.CurrentRoom["zerp-More_Dash_Boons" .. "InvisTargetTable"] ~= nil and 
 		   CurrentRun.CurrentRoom["zerp-More_Dash_Boons" .. "InvisTargetTable"][enemy.ObjectId] ~= nil then
 		targetId = CurrentRun.CurrentRoom["zerp-More_Dash_Boons" .. "InvisTargetTable"][enemy.ObjectId]
 		if aiData.CancelIfInvisTarget then
 			targetId = nil
 		end
+	--#endregion
 '''
 match_indent = false
 times = 1
