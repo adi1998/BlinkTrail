@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.6.4] - 2026-11-25
+
 - Fix Zeus blink triggering on-hit effects on Melinoe with Zeus x Heph duo.
 - Fix Zeus blink not getting +15% damage increase with Zeus x Heph duo.
 
@@ -80,7 +82,8 @@
 
 - First version of the mod!
 
-[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.3...HEAD
+[unreleased]: https://github.com/adi1998/BlinkTrail/compare/1.6.4...HEAD
+[1.6.4]: https://github.com/adi1998/BlinkTrail/compare/1.6.3...1.6.4
 [1.6.3]: https://github.com/adi1998/BlinkTrail/compare/1.6.2...1.6.3
 [1.6.2]: https://github.com/adi1998/BlinkTrail/compare/1.6.1...1.6.2
 [1.6.1]: https://github.com/adi1998/BlinkTrail/compare/1.6.0...1.6.1
